@@ -1,5 +1,6 @@
 # Team 20 - Team Contract
-ECE 3400, Semester Fall 2018 - Team 20
+ECE 3400
+Fall 2018 - Team 20
 
 Team Members:
 * Alec Newport  - acn55
@@ -19,7 +20,7 @@ Team Members:
 4. Method for setting & following meeting agendas:
     * The current team lead sets the agenda and enforces. 
 5. Method for record keeping:
-    * The last team lead is the current record keeper. For the first few weeks the last team lead is the record keeper.
+    * The previous team lead is the current record keeper. For the first few weeks the final team lead is the record keeper.
     
 ### Team Expectations
 _Work Quality:_
