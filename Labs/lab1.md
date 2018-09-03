@@ -124,6 +124,11 @@ What we observed is as follows:
 " target="_blank"><img src="https://www.youtube.com/embed/YBj1wgy29BY/0.jpg" 
 alt="Arduino Analog Output" width="240" height="180" border="10" /></a>
 
+*Assembling the Robot*
+
+We assembled the robot and wrote code involving writing to the Servos in order to make an S shape. 
+
+
 
 
 
