@@ -67,7 +67,7 @@ alt="Arduino Analog Input" width="240" height="180" border="10" /></a>
 The next goal was to be able to take the potentiometer value and map it to a PWM output that goes to the LED. For reference on PWM, we found the following article helpful: https://en.wikipedia.org/wiki/Pulse-width_modulation.
 
 We used the wiring from the previous part for the potentiometer and connected an LED in series with a 300 Ohm resistor to digital pin 5 (PWM pin) all with common grounds. 
-Our code was as follows:
+Our code for this was as follows:
 
 ```
 #define POT_PIN A0
@@ -97,6 +97,10 @@ alt="Arduino Analog Output" width="240" height="180" border="10" /></a>
 *Parallax Servos*
 
 Instead of the output being written to an LED, we now wrote the output to a Parallax Servos. The involved connecting the red wire to the 5 Volt Arduino output, the black wire to ground, and the white wire to a PWM pin (Pin 5). The code for it is similar; however involved now using the Servos.h library. And so we included this library at the top of the sketch and read its documentation for setting up the Servo from the following link: https://www.arduino.cc/en/Reference/Servo. 
+
+We used the following setup and code:
+
+
 
 
 
