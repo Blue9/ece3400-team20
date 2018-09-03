@@ -8,9 +8,9 @@
 
 We first opened the Arduino IDE and clicked under Files/Examples/01.Basic/Blink. In order to make sure the Arduino UNO was properly connected to the IDE, we clicked under Tools/Board/ and selected Arduino/Genuino UNO. We also verified that the IDE is connected to the right port by looking under Tools/Port. It should be as in the following images:
 
-![ArduinoBlinkSketch](https://github.com/Blue9/ece3400/tree/gh-pages/Labs/Blink.png)
+![ArduinoBlinkSketch](https://raw.githubusercontent.com/Blue9/ece3400/gh-pages/Labs/Blink.png?token=ALqGCLBrFr-mOmTYEvBasTaXfWTdYf-xks5blqK1wA%3D%3D)
 
-![ArduinoToolsImage](https://github.com/Blue9/ece3400/tree/gh-pages/Labs/Tools.png)
+![ArduinoToolsImage](https://raw.githubusercontent.com/Blue9/ece3400/gh-pages/Labs/Tools.png?token=ALqGCBe1R2TgNZlNnu1_rmeRQ2tHJ5pvks5blqNVwA%3D%3D)
 
 We clicked the check mark to compile the sketch and uploaded it to the Arduino UNO. We obtained the following result:
 
