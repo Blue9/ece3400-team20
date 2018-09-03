@@ -225,23 +225,22 @@
                             <hr class="star-dark mb-5">
                             
                             <div class="text-left">
-                                <p><strong>Lab 1</strong></p>
                                 <p><em>Objective</em>: The objective of this lab was to gain familiarity with the Arduino UNO microcontroller and its IDE.</p>
-                                <p><strong>Lab Procedure</strong></p>
-                                <p><em>Communicating with the Arduino and the IDE</em></p>
+                                <h3>Lab Procedure</h3>
+                                <h4 class="heading">Communicating with the Arduino and the IDE</h4>
                                 <p>We first opened the Arduino IDE and clicked under Files/Examples/01.Basic/Blink. In order to make sure the Arduino UNO was properly connected to the IDE, we clicked under Tools/Board/ and selected Arduino/Genuino UNO. We also verified that the IDE is connected to the right port by looking under Tools/Port. It should be as in the following images:</p>
                                 <p><img src="https://raw.githubusercontent.com/Blue9/ece3400/gh-pages/Labs/Blink.png?token=ALqGCLBrFr-mOmTYEvBasTaXfWTdYf-xks5blqK1wA%3D%3D" alt="ArduinoBlinkSketch"></p>
                                     <p><img src="https://raw.githubusercontent.com/Blue9/ece3400/gh-pages/Labs/Tools.png?token=ALqGCBe1R2TgNZlNnu1_rmeRQ2tHJ5pvks5blqNVwA%3D%3D" alt="ArduinoToolsImage"></p>
                                         <p>We clicked the check mark to compile the sketch and uploaded it to the Arduino UNO. We obtained the following result:</p>
                                         <iframe width="560" height="315" src="https://www.youtube.com/embed/GjLLtRx1XvA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                        <p><em>Modifying the Blink Sketch</em></p>
+                                        <h4 class="heading">Modifying the Blink Sketch</h4>
                                         <p>We modified the Blink sketch to communicate with an external LED powered by Pin 0 in series with a 300 Ohm resistor on the breadboard. We also made sure to connect the ground of the Arduino the ground of the LED. The wiring and operation is shown in the following video and the modification to the code is as follows:</p>
                                         <ul>
                                             <li>Added <code>#define LED_PIN 0</code> at the top of the sketch</li>
                                             <li>Replaced <code>LED_BUILTIN</code> with <code>LED_PIN</code></li>
                                         </ul>
                                         <iframe width="560" height="315" src="https://www.youtube.com/embed/NNcXywDYe_s" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                        <p><em>The Serial Monitor and the Analog Pins</em></p>
+                                        <h4 class="heading">The Serial Monitor and the Analog Pins</h4>
                                         <p>The first goal was to be able to see the output of the potentiometer on the Serial monitor on the Arduino UNO. The potentiometer has three pins and so we connected one end to ground, one end to the 5 Volt output on the Arduino Uno for power, and the middle pin to an Analog Pin on the Arduino for reading. We used A0.</p>
                                         <p>For the code, we set up the serial monitor and then used AnalogRead in order to read the input. The code is as follows:</p>
                                         <pre><code>void setup() {
@@ -259,7 +258,7 @@
                                         </code></pre>
                                         <p>Our result for this part is as follows:</p>
                                         <iframe width="560" height="315" src="https://www.youtube.com/embed/0JiTJ-EnS_w" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                        <p><em>Analog Output</em></p>
+                                        <h4 class="heading">Analog Output</h4>
                                         <p>The next goal was to be able to take the potentiometer value and map it to a PWM output that goes to the LED. For reference on PWM, we found the following article helpful: <a href="https://en.wikipedia.org/wiki/Pulse-width_modulation">https://en.wikipedia.org/wiki/Pulse-width_modulation</a>.</p>
                                         <p>We used the wiring from the previous part for the potentiometer and connected an LED in series with a 300 Ohm resistor to digital pin 5 (PWM pin) all with common grounds.
                                         <br> Our code for this was as follows:</p>
@@ -285,7 +284,7 @@
                                         <p><em>Note:</em> <code>analogRead()</code> produces values from <code>0</code> to <code>1023</code>, but <code>analogWrite()</code> only accepts values from <code>0</code> to <code>255</code> so the input was scaled down by a factor of four.</p>
                                         <p>What we observed was as follows:</p>
                                         <iframe width="560" height="315" src="https://www.youtube.com/embed/IoDwbJaUMtU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                        <p><em>Parallax Servos</em></p>
+                                        <h4 class="heading">Parallax Servos</h4>
                                         <p>Instead of the output being written to an LED, we now wrote the output to a Parallax Servos. The involved connecting the red wire to the 5 Volt Arduino output, the black wire to ground, and the white wire to a PWM pin (Pin 5). The code for it is similar; however involved now using the Servos.h library. And so we included this library at the top of the sketch and read its documentation for setting up the Servo from the following link: <a href="https://www.arduino.cc/en/Reference/Servo">https://www.arduino.cc/en/Reference/Servo</a>.</p>
                                         <p>We used the following setup and code:</p>
                                         <pre><code>#include &lt;Servo.h&gt;  // include the Servo library
@@ -310,7 +309,7 @@
                                         </code></pre>
                                         <p>What we observed is as follows:</p>
                                         <iframe width="560" height="315" src="https://www.youtube.com/embed/YBj1wgy29BY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                        <p><em>Assembling the Robot</em></p>
+                                        <h4 class="heading">Assembling the Robot</h4>
                                         <p>We assembled the robot and wrote code involving writing to the Servos in order to make an S shape. The following video
                                         <br> demonstrates our fully autonomous moving robot:</p>
                                         <iframe width="560" height="315" src="https://www.youtube.com/embed/D5O05hFTHSU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
