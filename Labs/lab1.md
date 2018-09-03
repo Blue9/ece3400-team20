@@ -66,6 +66,25 @@ alt="Arduino Analog Input" width="240" height="180" border="10" /></a>
 
 The next goal was to be able to take the potentiometer value and map it to a PWM output that goes to the LED. For reference on PWM, we found the following article helpful: https://en.wikipedia.org/wiki/Pulse-width_modulation.
 
-And so we used the wiring from the previous part for the potentiometer and connected an LED pin to digital pin 0 with all common grounds. 
+We used the wiring from the previous part for the potentiometer and connected an LED in series with a 300 Ohm resistor to digital pin 0 all with common grounds. 
+Our code was as follows:
+
+```
+#define POT_PIN A0
+#define LED_PIN 0
+
+// the setup function runs once when you press reset or power the board
+void setup() {  
+  Serial.begin(9600);           // initialize the serial monitor
+  pinMode(LED_PIN, OUTPUT);     // setup the LED_PIN as output
+}
+
+// the loop function runs over and over again forever
+void loop() {
+  int a = analogRead(POT_PIN);  // read from the analog pin
+  analogWrite(LED_PIN, a/4);    // write to the PWM pin - scaling 1024 -> 256
+}
+```
+*Note:* `analogRead()` produces values from `0` to `1023`, but `analogWrite()` only accepts values from `0` to `255` so the input was scaled down by a factor of four.
 
 
