@@ -2,6 +2,10 @@ body {
   font-family: 'Lato';
 }
 
+pre, code {
+    white-space: pre-line;
+}
+
 h1,
 h2,
 h3,
