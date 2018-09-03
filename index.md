@@ -1,3 +1,3 @@
-*ECE 3400 Team 22*
+*ECE 3400 Team 20*
 
 [Test](/TeamContract.md)
