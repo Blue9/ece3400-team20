@@ -2,7 +2,9 @@
 
 *Objective*: The objective of this lab was to gain familiarity with the Arduino UNO microcontroller and its IDE. 
 
-*Lab Procedure*
+**Lab Procedure**
+
+*Communicating with the Arduino and the IDE*
 
 We first opened the Arduino IDE and clicked under Files/Examples/01.Basic/Blink. In order to make sure the Arduino UNO was properly connected to the IDE, we clicked under Tools/Board/ and selected Arduino/Genuino UNO. We also verified that the IDE is connected to the right port by looking under Tools/Port. It should be as in the following images:
 
@@ -12,5 +14,58 @@ We first opened the Arduino IDE and clicked under Files/Examples/01.Basic/Blink.
 
 We clicked the check mark to compile the sketch and uploaded it to the Arduino UNO. We obtained the following result:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/GjLLtRx1XvA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+[//]: # (<iframe width="560" height="315" src="https://www.youtube.com/embed/GjLLtRx1XvA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>)
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=GjLLtRx1XvA
+" target="_blank"><img src="https://www.youtube.com/embed/GjLLtRx1XvA/0.jpg" 
+alt="Arduino Internal LED Blink" width="240" height="180" border="10" /></a>
+
+*Modifying the Blink Sketch*
+
+We modified the Blink sketch to communicate with an external LED powered by Pin 0 in series with a 300 Ohm resistor on the breadboard. We also made sure to connect the ground of the Arduino the ground of the LED. The wiring and operation is shown in the following video and the modification to the code is as follows:
+
+* Added `#define LED_PIN 0` at the top of the sketch
+* Replaced `LED_BUILTIN` with `LED_PIN`
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=NNcXywDYe_s
+" target="_blank"><img src="https://www.youtube.com/embed/NNcXywDYe_s/0.jpg" 
+alt="Arduino External LED Blink" width="240" height="180" border="10" /></a>
+
+[//]: # (<iframe width="560" height="315" src="https://www.youtube.com/embed/NNcXywDYe_s" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>)
+
+*The Serial Monitor and the Analog Pins*
+
+The first goal was to be able to see the output of the potentiometer on the Serial monitor on the Arduino UNO. The potentiometer has three pins and so we connected one end to ground, one end to the 5 Volt output on the Arduino Uno for power, and the middle pin to an Analog Pin on the Arduino for reading. We used A0. 
+
+For the code, we set up the serial monitor and then used AnalogRead in order to read the input. The code is as follows:
+
+```
+void setup() {
+
+ Serial.begin(9600); // setting up the Serial monitor
+
+}
+
+void loop() {
+
+  int a = analogRead(A0); // Read the Input
+  Serial.println(a); // Print the output to the serial monitor and create a new line
+
+}
+
+```
+
+Our result for this part is as follows:
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=0JiTJ-EnS_w
+" target="_blank"><img src="https://www.youtube.com/embed/0JiTJ-EnS_w/0.jpg" 
+alt="Arduino Analog Input" width="240" height="180" border="10" /></a>
+
+
+*Analog Output*
+
+The next goal was to be able to take the potentiometer value and map it to a PWM output that goes to the LED. For reference on PWM, we found the following article helpful: https://en.wikipedia.org/wiki/Pulse-width_modulation.
+
+And so we used the wiring from the previous part for the potentiometer and connected an LED pin to digital pin 0 with all common grounds. 
+
 
