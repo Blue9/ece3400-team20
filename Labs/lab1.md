@@ -52,7 +52,6 @@ void loop() {
   Serial.println(a); // Print the output to the serial monitor and create a new line
 
 }
-
 ```
 
 Our result for this part is as follows:
@@ -99,6 +98,25 @@ alt="Arduino Analog Output" width="240" height="180" border="10" /></a>
 Instead of the output being written to an LED, we now wrote the output to a Parallax Servos. The involved connecting the red wire to the 5 Volt Arduino output, the black wire to ground, and the white wire to a PWM pin (Pin 5). The code for it is similar; however involved now using the Servos.h library. And so we included this library at the top of the sketch and read its documentation for setting up the Servo from the following link: https://www.arduino.cc/en/Reference/Servo. 
 
 We used the following setup and code:
+
+```
+#include <Servo.h>  // include the Servo library
+
+#define POT_PIN A0
+Servo myServo;  // create servo object to control a servo
+
+void setup() {
+  myServo.attach(9);            // attaches the servo on pin 9 to the servo object
+  Serial.begin(9600);           // initialize the serial monitor
+}
+
+void loop() {
+  
+  int a = analogRead(POT_PIN);  // read from the analog pin
+  a = map(a, 0, 1023, 0, 180);  // scale 1024 to 180
+  myServo.write(a);             // sets the servo speed
+}
+```
 
 
 
