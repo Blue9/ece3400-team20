@@ -6,12 +6,6 @@ pre, code {
     white-space: pre-line;
 }
 
-pre {
-    background-color: #eee;
-    border-radius: 10px;
-    padding: 10px;
-}
-
 .heading {
     margin-top: 30px;
 }
