@@ -126,7 +126,10 @@ alt="Arduino Analog Output" width="240" height="180" border="10" /></a>
 
 *Assembling the Robot*
 
-We assembled the robot and wrote code involving writing to the Servos in order to make an S shape. 
+We assembled the robot and wrote code involving writing to the Servos in order to make an S shape. The following video 
+demonstrates a fully autonomous moving robot:
+
+
 
 
 
