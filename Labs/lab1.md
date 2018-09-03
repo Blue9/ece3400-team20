@@ -129,6 +129,10 @@ alt="Arduino Analog Output" width="240" height="180" border="10" /></a>
 We assembled the robot and wrote code involving writing to the Servos in order to make an S shape. The following video 
 demonstrates a fully autonomous moving robot:
 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=D5O05hFTHSU
+" target="_blank"><img src="https://www.youtube.com/embed/D5O05hFTHSU/0.jpg" 
+alt="Robot Moving" width="240" height="180" border="10" /></a>
+
 
 
 
