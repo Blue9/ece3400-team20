@@ -118,6 +118,11 @@ void loop() {
 }
 ```
 
+What we observed is as follows:
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=YBj1wgy29BY
+" target="_blank"><img src="https://www.youtube.com/embed/YBj1wgy29BY/0.jpg" 
+alt="Arduino Analog Output" width="240" height="180" border="10" /></a>
 
 
 
