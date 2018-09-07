@@ -346,7 +346,7 @@ a {
 }
 
 a:focus, a:hover, a:active {
-  color: #902923; /* #128f76; */
+  color: #701F1A; /* #128f76; */
 }
 
 .btn {
@@ -375,8 +375,8 @@ a:focus, a:hover, a:active {
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background-color: #902923; /* #128f76; */
-  border-color: #902923; /* #128f76; */
+  background-color: #701F1A; /* #128f76; */
+  border-color: #701F1A; /* #128f76; */
 }
 
 .btn-secondary {
