@@ -348,7 +348,7 @@ a {
 }
 
 a:focus, a:hover, a:active {
-  color: #128f76;
+  color: #902923; /* #128f76; */
 }
 
 .btn {
