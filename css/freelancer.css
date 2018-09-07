@@ -246,7 +246,6 @@ header.masthead h2 {
   margin: 1rem calc(1rem - 8px);
   position: relative;
   z-index: 2;
-  background-color: rgba(162, 44, 41, 0.9); /* added */
   -moz-box-shadow: 0 0 3rem 1rem rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0 0 3rem 1rem rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 3rem 1rem rgba(0, 0, 0, 0.5);
@@ -256,7 +255,6 @@ header.masthead h2 {
   position: absolute;
   top: 2rem;
   right: 2rem;
-  background-color: rgba(162, 44, 41, 0.9); /* added */
 }
 
 .portfolio-modal .portfolio-modal-dialog .close-button i {
@@ -377,8 +375,8 @@ a:focus, a:hover, a:active {
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background-color: #128f76;
-  border-color: #128f76;
+  background-color: #902923; /* #128f76; */
+  border-color: #902923; /* #128f76; */
 }
 
 .btn-secondary {
