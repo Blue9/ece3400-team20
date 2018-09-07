@@ -8,7 +8,7 @@
         <title>ECE 3400 Team 20 - Home</title>
         <!-- Bootstrap core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        
+
         <!-- Custom fonts for this template -->
         <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -38,7 +38,7 @@
                         <li class="nav-item mx-0 mx-lg-1">
                             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="teamcontract.html">Contract</a>
                         </li>
-                        
+
                         <li class="nav-item mx-0 mx-lg-1">
                             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="https://github.com/Blue9/ece3400/tree/gh-pages">Github</a>
                         </li>
@@ -53,7 +53,7 @@
                 <h1 class="text-uppercase mb-0">Team 20</h1>
                 <hr class="star-light">
             </div>
-            
+
         </header>
         <!-- Portfolio Grid Section -->
         <section class="portfolio" id="portfolio">
@@ -78,7 +78,7 @@
                                     <i class="fa fa-search-plus fa-3x"></i>
                                 </div>
                             </div>
-                            <img class="img-fluid" src="img/portfolio/cake.png" alt="">
+                            <img class="img-fluid" src="img/portfolio/cuterobot.png" alt="">
                         </a>
                     </div>
                     <div class="col-md-6 col-lg-4">
@@ -235,16 +235,16 @@
                                 <p>The first goal was to be able to see the output of the potentiometer on the Serial monitor on the Arduino UNO. The potentiometer has three pins and so we connected one end to ground, one end to the 5 Volt output on the Arduino Uno for power, and the middle pin to an Analog Pin on the Arduino for reading. We used A0.</p>
                                 <p>For the code, we set up the serial monitor and then used AnalogRead in order to read the input. The code is as follows:</p>
                                 <pre><code class="arduino">void setup() {
-                                    
+
                                             Serial.begin(9600); // setting up the Serial monitor
-                                            
+
                                             }
-                                            
+
                                             void loop() {
-                                            
+
                                             int a = analogRead(A0); // Read the Input
                                             Serial.println(a); // Print the output to the serial monitor and create a new line
-                                            
+
                                             }
                                         </code></pre>
                                 <p>Our result for this part is as follows:</p>
@@ -256,21 +256,21 @@
                                 </p>
                                 <pre><code>#define POT_PIN A0
                                             #define LED_PIN 5
-                                            
+
                                             // the setup function runs once when you press reset or power the board
                                             void setup() {
-                                            
+
                                             Serial.begin(9600);           // initialize the serial monitor
                                             pinMode(LED_PIN, OUTPUT);     // setup the LED_PIN as output
-                                            
+
                                             }
-                                            
+
                                             // the loop function runs over and over again forever
                                             void loop() {
-                                            
+
                                             int a = analogRead(POT_PIN);  // read from the analog pin
                                             analogWrite(LED_PIN, a/4);    // write to the PWM pin - scaling 1024 -&gt; 256
-                                            
+
                                             }
                                         </code></pre>
                                 <p><em>Note:</em> <code>analogRead()</code> produces values from <code>0</code> to <code>1023</code>, but <code>analogWrite()</code> only accepts values from <code>0</code> to <code>255</code> so the input was scaled down by a factor of four.</p>
@@ -280,19 +280,19 @@
                                 <p>Instead of the output being written to an LED, we now wrote the output to a Parallax Servos. The involved connecting the red wire to the 5 Volt Arduino output, the black wire to ground, and the white wire to a PWM pin (Pin 5). The code for it is similar; however involved now using the Servos.h library. And so we included this library at the top of the sketch and read its documentation for setting up the Servo from the following link: <a href="https://www.arduino.cc/en/Reference/Servo">https://www.arduino.cc/en/Reference/Servo</a>.</p>
                                 <p>We used the following setup and code:</p>
                                 <pre><code>#include &lt;Servo.h&gt;  // include the Servo library
-                                    
+
                                             #define POT_PIN A0
                                             Servo myServo;  // create servo object to control a servo
-                                            
+
                                             void setup() {
-                                            
+
                                             myServo.attach(9);            // attaches the servo on pin 9 to the servo object
                                             Serial.begin(9600);           // initialize the serial monitor
-                                            
+
                                             }
-                                            
+
                                             void loop() {
-                                            
+
                                             int a = analogRead(POT_PIN);  // read from the analog pin
                                             a = map(a, 0, 1023, 0, 180);  // scale 1024 to 180
                                             myServo.write(a);             // sets the servo speed
@@ -325,7 +325,7 @@
                         <div class="col-lg-8 mx-auto">
                             <h2 class="text-secondary text-uppercase mb-0">Project Name</h2>
                             <hr class="star-dark mb-5">
-                            <img class="img-fluid mb-5" src="img/portfolio/cake.png" alt="">
+                            <img class="img-fluid mb-5" src="img/portfolio/cuterobot.png" alt="">
                             <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                             <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
                             <i class="fa fa-close"></i> Close Project</a>
