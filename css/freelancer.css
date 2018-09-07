@@ -50,15 +50,15 @@ hr.star-light {
 
 hr.star-light:after {
   color: #fff;
-  background-color: #A22C29; //#18BC9C;
+  background-color: #A22C29; /* #18BC9C; */
 }
 
 hr.star-dark {
-  border-color: #262626; //#2C3E50;
+  border-color: #262626; /* #2C3E50; */
 }
 
 hr.star-dark:after {
-  color: #262626; //#2C3E50;
+  color: #262626; /* #2C3E50; */
   background-color: white;
 }
 
@@ -125,7 +125,7 @@ section h2 {
 }
 
 #mainNav .navbar-nav li.nav-item a.nav-link:hover {
-  color: #A22C29; //#18BC9C;
+  color: #A22C29; /* #18BC9C; */
 }
 
 #mainNav .navbar-nav li.nav-item a.nav-link:active, #mainNav .navbar-nav li.nav-item a.nav-link:focus {
@@ -133,7 +133,7 @@ section h2 {
 }
 
 #mainNav .navbar-nav li.nav-item a.nav-link.active {
-  color: #A22C29; //#18BC9C;
+  color: #A22C29; /* #18BC9C; */
 }
 
 #mainNav .navbar-toggler {
@@ -160,11 +160,11 @@ section h2 {
   }
   #mainNav .navbar-nav > li.nav-item > a.nav-link.active {
     color: #fff;
-    background: #A22C29; //#18BC9C;
+    background: #A22C29; /* #18BC9C; */
   }
   #mainNav .navbar-nav > li.nav-item > a.nav-link.active:active, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:focus, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:hover {
     color: #fff;
-    background: #A22C29; //#18BC9C;
+    background: #A22C29; /* #18BC9C; */
   }
   #mainNav.navbar-shrink {
     padding-top: 0.5rem;
@@ -323,7 +323,7 @@ header.masthead h2 {
 }
 
 .floating-label-form-group-with-focus label {
-  color: #A22C29; //#18BC9C;
+  color: #A22C29; /* #18BC9C; */
 }
 
 form .row:first-child .floating-label-form-group {
@@ -333,7 +333,7 @@ form .row:first-child .floating-label-form-group {
 .footer {
   padding-top: 5rem;
   padding-bottom: 5rem;
-  background-color: #262626; //#2C3E50;
+  background-color: #262626; /* #2C3E50; */
   color: #fff;
 }
 
@@ -342,7 +342,7 @@ form .row:first-child .floating-label-form-group {
 }
 
 a {
-  color: #A22C29; //#18BC9C;
+  color: #A22C29; /* #18BC9C; */
 }
 
 a:focus, a:hover, a:active {
@@ -354,24 +354,24 @@ a:focus, a:hover, a:active {
 }
 
 .bg-primary {
-  background-color: #A22C29; //#18BC9C !important;
+  background-color: #A22C29 !important; /* #18BC9C */
 }
 
 .bg-secondary {
-  background-color: #262626; //#2C3E50 !important;
+  background-color: #262626 !important; /* #2C3E50 */
 }
 
 .text-primary {
-  color: #A22C29; //#18BC9C !important;
+  color: #A22C29 !important; /* #18BC9C */
 }
 
 .text-secondary {
-  color: #262626; //#2C3E50 !important;
+  color: #262626 !important; /* #2C3E50 */
 }
 
 .btn-primary {
-  background-color: #A22C29; //#18BC9C;
-  border-color: #A22C29; //#18BC9C;
+  background-color: #A22C29; /* #18BC9C; */
+  border-color: #A22C29; /* #18BC9C; */
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
@@ -380,8 +380,8 @@ a:focus, a:hover, a:active {
 }
 
 .btn-secondary {
-  background-color: #262626; //#2C3E50;
-  border-color: #262626; //#2C3E50;
+  background-color: #262626; /* #2C3E50; */
+  border-color: #262626; /* #2C3E50; */
 }
 
 .btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
