@@ -91,8 +91,7 @@ void turn_right() {
 
 **Adjust Functions:**
 
-In order to ease the confusion that results from writing values on the servos from 0 to 180 where 0 refers to full speed ahead on one wheel and 0 refers to full speed backwards on the other, we developed adjust_left and adjust_right functions that take
-in values from -1 to 1 that map to the corresponding servos values. For example, adjust_left(0) and adjust_right(0) refer to stopping, adjust_left(1) and adjust_right(1) refer to full speed ahead, and adjust_left(-1) and adjust_right(-1) refer to full speed backwards. These functions rely on a map function we wrote that utilizes the Servos range of 0 to 180 as the out_min and out_max for the left wheel, and 180 to 0 as the out_min and out_max for the right wheel. 
+In order to reduce the confusion that results from writing values on the servos from 0 to 180 where 0 refers to full speed ahead on one wheel and 0 refers to full speed backwards on the other, we developed adjust_left and adjust_right functions that take in values from -1 to 1 that map to the corresponding servos values. For example, adjust_left(0) and adjust_right(0) both refer to stopping, adjust_left(1) and adjust_right(1) refer to full speed ahead, and adjust_left(-1) and adjust_right(-1) refer to full speed backwards. These functions rely on a map function we wrote that utilizes the Servos range of 0 to 180 as the out_min and out_max for the left wheel, and 180 to 0 as the out_min and out_max for the right wheel. 
 
 ```
 
