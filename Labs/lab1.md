@@ -14,11 +14,7 @@ We first opened the Arduino IDE and clicked under Files/Examples/01.Basic/Blink.
 
 We clicked the check mark to compile the sketch and uploaded it to the Arduino UNO. We obtained the following result:
 
-[//]: # (<iframe width="560" height="315" src="https://www.youtube.com/embed/GjLLtRx1XvA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>)
-
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=GjLLtRx1XvA
-" target="_blank"><img src="https://www.youtube.com/embed/GjLLtRx1XvA/0.jpg" 
-alt="Arduino Internal LED Blink" width="240" height="180" border="10" /></a>
+http://www.youtube.com/watch?feature=player_embedded&v=GjLLtRx1XvA
 
 *Modifying the Blink Sketch*
 
@@ -27,11 +23,7 @@ We modified the Blink sketch to communicate with an external LED powered by Pin 
 * Added `#define LED_PIN 0` at the top of the sketch
 * Replaced `LED_BUILTIN` with `LED_PIN`
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=NNcXywDYe_s
-" target="_blank"><img src="https://www.youtube.com/embed/NNcXywDYe_s/0.jpg" 
-alt="Arduino External LED Blink" width="240" height="180" border="10" /></a>
-
-[//]: # (<iframe width="560" height="315" src="https://www.youtube.com/embed/NNcXywDYe_s" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>)
+http://www.youtube.com/watch?feature=player_embedded&v=NNcXywDYe_s
 
 *The Serial Monitor and the Analog Pins*
 
@@ -56,10 +48,7 @@ void loop() {
 
 Our result for this part is as follows:
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=0JiTJ-EnS_w
-" target="_blank"><img src="https://www.youtube.com/embed/0JiTJ-EnS_w/0.jpg" 
-alt="Arduino Analog Input" width="240" height="180" border="10" /></a>
-
+http://www.youtube.com/watch?feature=player_embedded&v=0JiTJ-EnS_w
 
 *Analog Output*
 
@@ -88,10 +77,7 @@ void loop() {
 
 What we observed was as follows:
 
-
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=IoDwbJaUMtU
-" target="_blank"><img src="https://www.youtube.com/embed/IoDwbJaUMtU/0.jpg" 
-alt="Arduino Analog Output" width="240" height="180" border="10" /></a>
+http://www.youtube.com/watch?feature=player_embedded&v=IoDwbJaUMtU
 
 *Parallax Servos*
 
@@ -120,24 +106,11 @@ void loop() {
 
 What we observed is as follows:
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=YBj1wgy29BY
-" target="_blank"><img src="https://www.youtube.com/embed/YBj1wgy29BY/0.jpg" 
-alt="Arduino Analog Output" width="240" height="180" border="10" /></a>
+http://www.youtube.com/watch?feature=player_embedded&v=YBj1wgy29BY
 
 *Assembling the Robot*
 
 We assembled the robot and wrote code involving writing to the Servos in order to make an S shape. The following video 
 demonstrates our fully autonomous moving robot:
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=D5O05hFTHSU
-" target="_blank"><img src="https://www.youtube.com/embed/D5O05hFTHSU/0.jpg" 
-alt="Robot Moving" width="240" height="180" border="10" /></a>
-
-
-
-
-
-
-
-
-
+http://www.youtube.com/watch?feature=player_embedded&v=D5O05hFTHSU

@@ -2,10 +2,7 @@
 
 ***Visual Demonstration:***
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=Rsmbcb27Gc8
-" target="_blank"><img src="https://www.youtube.com/embed/Rsmbcb27Gc8/0.jpg" 
-alt="Robot Figure Eight Pattern" width="240" height="180" border="10" /></a>
-
+http://www.youtube.com/watch?feature=player_embedded&v=Rsmbcb27Gc8
 
 ***Lab Procedure:***
 
@@ -104,8 +101,7 @@ In order to reduce the confusion that results from writing values on the servos 
  * @param out_max The upper bound of the new range.
  * @return The scaled value.
  */
-double map(double value_to_map, double in_min, double in_max, double out_min,
-           double out_max) {
+double map(double value_to_map, double in_min, double in_max, double out_min, double out_max) {
   return (value_to_map - in_min) * (out_max - out_min) / (in_max - in_min) +
          out_min;
 }
