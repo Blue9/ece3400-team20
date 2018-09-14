@@ -92,4 +92,22 @@ void turn_right() {
 **Adjust Functions:**
 
 In order to ease the confusion that results from writing values on the servos from 0 to 180 where 0 refers to full speed ahead on one wheel and 0 refers to full speed backwards on the other, we developed adjust_left and adjust_right functions that take
-in values from -1 to 1 that map to the corresponding servos values. For example, adjust_left(0) and adjust_right(0) refer to stopping, adjust_left(1) and adjust_right(1) refer to full speed ahead, and adjust_left(-1) and adjust_right(-1) refer to full speed backwards. These functions rely on the built-in Arduino map functions.
+in values from -1 to 1 that map to the corresponding servos values. For example, adjust_left(0) and adjust_right(0) refer to stopping, adjust_left(1) and adjust_right(1) refer to full speed ahead, and adjust_left(-1) and adjust_right(-1) refer to full speed backwards. These functions rely on a map function we wrote that utilizes the Servos range of 0 to 180 as the out_min and out_max for the left wheel, and 180 to 0 as the out_min and out_max for the right wheel. 
+
+```
+
+/**
+ * Scale the given value to a new range.
+ * @param value_to_map The value to scale.
+ * @param in_min The lower bound of the original range.
+ * @param in_max The upper bound of the original range.
+ * @param out_min The lower bound of the new range.
+ * @param out_max The upper bound of the new range.
+ * @return The scaled value.
+ */
+double map(double value_to_map, double in_min, double in_max, double out_min,
+           double out_max) {
+  return (value_to_map - in_min) * (out_max - out_min) / (in_max - in_min) +
+         out_min;
+}
+```
