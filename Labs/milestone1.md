@@ -1,4 +1,11 @@
-***Milestone 1***
+***Milestone 1:***
+
+***Video:***
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=Rsmbcb27Gc8
+" target="_blank"><img src="https://www.youtube.com/embed/Rsmbcb27Gc8/0.jpg" 
+alt="Robot Figure Eight Pattern" width="240" height="180" border="10" /></a>
+
 
 ***Lab Procedure:***
 
