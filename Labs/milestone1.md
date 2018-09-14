@@ -10,7 +10,7 @@ We used two infrared sensors with spacing slightly greater than the tape’s wid
 
 To implement line following and turning, on each loop iteration, we checked the value of the line sensors with respect to the threshold and classified it in the following four states:
 	
-	Left on Right off: If the left sensor reads white and the right sensor reads black, then we know that the robot is angled against the line, i.e. it has turned too far to the right while line following. As a result, we adjust accordingly by stopping the right wheel (turn left) until both line sensors detect black. We then continue both wheels full speed ahead from there.	
+Left on Right off: If the left sensor reads white and the right sensor reads black, then we know that the robot is angled against the line, i.e. it has turned too far to the right while line following. As a result, we adjust accordingly by stopping the right wheel (turn left) until both line sensors detect black. We then continue both wheels full speed ahead from there.	
 
 adjust_left(0);
 while (sensor_on_white(LEFT_COLOR_PIN) && !sensor_on_white(RIGHT_COLOR_PIN)) {
@@ -19,7 +19,7 @@ while (sensor_on_white(LEFT_COLOR_PIN) && !sensor_on_white(RIGHT_COLOR_PIN)) {
 adjust_left(MAX_SPEED);
 		
 
-	Left off right on: If the right sensor reads white and the right sensor reads black, then we know that the robot is angled against the line in the other direction, i.e. it has turned too far to the left while line following. As a result, we adjust accordingly by stopping the left wheel (turn right) until both line sensors detect black. We then continue both wheels full speed ahead from there.
+Left off right on: If the right sensor reads white and the right sensor reads black, then we know that the robot is angled against the line in the other direction, i.e. it has turned too far to the left while line following. As a result, we adjust accordingly by stopping the left wheel (turn right) until both line sensors detect black. We then continue both wheels full speed ahead from there.
 
 adjust_right(0);
 while (sensor_on_white(RIGHT_COLOR_PIN) && !sensor_on_white(LEFT_COLOR_PIN)) {
@@ -28,7 +28,7 @@ while (sensor_on_white(RIGHT_COLOR_PIN) && !sensor_on_white(LEFT_COLOR_PIN)) {
 adjust_right(MAX_SPEED);
 
 
-	Both On:  Based off of the sensor alignment we chose, as aforementioned, if both sensors are on, we must be at an intersection. In order to complete a figure eight in the configuration we chose, the robot must turn left four times and then turn right four times. We kept a variable that kept track of which turn number we are on and used the mod function to decide whether to turn left or right. For example, if the counter variable records the 9th turn, the robot must be at an equivalent position as for the 1st turn (9 % 8 = 1) and turn left. Once we determined which way to turn, we called our turning functions accordingly.
+Both On:  Based off of the sensor alignment we chose, as aforementioned, if both sensors are on, we must be at an intersection. In order to complete a figure eight in the configuration we chose, the robot must turn left four times and then turn right four times. We kept a variable that kept track of which turn number we are on and used the mod function to decide whether to turn left or right. For example, if the counter variable records the 9th turn, the robot must be at an equivalent position as for the 1st turn (9 % 8 = 1) and turn left. Once we determined which way to turn, we called our turning functions accordingly.
 		
 
 
