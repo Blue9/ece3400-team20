@@ -1,23 +1,24 @@
 ***Milestone 1***
 
-*Lab Procedure*
+*Lab Procedure:*
 
 *Objective:* The objective of this milestone is to be able to add sensors to the robot as well as program the robot such that the robot will be able to line follow and turn along a grid in a figure eight fashion.
 
 We used two infrared sensors with spacing slightly greater than the tape’s width placed in front of the robot approximately 5 mm above the floor. This placement was chosen so that when the robot detects an intersection both line sensors would read white and while the robot is going straight along a path, both line sensors would read black. If any of the line sensors read white exclusively, i.e. the left sensor reads white and the right sensor reads black or vice-versa, we know that the robot is angled against the line and should adjust accordingly. This adjustment forms the basis  for our line-following procedure. We then calibrated the threshold value of each sensor by reading the value on the analog pins along lighter and darker regions of the grid and averaged accordingly. 
 
-*Loop Iteration States*
+*Loop Iteration States:*
 
 To implement line following and turning, on each loop iteration, we checked the value of the line sensors with respect to the threshold and classified it in the following four states:
 	
 Left on Right off: If the left sensor reads white and the right sensor reads black, then we know that the robot is angled against the line, i.e. it has turned too far to the right while line following. As a result, we adjust accordingly by stopping the right wheel (turn left) until both line sensors detect black. We then continue both wheels full speed ahead from there.	
 
+```
 adjust_left(0);
 while (sensor_on_white(LEFT_COLOR_PIN) && !sensor_on_white(RIGHT_COLOR_PIN)) {
 // Wait until neither on white.
 }
 adjust_left(MAX_SPEED);
-		
+```		
 
 Left off right on: If the right sensor reads white and the right sensor reads black, then we know that the robot is angled against the line in the other direction, i.e. it has turned too far to the left while line following. As a result, we adjust accordingly by stopping the left wheel (turn right) until both line sensors detect black. We then continue both wheels full speed ahead from there.
 
