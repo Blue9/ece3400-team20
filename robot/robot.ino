@@ -10,7 +10,7 @@
 #define LEFT_COLOR_PIN A2
 #define RIGHT_SERVO_PIN 10
 #define LEFT_SERVO_PIN 11
-#define SENSOR_THRESHOLD 650  // Determined experimentally.
+#define SENSOR_THRESHOLD 750  // Determined experimentally.
 
 #define LEFT_VELOCITY_MIN 0
 #define LEFT_VELOCITY_MAX 180
@@ -28,6 +28,10 @@ void setup() {
   pinMode(RIGHT_COLOR_PIN, INPUT);
   pinMode(LEFT_COLOR_PIN, INPUT);
   Serial.begin(9600);
+  // Start servos for a short period of time.
+  adjust_left(MAX_SPEED);
+  adjust_right(MAX_SPEED);
+  delay(500);
 }
 
 void loop() {
@@ -36,24 +40,29 @@ void loop() {
   if (right_on_white && left_on_white) {
     // If both the right and left sensors are on white,
     // then we are at an intersection.
-    if (figure_eight_step % 8 > 3)
+    if (figure_eight_step % 8 > 3) {
+      Serial.println("Turning left");
       turn_left();
-    else
+    } else {
+      Serial.println("Turning right");
       turn_right();
+    }
     figure_eight_step = (figure_eight_step + 1) % 8;
   } else if (right_on_white && !left_on_white) {
+    Serial.println("right on left off");
     // If the right line sensor reads white but the left sensor is not on white,
     // then turn right slighly to adjust
     adjust_right(0);
-    while (sensor_on_white(RIGHT_COLOR_PIN)) {
+    while (sensor_on_white(RIGHT_COLOR_PIN) && !sensor_on_white(LEFT_COLOR_PIN)) {
       // Wait until neither on white.
     }
     adjust_right(MAX_SPEED);
   } else if (!right_on_white && left_on_white) {
+    Serial.println("right off left on");
     // If the left line sensor reads white but the right sensor is not on white,
     // then turn left slighly to adjust
     adjust_left(0);
-    while (sensor_on_white(LEFT_COLOR_PIN)) {
+    while (sensor_on_white(LEFT_COLOR_PIN) && !sensor_on_white(RIGHT_COLOR_PIN)) {
       // Wait until neither on white.
     }
     adjust_left(MAX_SPEED);
@@ -87,9 +96,9 @@ void adjust_right(double velocity_right) {
  * Turn the robot left 90 degrees by slowing down the left servo.
  */
 void turn_left() {
-  adjust_left(0.1);
+  adjust_left(0);
   adjust_right(1);
-  delay(1200);
+  delay(900);
   adjust_left(1);
 }
 
@@ -98,8 +107,8 @@ void turn_left() {
  */
 void turn_right() {
   adjust_left(1);
-  adjust_right(0.1);
-  delay(1200);
+  adjust_right(0);
+  delay(900);
   adjust_right(1);
 }
 
