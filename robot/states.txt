@@ -1,0 +1,49 @@
+Main states:
+- straight
+- adjust left
+- adjust right
+- turn
+
+
+turn states:
+- forward until off
+- turn until left on track
+- turn until left off track
+
+
+straight:
+- left and !right --> adjust left
+- !left and right --> adjust right
+- !left and !right --> stop (at least for now)
+- left and right --> turn left or right depending on figure eight counter
+
+
+adjust left:
+- left and !right --> adjust left
+- !left and !right --> straight
+- !left and right --> adjust right (shouldn't happen since straight should be called first)
+
+
+adjust right:
+- !left and right --> adjust right
+- !left and !right --> straight
+- left and !right --> adjust left (shouldn't happen since straight should be called first)
+
+
+turn:
+- left and right --> forward until off
+
+
+forward until off:
+- left and right --> forward until off
+- !left and !right --> turn until left on track
+
+
+turn until left on track (stops one of wheels):
+- !left --> turn until left on track
+- left --> turn until left off track
+
+
+turn until left off track (wait until left is off track):
+- left --> turn until left off track
+- !left --> straight (main)
