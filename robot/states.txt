@@ -14,8 +14,8 @@ turn states:
 straight:
 - left and !right --> adjust left
 - !left and right --> adjust right
-- !left and !right --> stop (at least for now)
-- left and right --> turn left or right depending on figure eight counter
+- !left and !right --> stop (at least for now) // not used rn
+- left and right --> forward until off
 
 
 adjust left:
@@ -28,10 +28,6 @@ adjust right:
 - !left and right --> adjust right
 - !left and !right --> straight
 - left and !right --> adjust left (shouldn't happen since straight should be called first)
-
-
-turn:
-- left and right --> forward until off
 
 
 forward until off:
