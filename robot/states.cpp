@@ -44,7 +44,7 @@ int (*forward_until_past_intersection())(void) {
   set_left(1);
   set_right(1);
   if (both_on_white()) return forward_until_past_intersection;
-  if (neither_on_white()) return start_turn;
+  if (!left_on_white()) return start_turn;
   return forward_until_past_intersection;
 }
 
