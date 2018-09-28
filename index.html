@@ -275,19 +275,16 @@
                                 middle pin to an Analog Pin on the Arduino for reading. We used A0.</p>
                             <p>For the code, we set up the serial monitor and then used AnalogRead in order to read the
                                 input. The code is as follows:</p>
-                            <pre><code class="arduino">void setup() {
+                            <pre><code class="arduino">
+<!--                         -->void setup() {
+<!--                         -->    Serial.begin(9600); // setting up the Serial monitor
+<!--                         -->}
 
-                                            Serial.begin(9600); // setting up the Serial monitor
-
-                                            }
-
-                                            void loop() {
-
-                                            int a = analogRead(A0); // Read the Input
-                                            Serial.println(a); // Print the output to the serial monitor and create a new line
-
-                                            }
-                                        </code></pre>
+<!--                         -->void loop() {
+<!--                         -->    int a = analogRead(A0); // Read the Input
+<!--                         -->    Serial.println(a); // Print the output to the serial monitor and create a new line
+<!--                         -->}
+                            </code></pre>
                             <p>Our result for this part is as follows:</p>
                             <iframe width="560" height="315" src="https://www.youtube.com/embed/0JiTJ-EnS_w"
                                 frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -299,25 +296,22 @@
                                 series with a 300 Ohm resistor to digital pin 5 (PWM pin) all with common grounds.
                                 <br> Our code for this was as follows:
                             </p>
-                            <pre><code>#define POT_PIN A0
-                                            #define LED_PIN 5
+                            <pre><code>
+<!--                         -->#define POT_PIN A0
+<!--                         -->#define LED_PIN 5
 
-                                            // the setup function runs once when you press reset or power the board
-                                            void setup() {
+<!--                         -->// the setup function runs once when you press reset or power the board
+<!--                         -->void setup() {
+<!--                         -->    Serial.begin(9600);           // initialize the serial monitor
+<!--                         -->    pinMode(LED_PIN, OUTPUT);     // setup the LED_PIN as output
+<!--                         -->}
 
-                                            Serial.begin(9600);           // initialize the serial monitor
-                                            pinMode(LED_PIN, OUTPUT);     // setup the LED_PIN as output
-
-                                            }
-
-                                            // the loop function runs over and over again forever
-                                            void loop() {
-
-                                            int a = analogRead(POT_PIN);  // read from the analog pin
-                                            analogWrite(LED_PIN, a/4);    // write to the PWM pin - scaling 1024 -&gt; 256
-
-                                            }
-                                        </code></pre>
+<!--                         -->// the loop function runs over and over again forever
+<!--                         -->void loop() {
+<!--                         -->    int a = analogRead(POT_PIN);  // read from the analog pin
+<!--                         -->    analogWrite(LED_PIN, a/4);    // write to the PWM pin - scaling 1024 -&gt; 256
+<!--                         -->}
+                            </code></pre>
                             <p><em>Note:</em> <code>analogRead()</code> produces values from <code>0</code> to <code>1023</code>,
                                 but <code>analogWrite()</code> only accepts values from <code>0</code> to <code>255</code>
                                 so the input was scaled down by a factor of four.</p>
@@ -332,26 +326,22 @@
                                 top of the sketch and read its documentation for setting up the Servo from the
                                 following link: <a href="https://www.arduino.cc/en/Reference/Servo">https://www.arduino.cc/en/Reference/Servo</a>.</p>
                             <p>We used the following setup and code:</p>
-                            <pre><code>#include &lt;Servo.h&gt;  // include the Servo library
-
-                                            #define POT_PIN A0
-                                            Servo myServo;  // create servo object to control a servo
-
-                                            void setup() {
-
-                                            myServo.attach(9);            // attaches the servo on pin 9 to the servo object
-                                            Serial.begin(9600);           // initialize the serial monitor
-
-                                            }
-
-                                            void loop() {
-
-                                            int a = analogRead(POT_PIN);  // read from the analog pin
-                                            a = map(a, 0, 1023, 0, 180);  // scale 1024 to 180
-                                            myServo.write(a);             // sets the servo speed
-
-                                            }
-                                        </code></pre>
+                            <pre><code>
+<!--                         -->#include &lt;Servo.h&gt;  // include the Servo library
+<!--                         -->#define POT_PIN A0
+<!--                         -->Servo myServo;  // create servo object to control a servo
+<!--                         -->
+<!--                         -->void setup() {
+<!--                         -->    myServo.attach(9);            // attaches the servo on pin 9 to the servo object
+<!--                         -->    Serial.begin(9600);           // initialize the serial monitor
+<!--                         -->}
+<!--                         -->
+<!--                         -->void loop() {
+<!--                         -->    int a = analogRead(POT_PIN);  // read from the analog pin
+<!--                         -->    a = map(a, 0, 1023, 0, 180);  // scale 1024 to 180
+<!--                         -->    myServo.write(a);             // sets the servo speed
+<!--                         -->}
+                            </code></pre>
                             <p>What we observed is as follows:</p>
                             <iframe width="560" height="315" src="https://www.youtube.com/embed/YBj1wgy29BY"
                                 frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -470,12 +460,13 @@
                                 stopping the right wheel (turn left) until both line sensors detect black. We then
                                 continue both wheels full speed ahead from there. The following code demonstrates what
                                 would happen if this conditional is met:</p>
-                            <pre><code>adjust_right(0);
-                                        while (sensor_on_white(RIGHT_COLOR_PIN) &amp;&amp; !sensor_on_white(LEFT_COLOR_PIN)) {
-                                            &#9;// Wait until neither on white.
-                                        }
-                                        adjust_right(MAX_SPEED);
-                                        </code></pre>
+                            <pre><code>
+<!--                         -->adjust_right(0);
+<!--                         -->while (sensor_on_white(RIGHT_COLOR_PIN) && !sensor_on_white(LEFT_COLOR_PIN)) {
+<!--                         -->    // Wait until neither on white.
+<!--                         -->}
+<!--                         -->adjust_right(MAX_SPEED);
+                            </code></pre>
                             <p><strong>Left off right on</strong>: If the right sensor reads white and the right sensor
                                 reads black, then we know that the robot is angled against the line in the other
                                 direction, i.e. it has turned too far to the left while line following. As a result, we
@@ -483,11 +474,11 @@
                                 detect black. We then continue both wheels full speed ahead from there. The following
                                 code demonstrates what would happen if this conditional is met:</p>
                             <pre><code>adjust_left(0);
-                                        while (sensor_on_white(LEFT_COLOR_PIN) &amp;&amp; !sensor_on_white(RIGHT_COLOR_PIN)) {
-                                        // Wait until neither on white.
-                                        }
-                                        adjust_left(MAX_SPEED);
-                                        </code></pre>
+<!--                         -->while (sensor_on_white(LEFT_COLOR_PIN) && !sensor_on_white(RIGHT_COLOR_PIN)) {
+<!--                         -->    // Wait until neither on white.
+<!--                         -->}
+<!--                         -->adjust_left(MAX_SPEED);
+<!--                         --></code></pre>
                             <p><strong>Both On</strong>: Based off of the sensor alignment we chose, as aforementioned,
                                 if both sensors are on, we must be at an intersection. In order to complete a figure
                                 eight in the configuration we chose, the robot must turn left four times and then turn
@@ -497,25 +488,26 @@
                                 for the 1st turn (9 % 8 = 1) and turn left. Once we determined which way to turn, we
                                 called our turning functions accordingly. The following code demonstrates what would
                                 happen if this conditional is met:</p>
-                            <pre><code>// If both the right and left sensors are on white,
-                                        // then we are at an intersection.
-                                        if (figure_eight_step % 8 &gt; 3) {
-                                        Serial.println(&quot;Turning left&quot;);
-                                        turn_left();
-                                        } else {
-                                        Serial.println(&quot;Turning right&quot;);
-                                        turn_right();
-                                        }
-                                        figure_eight_step = (figure_eight_step + 1) % 8;
-                                        
-                                        </code></pre>
+                            <pre><code>
+<!--                         -->// If both the right and left sensors are on white,
+<!--                         -->// then we are at an intersection.
+<!--                         -->if (figure_eight_step % 8 &gt; 3) {
+<!--                         -->    Serial.println(&quot;Turning left&quot;);
+<!--                         -->    turn_left();
+<!--                         -->} else {
+<!--                         -->    Serial.println(&quot;Turning right&quot;);
+<!--                         -->    turn_right();
+<!--                         -->}
+<!--                         -->figure_eight_step = (figure_eight_step + 1) % 8;
+                            </code></pre>
                             <p><strong>Both off</strong>: If both sensors are off, then the robot is aligned with the
                                 tape. In this case, we continue forward and have both wheels go at their full speeds.
                                 The following code demonstrates what would happen if this conditional is met:</p>
-                            <pre><code>// Move straight.
-                                        adjust_left(MAX_SPEED);
-                                        adjust_right(MAX_SPEED);
-                                        </code></pre>
+                            <pre><code>
+<!--                         -->// Move straight.
+<!--                         -->adjust_left(MAX_SPEED);
+<!--                         -->adjust_right(MAX_SPEED);
+                            </code></pre>
                             <p><strong>Turning Procedures</strong></p>
                             <p>As aforementioned, since the sensors are slightly farther apart then the line is wide,
                                 when both sensors detect a line, we know that an intersection has been found. We
@@ -525,26 +517,26 @@
                                 the wheels switched. We arrived on the timing of 900 msec through rigorous testing. If
                                 the turn is not exact, our line following procedure will ensure the robot returns to
                                 being centered on the line for increased robustness.</p>
-                            <pre><code>/**
-                                         * Turn the robot left 90 degrees by slowing down the left servo.
-                                         */
-                                        void turn_left() {
-                                          adjust_left(0);
-                                          adjust_right(1);
-                                          delay(900);
-                                          adjust_left(1);
-                                        }
-                                        
-                                        /**
-                                         * Turn the robot right 90 degrees by slowing down the right servo.
-                                         */
-                                        void turn_right() {
-                                          adjust_left(1);
-                                          adjust_right(0);
-                                          delay(900);
-                                          adjust_right(1);
-                                        }
-                                        </code></pre>
+                            <pre><code>
+<!--                         -->/**
+<!--                         --> * Turn the robot left 90 degrees by slowing down the left servo.
+<!--                         --> */
+<!--                         -->void turn_left() {
+<!--                         -->    adjust_left(0);
+<!--                         -->    adjust_right(1);
+<!--                         -->    delay(900);
+<!--                         -->    adjust_left(1);
+<!--                         -->}
+<!--                         -->/**
+<!--                         --> * Turn the robot right 90 degrees by slowing down the right servo.
+<!--                         --> */
+<!--                         -->void turn_right() {
+<!--                         -->    adjust_left(1);
+<!--                         -->    adjust_right(0);
+<!--                         -->    delay(900);
+<!--                         -->    adjust_right(1);
+<!--                         -->}
+                            </code></pre>
                             <p><strong>Adjust Functions:</strong></p>
                             <p>In order to reduce the confusion that results from writing values on the servos from 0
                                 to 180 where 0 refers to full speed ahead on one wheel and 0 refers to full speed
@@ -556,19 +548,19 @@
                                 utilizes the Servos range of 0 to 180 as the out_min and out_max for the left wheel,
                                 and 180 to 0 as the out_min and out_max for the right wheel.</p>
                             <pre><code>
-                                        /**
-                                         * Scale the given value to a new range.
-                                         * @param value_to_map The value to scale.
-                                         * @param in_min The lower bound of the original range.
-                                         * @param in_max The upper bound of the original range.
-                                         * @param out_min The lower bound of the new range.
-                                         * @param out_max The upper bound of the new range.
-                                         * @return The scaled value.
-                                         */
-                                        double map(double value_to_map, double in_min, double in_max, double out_min, double out_max) {
-                                          return (value_to_map - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-                                        }
-                                        </code></pre>
+<!--                         -->/**
+<!--                         --> * Scale the given value to a new range.
+<!--                         --> * @param value_to_map The value to scale.
+<!--                         --> * @param in_min The lower bound of the original range.
+<!--                         --> * @param in_max The upper bound of the original range.
+<!--                         --> * @param out_min The lower bound of the new range.
+<!--                         --> * @param out_max The upper bound of the new range.
+<!--                         --> * @return The scaled value.
+<!--                         --> */
+<!--                         -->double map(double value_to_map, double in_min, double in_max, double out_min, double out_max) {
+<!--                         -->    return (value_to_map - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+<!--                         -->}
+                            </code></pre>
                         </div>
                         <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
                             <i class="fa fa-close"></i> Close Project</a>
