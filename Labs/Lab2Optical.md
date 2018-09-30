@@ -38,17 +38,23 @@ boolean isSignalThere(uint8_t fft[], int targetFrequency, long samplingRate) {
 
 Utilizing this function along with the `fft_adc_serial` example sketch by calling it with the parameters targetFrequency = 6080 and sampling rate = 76,800, we were able to print to the serial monitor whether we were detecting a signal at 6080 Hz. The following video shows how we were able to detect cycling the IR Hat on and off using the Serial plotter from a foot away:
 
-*Embedded Link for IR Sensor 6 rotated*
+https://www.youtube.com/watch?v=_tRcdDt8q-A
 
 We then tested the detection with an IR Decoy that was initially set to 12,000 Hz, later set to 18,000 Hz, and natural/flourescent light to make sure only the 6080 Hz tone was detected.
 
 The following video shows how we were able to detect the 6080 Hz signal, but not the decoy when it was placed in the way:
 
-*Embedded Link for IR Sensor 7 rotated*
+https://www.youtube.com/watch?time_continue=17&v=_UgpGABSOR8
+
 
 Finally, the IR Hat and decoy were displaced slightly so the IR sensor sensed both signals, but only detected the 6080Hz tone. The FFT of the two signals is below:
 
 <img src= https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/fftpicopticalteam%20(1).jpg>
 
+### Full System: ###
 
+We created functions for 
+
+
+https://www.youtube.com/watch?v=Ro4x0O4s6_g
 
