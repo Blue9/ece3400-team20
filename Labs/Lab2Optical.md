@@ -46,6 +46,9 @@ The following video shows how we were able to detect the 6080 Hz signal, but not
 
 *Embedded Link for IR Sensor 7 rotated*
 
+Finally, the IR Hat and decoy were displaced slightly so the IR sensor sensed both signals, but only detected the 6080Hz tone. The FFT of the two signals is below:
+
+*Embedded Image of FFT for 6K and 18K*
 
 
 
