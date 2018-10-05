@@ -44,7 +44,8 @@
                     </li>
 
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="https://github.com/Blue9/ece3400-team20">GitHub <i class="fa fa-external-link"></i></a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="https://github.com/Blue9/ece3400-team20">GitHub
+                            <i class="fa fa-external-link"></i></a>
                     </li>
                 </ul>
             </div>
@@ -76,10 +77,10 @@
                     </a>
                 </div>
                 <div class="col-md-6 col-lg-3">
-                    <a class="portfolio-item d-block mx-auto btn disabled" href="#portfolio-modal-2">
+                    <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-2">
                         <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
                             <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-                                <i class="fa fa-search-plus fa-3x"></i>
+                                <h3>Lab 2</h3>
                             </div>
                         </div>
                         <img class="img-fluid" src="img/portfolio/arduino.png" alt="">
@@ -249,9 +250,9 @@
                                 Tools/Board/ and selected Arduino/Genuino UNO. We also verified that the IDE is
                                 connected to the right port by looking under Tools/Port. It should be as in the
                                 following images:</p>
-                            <p><img src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/Labs/Blink.png?token=ALqGCLBrFr-mOmTYEvBasTaXfWTdYf-xks5blqK1wA%3D%3D"
+                            <p><img style="max-width:100%; max-height: 400px;" src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/Labs/Blink.png?token=ALqGCLBrFr-mOmTYEvBasTaXfWTdYf-xks5blqK1wA%3D%3D"
                                     alt="ArduinoBlinkSketch"></p>
-                            <p><img src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/Labs/Tools.png?token=ALqGCBe1R2TgNZlNnu1_rmeRQ2tHJ5pvks5blqNVwA%3D%3D"
+                            <p><img style="max-width:100%; max-height: 400px;" src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/Labs/Tools.png?token=ALqGCBe1R2TgNZlNnu1_rmeRQ2tHJ5pvks5blqNVwA%3D%3D"
                                     alt="ArduinoToolsImage"></p>
                             <p>We clicked the check mark to compile the sketch and uploaded it to the Arduino UNO. We
                                 obtained the following result:</p>
@@ -371,6 +372,225 @@
                     <div class="col-lg-8 mx-auto">
                         <h2 class="text-secondary text-uppercase mb-0">Lab 2</h2>
                         <hr class="star-dark mb-5">
+                        <div class="text-left">
+                            <p><em>Objective</em>: The goal of this lab was to design and implement analog and digital
+                                circuitry to detect both optical and audio signals.</p>
+                            <h2><a id="Lab_Procedure_4"></a>Lab Procedure</h2>
+                            <h3><a id="Setup_6"></a>Setup</h3>
+                            <p>The team was split into two groups, one to detect a 660 Hz audio tone that will signify the
+                                start of the competition, and one to detect a 6080 Hz infrared signal. Both groups utilized
+                                Open Music Labs Arduino FFT library to perform the required signal analysis. More
+                                information on Open Music Labs can be found on their website <a href="http://wiki.openmusiclabs.com/wiki/ArduinoFFT">here</a>.</p>
+                            <h3><a id="Audio_10"></a>Audio</h3>
+                            <p>We started out by designing the amplification and filtering circuit.<br>
+                                The fourier transform maps signals in the time domain into its constituent frequencies in
+                                the frequency domain. In a signal’s frequency representation, we can analyze the magnitude
+                                of various frequencies to see which frequencies are more present than others. Note that the
+                                fourier transform can be applied to both continuous and discrete signals. A fourier
+                                transform applied to a discrete function is called the discrete fourier transform (DFT). In
+                                computer science, one algorithm to calculate the discrete fourier transform in an optimized
+                                way is the Fast Fourier Transform (FFT). The FFT samples a signal at varying time steps and
+                                then calculates its frequency components. In this lab we used the FFT to detect when a
+                                660Hz tone is played.</p>
+                            <p>The following formula can be used to calculate the DFT of a signal:</p>
+                            <p><img style="max-width:100%; max-height: 400px;" src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/img/portfolio/DFT.png"
+                                    alt="logo"></p>
+                            <p>where x_k is a N-point sequence of complex points and X_k is the DFT vector.</p>
+                            <p>We first brainstormed various amplifiers that would achieve a high enough gain to amplify
+                                the 660Hz signal. We decided to use an inverting Op Amp cascaded with a low pass filter.</p>
+                            <p>In the above schematic, the microphone input signal passes through DC signal blocking
+                                capacitor C1, which is then fed into the inverting input of the op amp. The non-inverting
+                                input of the op amp is held at a DC bias of Vdd/2 for maximum output voltage swing. The
+                                output signal from the op amp is then passed through a low pass filter with pole at 600kHz.
+                                We did account for the fact that the LPF acts as a load of the Op Amp when we experimented
+                                with capacitor and resistor values. A rough calculation shows that the interstage voltage
+                                divider is not too significant. The final values we used amplified the signal producing a
+                                gain of around 100x and a low pass filter with cutoff frequency 4kHz. The below image shows
+                                an oscilloscope reading when a 660Hz tone is played around 10 cm away from the microphone.</p>
+                            <p><img style="max-width:100%; max-height: 400px;" src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/img/portfolio/Optical_Amplifier.jpg"
+                                    alt="Oscilloscope reading"></p>
+                            <p>The below image shows a frequency sweep of the operational amplifier. The cutoff frequency
+                                is around 4kHz as mentioned above. Note that this does not affect the gain of the 660Hz
+                                signal.</p>
+                            <p><img style="max-width:100%; max-height: 400px;" src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/FilterFrequencySweep.png?raw=true"
+                                    alt="Frequency sweep"></p>
+                            <p>On the software side, we initially captured the FFT output from the analog circuit using the
+                                example code provided by the FFT library from the Open Music Lab: fft_adc_serial.ino. This
+                                script captures analog data on Arduino pin A0 using the embedded ADC at a sampling rate of
+                                approximately 38kHz. There are 256 samples (bins) per FFT taken, giving a resolution of
+                                38,000/256 ≈ 150Hz. This indicates that we should see the 660Hz tone in bin
+                                ceiling(660/150) = 5, which is what we observed. We wrote the following MATLAB script to
+                                capture the data output on to the serial port:</p>
+                            <pre><code>
+<!--                         -->% Ensure that COM port is open
+<!--                         -->if ~isempty(instrfind)
+<!--                         -->    fclose(instrfind);
+<!--                         -->    delete(instrfind);
+<!--                         -->end
+<!--                         -->
+<!--                         -->% Clear old data
+<!--                         -->clear all
+<!--                         -->close all
+<!--                         -->
+<!--                         -->% Open serial port on COM3
+<!--                         -->myserialport = serial('COM3', 'BaudRate', 115200);
+<!--                         -->fopen(myserialport);
+<!--                         -->
+<!--                         -->% Get data for approximately 4 FFTs to ensure that we get a complete one
+<!--                         -->n = 1;
+<!--                         -->while n &lt;= 512
+<!--                         -->    % 'start' signal will generate matching failure warning
+<!--                         -->    % Safe to ignore
+<!--                         -->    temp = fscanf(myserialport,'%i');
+<!--                         -->    if (isscalar(temp) &amp;&amp; isnumeric(temp))
+<!--                         -->            y(n) = temp;
+<!--                         -->            n = n+1;
+<!--                         -->    end
+<!--                         -->end
+                            </code></pre>
+                            <p>Using this code, we recorded the following data:</p>
+                            <p>We observed that the 660Hz tone appeared as a strong peak in bin 5 as expected. In addition,
+                                tones at 1320Hz and 1960Hz appear in bins 10 and 15 respectively, demonstrating the
+                                linearity of the FFT.<br>
+                                Since the peak for 660Hz appears in such a low-numbered bin, we discovered that we could
+                                use a significantly slower sampling rate to conserve CPU time. The built-in Arduino
+                                function AnalogRead is capable of this. It samples at approximately 8930Hz. This gives us a
+                                resolution of 8930/256 ≈ 35Hz. Using this method, we expect to see the 660Hz tone in bin
+                                ceiling(660/35) = 19. We modified the code as follows:</p>
+                            <pre><code>
+<!--                         -->#define LOG_OUT 1 // use the log output function
+<!--                         -->#define FFT_N 256 // set to 256 point fft
+<!--                         -->
+<!--                         -->#include &lt;FFT.h&gt; // include the library
+<!--                         -->
+<!--                         -->void setup() {
+<!--                         -->  Serial.begin(115200);
+<!--                         -->}
+<!--                         -->
+<!--                         -->void loop() {
+<!--                         -->  while(1) {
+<!--                         -->    cli();
+<!--                         -->    for (int i = 0; i &lt; 512 ; i +=2) {
+<!--                         -->    fft_input[i] = analogRead(A0);
+<!--                         -->    fft_input[i+1] = 0;
+<!--                         -->    }
+<!--                         -->    fft_window(); // window the data for better frequency response
+<!--                         -->    fft_reorder(); // reorder the data before doing the fft
+<!--                         -->    fft_run(); // process the data in the fft
+<!--                         -->    fft_mag_log(); // take the output of the fft
+<!--                         -->    sei();
+<!--                         -->    for (byte i = 0 ; i &lt; FFT_N/2 ; i++) {
+<!--                         -->        Serial.println(fft_log_out[i]); // send out the data
+<!--                         -->    }
+<!--                         -->  }
+<!--                         -->}
+                            </code></pre>
+                            <p>Using the same MATLAB script, we captured the following data:</p>
+                            <p>We noticed that the actual bin numbers corresponding to the peaks for the 660Hz, 1320Hz, and
+                                1960Hz test tones were 20, 39, and 57 respectively. Although these bins are not exactly
+                                what we expected, they are within a margin of error of a bin, which we found acceptable for
+                                an Arduino.</p>
+                            <p>In our next step of testing, we applied the 660 Hz signal with background noise. To see if
+                                we could discern the signal from the noise, we looked at the FFT and checked if the bin
+                                with the 660Hz signal is within a certain intensity of the other signal. Please see the
+                                below video for a demonstration:</p>
+                            <p>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/u_h56zHHiHA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            </p>
+                            <h3><a id="Optical_114"></a>Optical</h3>
+                            <p>We first set up the photo-transistor circuit as depicted in the lab handout:</p>
+                            <p><img style="max-width:100%; max-height: 400px;" src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/phototransistor.png?raw=true"
+                                    alt="Photo-transistor circuit"></p>
+                            <p>We connected it to a 5V Power Source and then connected the IR Hat to 9 Volts. To increase
+                                the IR sensor’s range of detection, we added a simple inverting op-amp circuit with a gain
+                                of about -100 utilizing resistor values of 100,000 and 1,000 Ohms respectively. See the
+                                following article for the circuit design we referenced and built: <a href="https://en.wikipedia.org/wiki/Operational_amplifier_applications#Inverting_amplifier">Inverting
+                                    Amplifier</a>. This circuit is shown below but we later found that its benefits were
+                                minimal for our practical purposes. And so we decided not to use it in our final design.</p>
+                            <p><img style="max-width:100%; max-height: 400px;" src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/OpAmpCircuitOptical.png?raw=true"
+                                    alt="Op-amp circuit"></p>
+                            <p>The next thing that we tested was utilizing the FFT library in order to detect a 6080 Hz
+                                signal once the Arduino received the signal. We opened the example sketch: “fft_adc_serial”
+                                from the Open Music Labs Library and determined whether it was detecting frequencies from
+                                the IR Hat. What we noticed is that that the Arduino was printing values between 0 to 256
+                                onto the Serial Monitor to denote the value of each of the 256 buckets for the Fourier
+                                Transform it was computing.</p>
+                            <p>Once we made that observation, we changed the sampling rate, according to the calculations
+                                done by the Team Alpha report, by setting the ADCSRA register to 0xe4 from the standard
+                                fft_adc_serial script. This makes the ADC sample rate to be about 76,800 Hz. This was done
+                                since we needed to sample above 36,000 Hz to detect decoys at 18,000 Hz according to the
+                                Nyquist condition and this was smallest sample rate above that constraint. We often printed
+                                these Fourier transforms to the Serial monitor to see if we were detecting the correct
+                                bin/frequency.</p>
+                            <p>We then developed a function denoted as <code>isSignalThere</code> to calculate whether the
+                                FFT contained a peak at the frequency we desired. This function takes in the target
+                                frequency, the sampling rate, and the FFT array as parameters. The width of each bin is the
+                                sampling frequency divided by 256, and the function calculates which bin the target
+                                frequency is and then checks whether this bin or its adjacent bins contain a value above a
+                                threshold, which was determined through empirical tests to be 60.</p>
+                            <pre><code>
+<!--                         -->boolean isSignalThere(uint8_t fft[], int targetFrequency, long samplingRate) {
+<!--                         -->    long bucketLength = samplingRate / 256;
+<!--                         -->    uint8_t maxValue = 0;
+<!--                         -->
+<!--                         -->    uint8_t threshold = 60; 
+<!--                         -->    int targetBucket = targetFrequency / bucketLength;
+<!--                         -->    byte width = 2;
+<!--                         -->    for (byte i = 0; i &lt; width; i++) {
+<!--                         -->    if (fft[targetBucket + i] &gt;= threshold || fft[targetBucket - i] &gt;= threshold) {
+<!--                         -->        return true;
+<!--                         -->    }
+<!--                         -->    }
+<!--                         -->    return false;
+<!--                         -->}
+                            </code></pre>
+                            <p>Utilizing this function along with the <code>fft_adc_serial</code> example sketch by calling
+                                it with the parameters targetFrequency = 6080 and sampling rate = 76,800, we were able to
+                                print to the serial monitor whether we were detecting a signal at 6080 Hz. The following
+                                video shows how we were able to detect cycling the IR Hat on and off using the Serial
+                                plotter from a foot away:</p>
+                            <p>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/_tRcdDt8q-A" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            </p>
+                            <p>We then tested the detection with an IR Decoy that was initially set to 12,000 Hz, later set
+                                to 18,000 Hz, and natural/flourescent light to make sure only the 6080 Hz tone was
+                                detected.</p>
+                            <p>The following video shows how we were able to detect the 6080 Hz signal, but not the decoy
+                                when it was placed in the way:</p>
+                            <p>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/_UgpGABSOR8?start=17" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            </p>
+                            <p>Finally, the IR Hat and decoy were displaced slightly so the IR sensor sensed both signals,
+                                but only detected the 6080Hz tone. The FFT of the two signals is below:</p>
+                            <p><img style="max-width:100%; max-height: 400px;" src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/fftpicopticalteam%20(1).jpg?raw=true"
+                                    alt="FFT"></p>
+                            <h3><a id="Combined_System_162"></a>Combined System</h3>
+                            <p>Once each system had been implemented and tested they were combined into a single Arduino
+                                sketch, with the optical signal reading from A0, and the acoustic signal being read from
+                                A5. The loop for individual system was put into a function, and were then called from a top
+                                level loop, as seen below:</p>
+                            <pre><code>
+<!--                         -->void loop() {
+<!--                         -->  while(1) { // reduces jitter
+<!--                         -->    bool audio    = audioFFT();
+<!--                         -->    bool optical  = opticalFFT();
+<!--                         -->    
+<!--                         -->    Serial.print(&quot;Optical: &quot;);
+<!--                         -->    Serial.print(optical);
+<!--                         -->    Serial.print(&quot;\tAudio: &quot;);
+<!--                         -->    Serial.println(audio);
+<!--                         -->
+<!--                         -->  }
+<!--                         -->}
+                            </code></pre>
+                            <p>Simply pasting the two sets of code into functions do not work properly, as they use
+                                different sample rates and ADC settings. To combat this issue initialization of the ADC was
+                                moved form the <code>setup()</code> function to each of the individual FFT functions. After
+                                this change was made the entire system worked properly as shown in the video below:</p>
+                            <p>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/Ro4x0O4s6_g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
