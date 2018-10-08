@@ -17,5 +17,6 @@ int (*start_turn())(void);
 
 int (*wait_until_turn_end())(void);
 
+int (*check_for_walls())(void);
 
 #endif

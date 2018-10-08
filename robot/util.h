@@ -66,4 +66,39 @@ int both_on_white();
 
 int neither_on_white();
 
+/**
+ * Read the given sensor and return whether it is pointed at a wall.
+ * @param pin_name The pin name of the sensor. Ex: A1.
+ * @return True if the sensor is pointed at a wall, false otherwise.
+ */
+int sensor_at_wall(int pin_name);
+
+int right_wall();
+
+int front_wall();
+
+int both_wall();
+
+int neither_wall();
+
+/**
+ * Turn on the given LED.
+ * @param pin_name The pin name of the LED. Ex: 1.
+ */
+void led_on(int pin_name);
+
+/**
+ * Turn off the given LED.
+ * @param pin_name The pin name of the LED. Ex: 1.
+ */
+void led_off(int pin_name);
+
+void right_led_on();
+
+void front_led_on();
+
+void right_led_off();
+
+void front_led_off();
+
 #endif

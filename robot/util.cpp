@@ -96,3 +96,58 @@ int both_on_white() {
 int neither_on_white() {
   return !left_on_white() && !right_on_white();  // !left && !right
 }
+
+/**
+ * Read the given sensor and return whether it is pointed at a wall.
+ * @param pin_name The pin name of the sensor. Ex: A1.
+ * @return True if the sensor is pointed at a wall, false otherwise.
+ */
+int sensor_at_wall(int pin_name) {
+  if (pin_name == frontDistancePin) {
+    return analogRead(pin_name) > FRONT_DISTANCE_THRESHOLD;
+  } else if (pin_name == RIGHT_DISTANCE_PIN) {
+    return analogRead(pin_name) > RIGHT_DISTANCE_THRESHOLD;
+  } else {
+    return 0;
+  }
+}
+
+int right_wall() {
+  return sensor_at_wall(RIGHT_DISTANCE_PIN);
+}
+
+int front_wall() {
+  return sensor_at_wall(FRONT_DISTANCE_PIN);
+}
+
+int both_wall() {
+  return right_wall() && front_wall();
+}
+
+int neither_wall() {
+  return !right_wall() && !front_wall();
+}
+
+void led_on(int pin_name) {
+  digitalWrite(pin_name, HIGH);
+}
+
+void led_off(int pin_name) {
+  digitalWrite(pin_name, LOW);
+}
+
+void right_led_on() {
+  led_on(RIGHT_LED_PIN);
+}
+
+void front_led_on() {
+  led_on(FRONT_LED_PIN);
+}
+
+void right_led_off() {
+  led_off(RIGHT_LED_PIN);
+}
+
+void front_led_off() {
+  led_off(FRONT_LED_PIN);
+}
