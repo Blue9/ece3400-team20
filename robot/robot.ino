@@ -26,7 +26,7 @@ void setup() {
 }
 
 void loop() {
-  next_state = states[next_state]();
+  next_state = handle_next_state();
   Serial.println("3");
   Serial.print(left_servo.read());
   Serial.print(" ");

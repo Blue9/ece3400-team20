@@ -14,8 +14,8 @@ state_function_t states[] = {
 
 int next_state;
 
-state_function_t get_state() {
-  return states[next_state];  // Returns a function.
+int handle_next_state() {
+  return states[next_state]();  // Returns a function.
 }
 
 int move_forward() {

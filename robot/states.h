@@ -14,7 +14,7 @@ extern state_function_t states[];
 
 extern int next_state;
 
-state_function_t get_state();
+int handle_next_state();
 
 int move_forward();
 
