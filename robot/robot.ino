@@ -12,15 +12,6 @@
 Servo right_servo;
 Servo left_servo;
 
-int (*states[])(void) = {
-    move_forward,                     //
-    adjust_left,                      //
-    adjust_right,                     //
-    forward_until_past_intersection,  //
-    start_turn,                       //
-    wait_until_turn_end,  // This trailing comma is here for the auto-formatter.
-};
-
 void setup() {
   right_servo.attach(RIGHT_SERVO_PIN);
   left_servo.attach(LEFT_SERVO_PIN);
@@ -29,12 +20,13 @@ void setup() {
   Serial.begin(9600);
   // Start servos for a short period of time.
   Serial.println("1");
-  next_state = move_forward();
+  next_state = MOVE_FORWARD;
   Serial.println("2");
   delay(500);
 }
+
 void loop() {
-  next_state = next_state();
+  next_state = states[next_state]();
   Serial.println("3");
   Serial.print(left_servo.read());
   Serial.print(" ");

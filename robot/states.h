@@ -1,21 +1,32 @@
 #ifndef states_h
 #define states_h
 
-extern int (*next_state)(void);
+#define MOVE_FORWARD 0
+#define ADJUST_LEFT 1
+#define ADJUST_RIGHT 2
+#define FORWARD_UNTIL_PAST_INTERSECTION 3
+#define START_TURN 4
+#define WAIT_UNTIL_TURN_END 5
 
-int (*get_state())(void);
+typedef int (*state_function_t)(void);
 
-int (*move_forward())(void);
+extern state_function_t states[];
 
-int (*adjust_left())(void);
+extern int next_state;
 
-int (*adjust_right())(void);
+state_function_t get_state();
 
-int (*forward_until_past_intersection())(void);
+int move_forward();
 
-int (*start_turn())(void);
+int adjust_left();
 
-int (*wait_until_turn_end())(void);
+int adjust_right();
+
+int forward_until_past_intersection();
+
+int start_turn();
+
+int wait_until_turn_end();
 
 
 #endif

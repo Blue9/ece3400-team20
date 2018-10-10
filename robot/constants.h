@@ -1,6 +1,6 @@
 #ifndef constants_h
 #define constants_h
-#include "pins_arduino.h"
+#include <pins_arduino.h>
 
 #define RIGHT_COLOR_PIN A1
 #define LEFT_COLOR_PIN A2
