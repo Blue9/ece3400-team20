@@ -75,12 +75,17 @@ int wait_until_turn_end() {
 }
 
 
-'''
+```
 
 Once we developed these states and branching conditions, we were able to develop a wall-detection algorithm. The following video demonstrates how our robot is able to detect walls and line follow:
+
+# insert Video #
 
 ## Avoiding other Robots
 
 In order to avoid other robots, we attached an IR Sensor to the front of the robot. The robot performs an FFT utilizing the "optical_FFT" function written in Lab 2. If we do detect a decoy robot, then we treat it as a wall in our wall detection algorithm above. This is why there is an OR statement with "optical_FFT()" above. 
 
+A video of our robot avoiding other robots, walls, and line following is as follows:
+
+# INSERT VIDEO #
 
