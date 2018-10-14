@@ -84,7 +84,7 @@ Once we developed these states and branching conditions, we were able to develop
 
 ## Avoiding other Robots
 
-In order to avoid other robots, we attached an IR Sensor to the front of the robot. The robot performs an FFT utilizing the "optical_FFT" function written in Lab 2. If we do detect a decoy robot, then we treat it as a wall in our wall detection algorithm above. This is why there is an OR statement with "optical_FFT()" above. 
+In order to avoid other robots, we attached an IR Sensor to the front of the robot. The robot performs an FFT utilizing the "optical_FFT" function written in Lab 2. If we do detect a decoy robot, then we treat it as a wall in our wall detection algorithm above. This is why we added an OR statement with "optical_FFT()" above in the "move_forward" state as well as added similar conditions in the "adjust_left" and "adjust_right" states. We initially had issues with integrating the FFT but we adjusted our value of ADCSRA and we found it to work.
 
 A video of our robot avoiding other robots, walls, and line following is as follows:
 
