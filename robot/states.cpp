@@ -9,7 +9,8 @@ function_t states[] = {
   adjust_right,
   forward_until_past_intersection,
   start_turn,
-  wait_until_turn_end
+  wait_until_turn_end,
+  undo_turn
 };
 
 int next_state;
@@ -23,8 +24,6 @@ int handle_next_state() {
 
 int move_forward() {
   Serial.println("move forward");
-  front_led_off();
-  right_led_off();
   set_left(1);
   set_right(1);
   if (only_left_on_white()) return ADJUST_LEFT;
@@ -78,7 +77,13 @@ int start_turn() {
   set_left(turn_direction);
   set_right(1 - turn_direction);
   if (!turn_status[turn_direction]()) return START_TURN;
-  if (turn_status[turn_direction]()) return WAIT_UNTIL_TURN_END;
+  if (turn_status[turn_direction]()) {
+    // Before completing turn, check for a dead end.
+    Serial.print("fonrt walll???????????  ");
+    Serial.println(front_wall());
+    if (front_wall() && turn_direction == 0) return UNDO_TURN;
+    else return WAIT_UNTIL_TURN_END;
+  }
   return START_TURN;
 }
 
@@ -89,4 +94,26 @@ int wait_until_turn_end() {
   if (turn_status[turn_direction]()) return WAIT_UNTIL_TURN_END;
   if (!turn_status[turn_direction]()) return MOVE_FORWARD;
   return WAIT_UNTIL_TURN_END;
+}
+
+int undo_turn() {
+  // We were turning left, but need to reverse that.
+  byte del = 50;
+  Serial.println("undo turn");
+  set_left(0);
+  set_right(-1);
+  while (!right_on_white());
+  delay(del);
+  while (right_on_white());
+  set_left(1);
+  set_right(-1);
+  delay(del);
+  while (!right_on_white());
+  delay(del);
+  while (right_on_white());
+  delay(del);
+  while (!right_on_white());
+  delay(del);
+  while (right_on_white());
+  return MOVE_FORWARD;
 }

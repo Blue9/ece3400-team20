@@ -7,7 +7,7 @@
 #define FORWARD_UNTIL_PAST_INTERSECTION 3
 #define START_TURN 4
 #define WAIT_UNTIL_TURN_END 5
-#define HANDLE_WALL 6
+#define UNDO_TURN 6
 
 typedef int (*function_t)(void);
 
@@ -29,5 +29,6 @@ int start_turn();
 
 int wait_until_turn_end();
 
+int undo_turn();
 
 #endif

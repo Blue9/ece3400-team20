@@ -19,6 +19,6 @@
 #define FRONT_LED_PIN 8
 #define RIGHT_LED_PIN 2
 #define FRONT_DISTANCE_THRESHOLD 100 // Determined experimentally.
-#define RIGHT_DISTANCE_THRESHOLD 200 // Determined experimentally.
+#define RIGHT_DISTANCE_THRESHOLD 150 // Determined experimentally.
 
 #endif

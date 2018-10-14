@@ -12,6 +12,8 @@
 #include <Arduino.h> // needed for analogRead
 #include <FFT.h> // include the library
 
+typedef uint8_t byte;
+
 const int audio_threshold = 10;
 short audio_cnt;
 uint8_t empty_arr[FFT_N/2];
@@ -23,42 +25,39 @@ void resetFFT(){
 }
 
 bool isSignalThere(uint8_t fft[], int targetFrequency, long samplingRate) {
-
-  long bucketLength = samplingRate / 256;
+  int bucketLength = samplingRate / 256;
   // Serial.print("Bucket Length:\t");
   // Serial.println(bucketLength);
-  uint8_t maxValue = 0;
+  byte maxValue = 0;
   
-  for (int i = 0; i < FFT_N / 2; i++) {
+  for (byte i = 0; i < FFT_N / 2; i++) {
     if (fft[i] > maxValue) {
       maxValue = fft[i];
     }
   }
 
-  int threshold = 60; //maxValue * (3/4);
+  byte threshold = 60; //maxValue * (3/4);
   // Serial.print("Threshold:\t");
   // Serial.println(threshold);
 
-  int targetBucket = targetFrequency / bucketLength;
+  byte targetBucket = targetFrequency / bucketLength;
   // Serial.print("Target Bucket:\t");
   // Serial.println(targetBucket);
 
-  int width = 2;
+  byte width = 2;
   for (int i = 0; i < width; i++) {
   // Serial.print("Bucket Val:\t");
   // Serial.println(fft[targetBucket + i]);
-    if(fft[targetBucket + i] >= threshold || fft[targetBucket - i] >= threshold) {
-      digitalWrite(7, true);
+    if (fft[targetBucket + i] >= threshold || fft[targetBucket - i] >= threshold) {
       return true;
     }
-
   }
-  digitalWrite(7, false);
   return false;
 }
 
 bool opticalFFT(){
     TIMSK0 = 0; // turn off timer0 for lower jitter
+    byte init_adcsra = ADCSRA;
     ADCSRA = 0xe4; // set the adc to free running mode
     ADMUX = 0x40; // use adc0
     DIDR0 = 0x01; // turn off the digital input for adc0
@@ -79,17 +78,17 @@ bool opticalFFT(){
     fft_reorder(); // reorder the data before doing the fft
     fft_run(); // process the data in the fft
     fft_mag_log(); // take the output of the fft
+    ADCSRA = init_adcsra; // This is needed so the function actually returns
     sei();
-    // Serial.println("start");
-    // for (byte i = 0 ; i < FFT_N/2 ; i++) { 
-    //   Serial.println(fft_log_out[i]); // send out the data
-    // }
-    // resetFFT();
-    return isSignalThere(fft_log_out, 6080, 76800);      
+    //for (byte i = 0 ; i < FFT_N/2 ; i++) { 
+    //  Serial.println(fft_log_out[i]); // send out the data
+    //}
+    return isSignalThere(fft_log_out, 6080, 76800);
 }
 
 bool audioFFT(){
     TIMSK0 = 1; // turn off timer0 for lower jitter
+    byte init_adcsra = ADCSRA;
     ADCSRA = 0x87; // set the adc to free running mode
     ADMUX = 0x50; // use adc0
     DIDR0 = 0x00; // turn off the digital input for adc0
@@ -103,6 +102,7 @@ bool audioFFT(){
     fft_run(); // process the data in the fft
     fft_mag_log(); // take the output of the fft
     sei();
+    ADCSRA = init_adcsra;
     //Serial.println("start");
     /*for (byte i = 0 ; i < FFT_N/2 ; i++) {
         Serial.println(fft_log_out[i]); // send out the data

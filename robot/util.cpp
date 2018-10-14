@@ -111,7 +111,7 @@ int right_wall() {
 }
 
 int front_wall() {
-  return false && sensor_at_wall(FRONT_DISTANCE_PIN, FRONT_DISTANCE_THRESHOLD);  // see constants.h
+  return sensor_at_wall(FRONT_DISTANCE_PIN, FRONT_DISTANCE_THRESHOLD);  // see constants.h
 }
 
 int both_wall() {

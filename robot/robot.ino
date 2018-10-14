@@ -19,17 +19,18 @@ void setup() {
   pinMode(LEFT_COLOR_PIN, INPUT);
   pinMode(FRONT_LED_PIN, OUTPUT);
   pinMode(RIGHT_LED_PIN, OUTPUT);
-  pinMode(7, OUTPUT);
+  pinMode(FRONT_DISTANCE_PIN, INPUT);
+  pinMode(RIGHT_DISTANCE_PIN, INPUT);
   Serial.begin(9600);
   // Start servos for a short period of time.
-  Serial.println("1");
   next_state = MOVE_FORWARD;
-  Serial.println("2");
+  set_left(0);
+  set_right(0);
 }
 
 void loop() {
   next_state = handle_next_state();
-  Serial.println(next_state);
+  Serial.println(analogRead(A4));
   digitalWrite(RIGHT_LED_PIN, right_wall() * HIGH);
   digitalWrite(FRONT_LED_PIN, front_wall() * HIGH);
   delay(1);
