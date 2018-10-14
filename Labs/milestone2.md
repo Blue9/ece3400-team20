@@ -18,7 +18,8 @@ Due to the extra amount of complexity that arose from wall detection and in orde
 
 Excerpts from the code is as follows. The "only_left_on_white" and "only_right_on_white" function check if only one of the line sensors is on white based on empirical thresholds from the previous lab. We also created "left_on_white" and "right_on_white" to check if the respective sensor is on white. The "both_on_white" function checks if both the line sensors are on white. The "turn_status[turn_direction]" returns "left_on_white" for a left turn and "right_on_white" for a right turn as we start turning left when the left line sensor is no longer on white and turn right when the right line sensor is no longer on white.
 
-```int move_forward() {
+```
+int move_forward() {
   Serial.println("move forward");
   front_led_off(); 
   right_led_off();
