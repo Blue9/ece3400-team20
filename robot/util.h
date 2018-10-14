@@ -58,28 +58,62 @@ int left_on_white();
  */
 int right_on_white();
 
+/**
+ * Return true if the left pin is on white and right pin is not.
+ * @return True if only the left pin is on white.
+ */
 int only_left_on_white();
 
+/**
+ * Return true if the right pin is on white and left pin is not.
+ * @return True if only the right pin is on white.
+ */
 int only_right_on_white();
 
+/**
+ * Return true if both the left pin and right pin are on white.
+ * @return True if both sensors are on white.
+ */
 int both_on_white();
 
+/**
+ * Return true if neither the left pin nor the right pin are on white.
+ * @return True if neither sensors are on white.
+ */
 int neither_on_white();
 
 /**
  * Read the given sensor and return whether it is pointed at a wall.
- * @param pin_name The pin name of the sensor. Ex: A1.
+ * @param sensor_pin_name The pin name of the sensor. Ex: A1.
  * @return True if the sensor is pointed at a wall, false otherwise.
  */
-int sensor_at_wall(int pin_name);
+int sensor_at_wall(int sensor_pin_name);
 
+/**
+ * Return whether the right wall sensor detects the wall.
+ * @return True if the right wall is detected, false otherwise.
+ */
 int right_wall();
 
+/**
+ * Return whether the front wall sensor detects the wall.
+ * @return True if the front wall is detected, false otherwise.
+ */
 int front_wall();
 
+/**
+ * Return whether the right and front wall sensors detect walls.
+ * @return True if both walls are detected, false otherwise.
+ */
 int both_wall();
 
+/**
+ * Return whether neither wall sensors detect walls.
+ * @return True if neither walls are detected, false otherwise.
+ */
 int neither_wall();
+
+int get_turn_direction();
 
 /**
  * Turn on the given LED.
@@ -100,5 +134,9 @@ void front_led_on();
 void right_led_off();
 
 void front_led_off();
+
+bool opticalFFT();
+
+bool audioFFT();
 
 #endif

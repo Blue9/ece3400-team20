@@ -12,32 +12,36 @@
 Servo right_servo;
 Servo left_servo;
 
-int (*states[])(void) = {
-    move_forward,                     //
-    adjust_left,                      //
-    adjust_right,                     //
-    forward_until_past_intersection,  //
-    start_turn,                       //
-    wait_until_turn_end,  // This trailing comma is here for the auto-formatter.
-};
-
 void setup() {
   right_servo.attach(RIGHT_SERVO_PIN);
   left_servo.attach(LEFT_SERVO_PIN);
   pinMode(RIGHT_COLOR_PIN, INPUT);
   pinMode(LEFT_COLOR_PIN, INPUT);
+  pinMode(FRONT_LED_PIN, OUTPUT);
+  pinMode(RIGHT_LED_PIN, OUTPUT);
+  pinMode(FRONT_DISTANCE_PIN, INPUT);
+  pinMode(RIGHT_DISTANCE_PIN, INPUT);
   Serial.begin(9600);
   // Start servos for a short period of time.
-  Serial.println("1");
-  next_state = move_forward();
-  Serial.println("2");
-  delay(500);
+  next_state = MOVE_FORWARD;
+  set_left(0);
+  set_right(0);
 }
+
 void loop() {
-  next_state = next_state();
-  Serial.println("3");
-  Serial.print(left_servo.read());
-  Serial.print(" ");
-  Serial.println(right_servo.read());
-  delay(10);
+  next_state = handle_next_state();
+  Serial.println(analogRead(A4));
+  digitalWrite(RIGHT_LED_PIN, right_wall() * HIGH);
+  digitalWrite(FRONT_LED_PIN, front_wall() * HIGH);
+  delay(1);
+//  while(1) { // reduces jitter
+//    right_servo.write(90);
+//  left_servo.write(90);
+//      bool audio    = audioFFT();
+//      bool optical  = opticalFFT();
+//      Serial.print("Optical: ");
+//      Serial.print(optical);
+//      Serial.print("\tAudio: ");
+//      Serial.println(audio);
+//  }
 }

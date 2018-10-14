@@ -1,5 +1,5 @@
+#include <Arduino.h>  // needed for analogRead
 #include <Servo.h>
-#include <Arduino.h> // needed for analogRead
 #include "constants.h"
 #include "servos.h"
 
@@ -33,7 +33,7 @@ int sensor_on_white(int pin_name) {
  * @return The scaled left servo value.
  */
 double get_velocity_left(double normalized_vel) {
-  return map(normalized_vel, -1, 1, LEFT_VELOCITY_MIN, LEFT_VELOCITY_MAX);
+  return map(normalized_vel * MAX_SPEED, -1, 1, LEFT_VELOCITY_MIN, LEFT_VELOCITY_MAX);
 }
 
 /**
@@ -42,9 +42,8 @@ double get_velocity_left(double normalized_vel) {
  * @return The scaled right servo value.
  */
 double get_velocity_right(double normalized_vel) {
-  return map(normalized_vel, -1, 1, RIGHT_VELOCITY_MIN, RIGHT_VELOCITY_MAX);
+  return map(normalized_vel * MAX_SPEED, -1, 1, RIGHT_VELOCITY_MIN, RIGHT_VELOCITY_MAX);
 }
-
 
 /**
  * Write the given speed to the left servo.
@@ -64,13 +63,12 @@ void set_right(double velocity_right) {
   right_servo.write(scaled_velocity);
 }
 
-
 /**
  * Return whether the left pin is on white.
  * @return True if the left pin is on white.
  */
 int left_on_white() {
-  return sensor_on_white(LEFT_COLOR_PIN);  // From util.ino
+  return sensor_on_white(LEFT_COLOR_PIN);
 }
 
 /**
@@ -78,7 +76,7 @@ int left_on_white() {
  * @return True if the left pin is on white.
  */
 int right_on_white() {
-  return sensor_on_white(RIGHT_COLOR_PIN);  // From util.ino
+  return sensor_on_white(RIGHT_COLOR_PIN);
 }
 
 int only_left_on_white() {
@@ -99,55 +97,55 @@ int neither_on_white() {
 
 /**
  * Read the given sensor and return whether it is pointed at a wall.
- * @param pin_name The pin name of the sensor. Ex: A1.
+ * @param sensor_pin_name The pin name of the sensor. Ex: A1.
+ * @param threshold The threshold pin value (return true if sensor value >
+ * threshold).
  * @return True if the sensor is pointed at a wall, false otherwise.
  */
-int sensor_at_wall(int pin_name) {
-  if (pin_name == frontDistancePin) {
-    return analogRead(pin_name) > FRONT_DISTANCE_THRESHOLD;
-  } else if (pin_name == RIGHT_DISTANCE_PIN) {
-    return analogRead(pin_name) > RIGHT_DISTANCE_THRESHOLD;
-  } else {
-    return 0;
-  }
+int sensor_at_wall(int sensor_pin_name, int threshold) {
+  return analogRead(sensor_pin_name) > threshold;
 }
 
 int right_wall() {
-  return sensor_at_wall(RIGHT_DISTANCE_PIN);
+  return sensor_at_wall(RIGHT_DISTANCE_PIN, RIGHT_DISTANCE_THRESHOLD);  // see constants.h
 }
 
 int front_wall() {
-  return sensor_at_wall(FRONT_DISTANCE_PIN);
+  return sensor_at_wall(FRONT_DISTANCE_PIN, FRONT_DISTANCE_THRESHOLD);  // see constants.h
 }
 
 int both_wall() {
-  return right_wall() && front_wall();
+  return right_wall() && front_wall();  // right && front
 }
 
 int neither_wall() {
-  return !right_wall() && !front_wall();
+  return !right_wall() && !front_wall();  // !right and !front
+}
+
+int get_turn_direction() {
+  return 1;
 }
 
 void led_on(int pin_name) {
-  digitalWrite(pin_name, HIGH);
+  digitalWrite(pin_name, HIGH);  //
 }
 
 void led_off(int pin_name) {
-  digitalWrite(pin_name, LOW);
+  digitalWrite(pin_name, LOW);  //
 }
 
 void right_led_on() {
-  led_on(RIGHT_LED_PIN);
+  led_on(RIGHT_LED_PIN);  //
 }
 
 void front_led_on() {
-  led_on(FRONT_LED_PIN);
+  led_on(FRONT_LED_PIN);  //
 }
 
 void right_led_off() {
-  led_off(RIGHT_LED_PIN);
+  led_off(RIGHT_LED_PIN);  ///
 }
 
 void front_led_off() {
-  led_off(FRONT_LED_PIN);
+  led_off(FRONT_LED_PIN);  //
 }
