@@ -117,25 +117,3 @@ int undo_turn() {
   while (right_on_white());
   return MOVE_FORWARD;
 }
-
-int (*check_for_walls())(void) {
-  Serial.println("check_for_walls");
-  if (both_wall()) {
-    front_led_on();
-    right_led_on();
-    return start_turn; // Need to turn left & go forward
-  }
-  if (right_wall()) {
-    right_led_on();
-    return move_forward;
-  }
-  if (front_wall()) {
-    front_led_on();
-    return start_turn; // Need to turn right & go forward
-  }
-  if (neither_wall()) {
-    front_led_off();
-    right_led_off();
-    return start_turn; // Need to turn right & go forward
-  }
-}
