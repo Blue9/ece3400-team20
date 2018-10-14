@@ -7,10 +7,11 @@
 #define FORWARD_UNTIL_PAST_INTERSECTION 3
 #define START_TURN 4
 #define WAIT_UNTIL_TURN_END 5
+#define HANDLE_WALL 6
 
-typedef int (*state_function_t)(void);
+typedef int (*function_t)(void);
 
-extern state_function_t states[];
+extern function_t states[];
 
 extern int next_state;
 

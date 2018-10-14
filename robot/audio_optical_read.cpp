@@ -6,7 +6,6 @@
 
 #define LOG_OUT 1 // use the log output function
 #define FFT_N 256 // set to 256 point fft
-#define uint8_t byte
 
 #include <avr/interrupt.h>
 #include <pins_arduino.h>
@@ -16,30 +15,6 @@
 const int audio_threshold = 10;
 short audio_cnt;
 uint8_t empty_arr[FFT_N/2];
-
-//void setup() {
-//  Serial.begin(115200); // use the serial port
-//  TIMSK0 = 0; // turn off timer0 for lower jitter
-//  ADCSRA = 0xe4; // set the adc to free running mode
-//  ADMUX = 0x40; // use adc0
-//  DIDR0 = 0x01; // turn off the digital input for adc0
-//  audio_cnt = 0;
-//}
-//
-//void loop() {
-//  while(1) { // reduces jitter
-//    // cli();  // UDRE interrupt slows this way down on arduino1.0
-//    
-//    bool audio    = audioFFT();
-//    bool optical  = opticalFFT();
-//
-//    Serial.print("Optical: ");
-//    Serial.print(optical);
-//    Serial.print("\tAudio: ");
-//    Serial.println(audio);
-//
-//  }
-//}
 
 void resetFFT(){
   for(int i = 0; i < 256; i++){
@@ -54,13 +29,13 @@ bool isSignalThere(uint8_t fft[], int targetFrequency, long samplingRate) {
   // Serial.println(bucketLength);
   uint8_t maxValue = 0;
   
-  for(byte i = 0; i < FFT_N/2; i++) {
-    if(fft[i] > maxValue) {
+  for (int i = 0; i < FFT_N / 2; i++) {
+    if (fft[i] > maxValue) {
       maxValue = fft[i];
     }
   }
 
-  uint8_t threshold = 60; //maxValue * (3/4);
+  int threshold = 60; //maxValue * (3/4);
   // Serial.print("Threshold:\t");
   // Serial.println(threshold);
 
@@ -68,18 +43,17 @@ bool isSignalThere(uint8_t fft[], int targetFrequency, long samplingRate) {
   // Serial.print("Target Bucket:\t");
   // Serial.println(targetBucket);
 
-  byte width = 2;
-
-  for(byte i = 0; i < width; i++) {
+  int width = 2;
+  for (int i = 0; i < width; i++) {
   // Serial.print("Bucket Val:\t");
   // Serial.println(fft[targetBucket + i]);
-
     if(fft[targetBucket + i] >= threshold || fft[targetBucket - i] >= threshold) {
+      digitalWrite(7, true);
       return true;
     }
 
   }
-
+  digitalWrite(7, false);
   return false;
 }
 
@@ -107,10 +81,10 @@ bool opticalFFT(){
     fft_mag_log(); // take the output of the fft
     sei();
     // Serial.println("start");
-    /* for (byte i = 0 ; i < FFT_N/2 ; i++) { 
-       Serial.println(fft_log_out[i]); // send out the data
-      } */
-//    resetFFT();
+    // for (byte i = 0 ; i < FFT_N/2 ; i++) { 
+    //   Serial.println(fft_log_out[i]); // send out the data
+    // }
+    // resetFFT();
     return isSignalThere(fft_log_out, 6080, 76800);      
 }
 
