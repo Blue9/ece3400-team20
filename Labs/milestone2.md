@@ -82,7 +82,7 @@ int wait_until_turn_end() {
 
 ```
 
-Once we developed these states and branching conditions, wall-detection worked. The following video demonstrates how our robot is able to detect walls and line follow:
+Once we developed these states and branching conditions, wall-detection worked. The following video demonstrates how our robot is able to detect walls and line follows. Note the flashing LEDs.
 
 # https://youtu.be/sdR-A3kpq3s #
 
