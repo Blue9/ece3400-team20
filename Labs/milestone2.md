@@ -12,7 +12,7 @@
       turn_left() // right wall and front wall is detected 
 ```
 We essentially try to turn right at every possible opportunity, and if the right side is blocked, we explore what is forward.
-In terms of the hardware, we added two short distance sensors for wall detection on the right and front side of the robot in addition to the IR sensor explored in Lab 2. We also added two LEDs to tell us what the robot is thinking with regards to a wall on the front or right side based on an experimentally determined threshold value. For our placement of the sensors, we found 100 to be a good threshold for the left wall sensor and 200 to be a good threshold for the right sensor. In the edge case that a robot reaches a dead end, the robot will first turn left (evaluate the "else" statement) and then turn left again, which in aggregate is the same as turning around. 
+In terms of the hardware, we added two short distance sensors for wall detection on the right and front side of the robot in addition to the IR sensor explored in Lab 2. We also added two LEDs to tell us what the robot is thinking with regards to a wall on the front or right side based on an experimentally determined threshold value from the distance sensors. For our placement of the sensors, we found 100 to be a good threshold for the left wall sensor and 200 to be a good threshold for the right sensor. In the edge case that a robot reaches a dead end, the robot will first turn left (evaluate the "else" statement) and then turn left again, which in aggregate is the same as turning around. 
 
 Due to the extra amount of complexity that arose from wall detection and in order to make our line following system more robust, we developed a finite state machine structure to our code. We start our robot in a "move forward" state that iteratively checks our left and right line sensors. If any of those sensors detect that we are no longer line following, then we branch into their respective states to adjust accordingly. If any of the adjusting or "move forward" states also detect that we are at an intersection, by checking if both the left and right sensors are on white, and need to turn according to the right hand rule logic above, we branch into a state that moves the robot slightly past the intersection (forward_until_past_intersection) and determines which way to turn by setting a variable called turn_direction. If we do need to turn, we branch into a state that performs the turn based on the turn_direction (start_turn), determine that the turn is completed (wait_until_turn_completed), and then branches back into the "move forward" state and continue.
 
@@ -80,7 +80,8 @@ int wait_until_turn_end() {
 
 Once we developed these states and branching conditions, wall-detection began to work. The following video demonstrates how our robot is able to detect walls and line follow:
 
-# insert Video #
+# https://youtu.be/sdR-A3kpq3s #
+
 
 ## Avoiding other Robots
 
@@ -88,5 +89,5 @@ In order to avoid other robots, we attached an IR Sensor to the front of the rob
 
 A video of our robot avoiding other robots, walls, and line following is as follows:
 
-# INSERT VIDEO #
+# https://youtu.be/XYCFWvGQjow #
 
