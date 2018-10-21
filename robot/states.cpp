@@ -4,6 +4,7 @@
 #include <USBAPI.h>
 
 function_t states[] = {
+  wait_for_tone,
   move_forward,
   adjust_left,
   adjust_right,
@@ -20,6 +21,12 @@ function_t turn_status[] = {left_on_white, right_on_white};
 
 int handle_next_state() {
   return states[next_state]();  // Returns a function.
+}
+
+int wait_for_tone() {
+  Serial.println("move forward");
+  if (!audioFFT()) return WAIT_FOR_TONE;
+  return MOVE_FORWARD;
 }
 
 int move_forward() {

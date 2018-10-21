@@ -23,7 +23,7 @@ void setup() {
   pinMode(RIGHT_DISTANCE_PIN, INPUT);
   Serial.begin(9600);
   // Start servos for a short period of time.
-  next_state = MOVE_FORWARD;
+  next_state = WAIT_FOR_TONE;
   set_left(0);
   set_right(0);
 }
