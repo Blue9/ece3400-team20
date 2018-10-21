@@ -86,8 +86,8 @@ For example, in order to obtain the x and y coordinates, we used the following m
 This allowed us to communicate information from one radio to another and decode it appropriately. The following 
 images demonstrates the output when we sent encoded information from one radio to another:
 
-<img src=https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/IMG_5380.jpg width=250>
-<img src=https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/IMG_5381.jpg width=250>
+<img src=https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/IMG_5380.jpg width=500 height = 250>
+<img src=https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/IMG_5381.jpg width=500 height = 250>
 
 
 
