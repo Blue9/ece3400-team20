@@ -89,5 +89,40 @@ images demonstrates the output when we sent encoded information from one radio t
 <img src=https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/IMG_5380.jpg width=500 height = 250>
 <img src=https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/IMG_5381.jpg width=500 height = 250>
 
+# Updating GUI from the base station #
+
+We were able to update the GUI from the base station using hardcoded values.  See the below video:
+
+// TODO
+
+
+# Updating GUI from virtual robot wirelessly
+The following video shows us updating the GUI from a virtual robot on a separate Arduino which is separately connected to the base station.  There is slight lagging mostly due to the browser's refreshing rate.
+
+https://youtu.be/IlqivRq3zKw
+
+
+# Robot starting on a 660Hz tone
+
+See the below video:
+
+https://www.youtube.com/watch?v=J3oYayUAUiY
+
+We also implemented a manual override switch:
+
+https://www.youtube.com/watch?v=3r8BT0jyPSM
+
+# Robot starting on a 660Hz tone and exploring maze
+
+
+See the below video:
+https://youtu.be/U-msFs_uLQE
+
+# 
+
+
+
+
+
 
 
