@@ -13,3 +13,4 @@ The team was split up into two groups, one to work on development of the radio c
 
 ### Robot ###
 
+To begin we incorportated the analog audio circuit from ***<Lab 2 ~hyper link>*** onto the primary breadboard. 
