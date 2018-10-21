@@ -66,7 +66,7 @@ This allowed us to encode messages to write to our radios that would be able to 
 # Receiving Information: #
 
 Once a radio received a packet in the data scheme above, we decoded the information utilizing bit shifting. 
-For example, in order to obtain the x and y coordinates, we used the following masks and bit-shifting.
+For example, in order to obtain the x and y coordinates, we used the following masks and bit-shifting to decode the values.
 
 ```
 #define x_mask 0xe000
