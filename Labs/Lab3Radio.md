@@ -99,4 +99,5 @@ And so once we generated this string from the parsed information, we were able t
 
 A wireless virtual transmission with an interface with the GUI is presented below:
 
-# Insert Video
+# Wireless Transmission Radio
+
