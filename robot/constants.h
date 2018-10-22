@@ -6,7 +6,8 @@
 #define LEFT_COLOR_PIN A3
 #define RIGHT_SERVO_PIN 3
 #define LEFT_SERVO_PIN 5
-#define SENSOR_THRESHOLD 900  // Determined experimentally.
+#define SENSOR_THRESHOLD 930  // Determined experimentally.
+#define SENSOR_THRESHOLD_MARGIN 30
 
 #define LEFT_VELOCITY_MIN 0
 #define LEFT_VELOCITY_MAX 180

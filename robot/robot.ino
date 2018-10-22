@@ -35,6 +35,11 @@ void setup() {
 }
 
 void loop() {
+  // while (1) {
+  //   Serial.print(analogRead(LEFT_COLOR_PIN));
+  //   Serial.print(" ");
+  //   Serial.println(analogRead(RIGHT_COLOR_PIN));
+  // }
   next_state = handle_next_state();
   digitalWrite(RIGHT_LED_PIN, right_wall() * HIGH);
   digitalWrite(FRONT_LED_PIN, front_wall() * HIGH);

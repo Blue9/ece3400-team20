@@ -24,7 +24,16 @@ double map(double value_to_map, double in_min, double in_max, double out_min,
  * @return True if the sensor is above the white tape, false otherwise.
  */
 int sensor_on_white(int pin_name) {
-  return analogRead(pin_name) < SENSOR_THRESHOLD;
+  return analogRead(pin_name) < SENSOR_THRESHOLD + SENSOR_THRESHOLD_MARGIN;
+}
+
+/**
+ * Read the given sensor and return whether it is above black.
+ * @param pin_name The pin name of the sensor. Ex: A1.
+ * @return True if the sensor is above black, false otherwise.
+ */
+int sensor_on_black(int pin_name) {
+  return analogRead(pin_name) > SENSOR_THRESHOLD - SENSOR_THRESHOLD_MARGIN;
 }
 
 /**
@@ -77,6 +86,22 @@ int left_on_white() {
  */
 int right_on_white() {
   return sensor_on_white(RIGHT_COLOR_PIN);
+}
+
+/**
+ * Return whether the left pin is on black.
+ * @return True if the left pin is on black.
+ */
+int left_on_black() {
+  return sensor_on_black(LEFT_COLOR_PIN);
+}
+
+/**
+ * Return whether the left pin is on black.
+ * @return True if the left pin is on black.
+ */
+int right_on_black() {
+  return sensor_on_black(RIGHT_COLOR_PIN);
 }
 
 int only_left_on_white() {

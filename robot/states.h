@@ -7,15 +7,22 @@
 #define ADJUST_RIGHT 3
 #define FORWARD_UNTIL_PAST_INTERSECTION 4
 #define HANDLE_INTERSECTION 5
-#define START_TURN 6
-#define WAIT_UNTIL_TURN_END 7
-#define UNDO_TURN 8
+#define EARLY_TURN 6
+#define MID_TURN 7
+#define LATE_TURN 8
+#define START_180 9
+#define MID_180 10
+#define LATE_180 11
 
 typedef int (*function_t)(void);
 
 extern function_t states[];
 
 extern int next_state;
+
+extern int turn_direction;
+extern function_t on_white[];
+extern function_t on_black[];
 
 int handle_next_state();
 
@@ -30,11 +37,5 @@ int adjust_right();
 int forward_until_past_intersection();
 
 int handle_intersection();
-
-int start_turn();
-
-int wait_until_turn_end();
-
-int undo_turn();
 
 #endif

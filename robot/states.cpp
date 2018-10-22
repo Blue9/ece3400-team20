@@ -1,5 +1,6 @@
 #include "states.h"
 #include "robot_state.h"
+#include "turn_states.h"
 #include "radio.h"
 #include "constants.h"
 #include "util.h"
@@ -12,15 +13,18 @@ function_t states[] = {
   adjust_right,
   forward_until_past_intersection,
   handle_intersection,
-  start_turn,
-  wait_until_turn_end,
-  undo_turn
+  early_turn,
+  mid_turn,
+  late_turn,
+  start_180,
+  mid_180,
+  late_180
 };
 
 int next_state;
 int turn_direction = 1; // 0 == left, 1 == right
-function_t turn_status[] = {left_on_white, right_on_white};
-
+function_t on_white[] = {left_on_white, right_on_white};
+function_t on_black[] = {left_on_black, right_on_black};
 
 int handle_next_state() {
   return states[next_state]();  // Returns a function.
@@ -69,7 +73,6 @@ int adjust_right() {
 
 int forward_until_past_intersection() { // must turn after this state
   Serial.print("forward_until_past_intersection ");
-  Serial.println(turn_direction);
   set_left(1);
   set_right(1);
   if (both_on_white()) return FORWARD_UNTIL_PAST_INTERSECTION;
@@ -82,41 +85,10 @@ int handle_intersection() {
   set_right(0);
   update_walls();
   update_robot_position();
+  transmit_msg();
   if (!right_wall()) turn_direction = 1;
   else if (front_wall() && !left_wall()) turn_direction = 0;
-
-  transmit_msg();
   if (right_wall() && !front_wall()) return MOVE_FORWARD;
-  else if (right_wall() && left_wall() && front_wall()) return UNDO_TURN;
-  update_direction(turn_direction);
-  return START_TURN;
-}
-
-int start_turn() {
-  Serial.println("start_turn");
-  set_left(turn_direction);
-  set_right(1 - turn_direction);
-  delay(100);
-  if (!turn_status[turn_direction]()) return START_TURN;
-  if (turn_status[turn_direction]()) return WAIT_UNTIL_TURN_END;
-  return START_TURN;
-}
-
-int wait_until_turn_end() {
-  Serial.println("wait_until_turn_end");
-  set_left(turn_direction);
-  set_right(1 - turn_direction);
-  if (turn_status[turn_direction]()) return WAIT_UNTIL_TURN_END;
-  if (!turn_status[turn_direction]()) return MOVE_FORWARD;
-  return WAIT_UNTIL_TURN_END;
-}
-
-int undo_turn() {
-  set_left(-1);
-  set_right(1);
-  delay(750);
-  while (!left_on_white());
-  while (left_on_white());
-  reverse_direction();
-  return MOVE_FORWARD;
+  else if (right_wall() && left_wall() && front_wall()) return START_180;
+  return EARLY_TURN;
 }

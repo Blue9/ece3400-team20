@@ -21,6 +21,13 @@ double map(double value_to_map, double in_min, double in_max, double out_min,
 int sensor_on_white(int pin_name);
 
 /**
+ * Read the given sensor and return whether it is above black.
+ * @param pin_name The pin name of the sensor. Ex: A1.
+ * @return True if the sensor is above black, false otherwise.
+ */
+int sensor_on_black(int pin_name);
+
+/**
  * Convert a normalized velocity to the left servo value.
  * @param normalized_vel The normalized velocity.
  * @return The scaled left servo value.
@@ -57,6 +64,18 @@ int left_on_white();
  * @return True if the left pin is on white.
  */
 int right_on_white();
+
+/**
+ * Return whether the left pin is on black.
+ * @return True if the left pin is on black.
+ */
+int left_on_black();
+
+/**
+ * Return whether the left pin is on black.
+ * @return True if the left pin is on black.
+ */
+int right_on_black();
 
 /**
  * Return true if the left pin is on white and right pin is not.
