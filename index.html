@@ -971,8 +971,22 @@
                             so it shouldn’t be a significant drain on processing power either.</p>
                         <h4><a id="Testing_With_Other_Robots_183"></a>Testing With Other Robots</h4>
                         <p>From milestone 2, we were able to test our IR hat and optical FFT implementation. In this
-                            lab, we mounted the IR hat at a 5.5 inch height but could not test with other teams’ robots
-                            due to time constraints.</p>
+                            lab, we mounted the IR hat at a 5.5 inch height and connected a 9 V source to it. To make sure our
+                            robot could avoid other robots, we placed another team's robot in the maze and made sure our robot
+                            avoided it. Additionally, we made sure to disable front wall detection while conducting this test
+                            to make sure the robot was actually detecting the other robot and not just a wall. A video of this
+                            is shown below.
+                            
+                            <p>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/9wIbhgJp84U"
+                                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            </p>
+                            
+                            <p>Regarding decoys, we do not actively seek out decoys and ignore them. This is because our
+                            optical FFT functions are accurate enough to only return true when an actual robot is
+                            detected.
+                            </p>
+                            
                         <h3><a id="Complete_Integration_186"></a>Complete Integration</h3>
                         <p>After all of the aforementioned changes had be integrated into the design we did a final
                             test of the robot starting on a tone, navigating a maze, storing the maze locally, and
