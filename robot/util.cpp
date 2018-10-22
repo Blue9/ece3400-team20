@@ -102,50 +102,25 @@ int neither_on_white() {
  * threshold).
  * @return True if the sensor is pointed at a wall, false otherwise.
  */
-int sensor_at_wall(int sensor_pin_name, int threshold) {
-  return analogRead(sensor_pin_name) > threshold;
+int sensor_at_wall(int mux_out, int threshold) {
+  digitalWrite(WALL_MUX_PIN_OUT1, mux_out & 0b01);
+  digitalWrite(WALL_MUX_PIN_OUT2, (mux_out & 0b10) >> 1);
+  //delay(10); // Give time for the mux to update
+  return analogRead(WALL_MUX_PIN_IN) > threshold;
 }
 
 int right_wall() {
-  return sensor_at_wall(RIGHT_DISTANCE_PIN, RIGHT_DISTANCE_THRESHOLD);  // see constants.h
+  return sensor_at_wall(RIGHT_DISTANCE_MUX, RIGHT_DISTANCE_THRESHOLD);  // see constants.h
 }
 
 int front_wall() {
-  return sensor_at_wall(FRONT_DISTANCE_PIN, FRONT_DISTANCE_THRESHOLD);  // see constants.h
+  return sensor_at_wall(FRONT_DISTANCE_MUX, FRONT_DISTANCE_THRESHOLD);  // see constants.h
 }
 
-int both_wall() {
-  return right_wall() && front_wall();  // right && front
+int left_wall() {
+  return sensor_at_wall(LEFT_DISTANCE_MUX, LEFT_DISTANCE_THRESHOLD); // see constants.h
 }
 
-int neither_wall() {
-  return !right_wall() && !front_wall();  // !right and !front
-}
-
-int get_turn_direction() {
-  return 1;
-}
-
-void led_on(int pin_name) {
-  digitalWrite(pin_name, HIGH);  //
-}
-
-void led_off(int pin_name) {
-  digitalWrite(pin_name, LOW);  //
-}
-
-void right_led_on() {
-  led_on(RIGHT_LED_PIN);  //
-}
-
-void front_led_on() {
-  led_on(FRONT_LED_PIN);  //
-}
-
-void right_led_off() {
-  led_off(RIGHT_LED_PIN);  ///
-}
-
-void front_led_off() {
-  led_off(FRONT_LED_PIN);  //
+bool override_pressed() {
+  return digitalRead(OVERRIDE_SWITCH_PIN);
 }

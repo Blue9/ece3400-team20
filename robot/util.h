@@ -102,38 +102,12 @@ int right_wall();
 int front_wall();
 
 /**
- * Return whether the right and front wall sensors detect walls.
- * @return True if both walls are detected, false otherwise.
+ * Return whether the left wall sensor detects the wall.
+ * @return True if the left wall is detected, false otherwise.
  */
-int both_wall();
+int left_wall();
 
-/**
- * Return whether neither wall sensors detect walls.
- * @return True if neither walls are detected, false otherwise.
- */
-int neither_wall();
-
-int get_turn_direction();
-
-/**
- * Turn on the given LED.
- * @param pin_name The pin name of the LED. Ex: 1.
- */
-void led_on(int pin_name);
-
-/**
- * Turn off the given LED.
- * @param pin_name The pin name of the LED. Ex: 1.
- */
-void led_off(int pin_name);
-
-void right_led_on();
-
-void front_led_on();
-
-void right_led_off();
-
-void front_led_off();
+bool override_pressed();
 
 bool opticalFFT();
 

@@ -11,10 +11,11 @@
 #include <pins_arduino.h>
 #include <Arduino.h> // needed for analogRead
 #include <FFT.h> // include the library
+#include "constants.h"
 
 typedef uint8_t byte;
 
-const int audio_threshold = 10;
+const int audio_threshold = 15;
 short audio_cnt;
 uint8_t empty_arr[FFT_N/2];
 
@@ -61,7 +62,7 @@ bool opticalFFT(){
     ADCSRA = 0xe4; // set the adc to free running mode
     ADMUX = 0x40; // use adc0
     DIDR0 = 0x01; // turn off the digital input for adc0
-    cli();
+    // cli();
     for (int i = 0 ; i < 512 ; i += 2) { // save 256 samples
       while(!(ADCSRA & 0x10)); // wait for adc to be ready
       ADCSRA = 0xf4; // restart adc
@@ -79,7 +80,7 @@ bool opticalFFT(){
     fft_run(); // process the data in the fft
     fft_mag_log(); // take the output of the fft
     ADCSRA = init_adcsra; // This is needed so the function actually returns
-    sei();
+    // sei();
     //for (byte i = 0 ; i < FFT_N/2 ; i++) { 
     //  Serial.println(fft_log_out[i]); // send out the data
     //}
@@ -92,16 +93,16 @@ bool audioFFT(){
     ADCSRA = 0x87; // set the adc to free running mode
     ADMUX = 0x50; // use adc0
     DIDR0 = 0x00; // turn off the digital input for adc0
-    cli();
+    // cli();
     for (int i = 0; i < 512 ; i +=2) {
-      fft_input[i] = analogRead(A5);
+      fft_input[i] = analogRead(AUDIO_PIN);
       fft_input[i+1] = 0;
     }
     fft_window(); // window the data for better frequency response
     fft_reorder(); // reorder the data before doing the fft
     fft_run(); // process the data in the fft
     fft_mag_log(); // take the output of the fft
-    sei();
+    // sei();
     ADCSRA = init_adcsra;
     //Serial.println("start");
     /*for (byte i = 0 ; i < FFT_N/2 ; i++) {
@@ -120,7 +121,7 @@ bool audioFFT(){
     Serial.println(audio_cnt);    */
 //    resetFFT();
     if(audio_cnt >= audio_threshold){
-      // Serial.println("660Hz Found"); 
+      Serial.println("660Hz Found"); 
       return true;
     }
     return false; 

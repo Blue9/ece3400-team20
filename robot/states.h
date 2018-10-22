@@ -6,9 +6,10 @@
 #define ADJUST_LEFT 2
 #define ADJUST_RIGHT 3
 #define FORWARD_UNTIL_PAST_INTERSECTION 4
-#define START_TURN 5
-#define WAIT_UNTIL_TURN_END 6
-#define UNDO_TURN 7
+#define HANDLE_INTERSECTION 5
+#define START_TURN 6
+#define WAIT_UNTIL_TURN_END 7
+#define UNDO_TURN 8
 
 typedef int (*function_t)(void);
 
@@ -27,6 +28,8 @@ int adjust_left();
 int adjust_right();
 
 int forward_until_past_intersection();
+
+int handle_intersection();
 
 int start_turn();
 

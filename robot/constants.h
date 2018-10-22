@@ -14,11 +14,21 @@
 #define RIGHT_VELOCITY_MAX 0
 #define MAX_SPEED 0.08
 
-#define FRONT_DISTANCE_PIN A4
-#define RIGHT_DISTANCE_PIN A5
-#define FRONT_LED_PIN 8
+#define FRONT_DISTANCE_MUX 0b00
+#define RIGHT_DISTANCE_MUX 0b11
+#define LEFT_DISTANCE_MUX 0b01
+#define WALL_MUX_PIN_OUT1 6
+#define WALL_MUX_PIN_OUT2 7
+#define WALL_MUX_PIN_IN A5
+
+#define FRONT_LED_PIN 0
 #define RIGHT_LED_PIN 2
-#define FRONT_DISTANCE_THRESHOLD 100 // Determined experimentally.
+#define LEFT_LED_PIN 8
+#define FRONT_DISTANCE_THRESHOLD 80 // Determined experimentally.
 #define RIGHT_DISTANCE_THRESHOLD 150 // Determined experimentally.
+#define LEFT_DISTANCE_THRESHOLD 120 // Determined experimentally.
+
+#define AUDIO_PIN A1
+#define OVERRIDE_SWITCH_PIN 4
 
 #endif

@@ -1,4 +1,6 @@
 #include "states.h"
+#include "robot_state.h"
+#include "radio.h"
 #include "constants.h"
 #include "util.h"
 #include <USBAPI.h>
@@ -9,6 +11,7 @@ function_t states[] = {
   adjust_left,
   adjust_right,
   forward_until_past_intersection,
+  handle_intersection,
   start_turn,
   wait_until_turn_end,
   undo_turn
@@ -24,8 +27,8 @@ int handle_next_state() {
 }
 
 int wait_for_tone() {
-  Serial.println("move forward");
-  if (!audioFFT()) return WAIT_FOR_TONE;
+  Serial.println("wait for tone");
+  if (!audioFFT() && !override_pressed()) return WAIT_FOR_TONE;
   return MOVE_FORWARD;
 }
 
@@ -35,7 +38,8 @@ int move_forward() {
   set_right(1);
   if (only_left_on_white()) return ADJUST_LEFT;
   if (only_right_on_white()) return ADJUST_RIGHT;
-  if (both_on_white() && (front_wall() || !right_wall() || opticalFFT())) {
+  if (both_on_white()) {
+    // At intersection, update current position data
     return FORWARD_UNTIL_PAST_INTERSECTION;
   }
   return MOVE_FORWARD;
@@ -48,7 +52,7 @@ int adjust_left() {
   if (only_left_on_white()) return ADJUST_LEFT;
   if (neither_on_white()) return MOVE_FORWARD;
   if (only_right_on_white()) return ADJUST_RIGHT;
-  if (both_on_white() && (front_wall() || !right_wall() || opticalFFT())) return FORWARD_UNTIL_PAST_INTERSECTION;
+  if (both_on_white()) return FORWARD_UNTIL_PAST_INTERSECTION;
   return ADJUST_LEFT;
 }
 
@@ -59,38 +63,42 @@ int adjust_right() {
   if (only_right_on_white()) return ADJUST_RIGHT;
   if (neither_on_white()) return MOVE_FORWARD;
   if (only_left_on_white()) return ADJUST_LEFT;
-  if (both_on_white() && (front_wall() || !right_wall() || opticalFFT())) return FORWARD_UNTIL_PAST_INTERSECTION;
+  if (both_on_white()) return FORWARD_UNTIL_PAST_INTERSECTION;
   return ADJUST_RIGHT;
 }
 
 int forward_until_past_intersection() { // must turn after this state
-  Serial.println("forward_until_past_intersection");
+  Serial.print("forward_until_past_intersection ");
+  Serial.println(turn_direction);
   set_left(1);
   set_right(1);
   if (both_on_white()) return FORWARD_UNTIL_PAST_INTERSECTION;
+  return HANDLE_INTERSECTION;
+}
+
+int handle_intersection() {
+  Serial.println("handle_intersection");
+  set_left(0);
+  set_right(0);
+  update_walls();
+  update_robot_position();
   if (!right_wall()) turn_direction = 1;
-  else turn_direction = 0;
-  if (!turn_status[turn_direction]()) {
-    set_left(0);
-    set_right(0);
-    delay(10);
-    return START_TURN;
-  }
-  return FORWARD_UNTIL_PAST_INTERSECTION;
+  else if (front_wall() && !left_wall()) turn_direction = 0;
+
+  transmit_msg();
+  if (right_wall() && !front_wall()) return MOVE_FORWARD;
+  else if (right_wall() && left_wall() && front_wall()) return UNDO_TURN;
+  update_direction(turn_direction);
+  return START_TURN;
 }
 
 int start_turn() {
-  Serial.println("start turn");
+  Serial.println("start_turn");
   set_left(turn_direction);
   set_right(1 - turn_direction);
+  delay(100);
   if (!turn_status[turn_direction]()) return START_TURN;
-  if (turn_status[turn_direction]()) {
-    // Before completing turn, check for a dead end.
-    Serial.print("fonrt walll???????????  ");
-    Serial.println(front_wall());
-    if (front_wall() && turn_direction == 0) return UNDO_TURN;
-    else return WAIT_UNTIL_TURN_END;
-  }
+  if (turn_status[turn_direction]()) return WAIT_UNTIL_TURN_END;
   return START_TURN;
 }
 
@@ -104,23 +112,11 @@ int wait_until_turn_end() {
 }
 
 int undo_turn() {
-  // We were turning left, but need to reverse that.
-  byte del = 50;
-  Serial.println("undo turn");
-  set_left(0);
-  set_right(-1);
-  while (!right_on_white());
-  delay(del);
-  while (right_on_white());
-  set_left(1);
-  set_right(-1);
-  delay(del);
-  while (!right_on_white());
-  delay(del);
-  while (right_on_white());
-  delay(del);
-  while (!right_on_white());
-  delay(del);
-  while (right_on_white());
+  set_left(-1);
+  set_right(1);
+  delay(750);
+  while (!left_on_white());
+  while (left_on_white());
+  reverse_direction();
   return MOVE_FORWARD;
 }
