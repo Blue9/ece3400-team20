@@ -141,4 +141,4 @@ We used an 8x8 array to store maze information.  Each index corresponds to an in
 
 # Additions to Previous Design
 
-We added a third sensor and used a 4:1 mux for analog read pins.  This was done to aid in navigating and routing through the maze.  
+We added a third sensor and used a 4:1 mux for analog read pins.  This was done to aid in navigating and routing through the maze.   
