@@ -90,11 +90,6 @@ We were able to update the GUI from the base station using hardcoded values.  Se
 // TODO
 
 
-# Updating GUI from virtual robot wirelessly
-The following video shows us updating the GUI from a virtual robot on a separate Arduino which is separately connected to the base station.  There is slight lagging mostly due to the browser's refreshing rate.
-
-https://youtu.be/IlqivRq3zKw
-
 
 # Robot starting on a 660Hz tone
 
@@ -132,7 +127,18 @@ And so once we generated this string from the parsed information, we were able t
 
 ```
 
-A wireless virtual transmission with an interface with the GUI is presented below:
+A wireless virtual transmission with an interface with the GUI is presented below.  There is slight lagging mostly due to the browser's refreshing rate.
 
-# Insert Wireless Transmission Radio Videos
- 
+https://youtu.be/IlqivRq3zKw
+
+
+# Efficient data scheme to store all maze information on an Arduino
+
+We used an 8x8 array to store maze information.  Each index corresponds to an intersection.  To keep the data at a minimum, we stored a two byte short in each index of the array.  Each packet sent wirelessly is decoded and stored in the array.Below is an outline of each bit:
+
+
+
+
+# Additions to Previous Design
+
+We added a third sensor and used a 4:1 mux for analog read pins.  This was done to aid in navigating and routing through the maze.  
