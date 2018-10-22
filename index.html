@@ -87,10 +87,10 @@
                     </a>
                 </div>
                 <div class="col-md-6 col-lg-3">
-                    <a class="portfolio-item d-block mx-auto btn disabled" href="#portfolio-modal-3">
+                    <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-3">
                         <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
                             <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-                                <i class="fa fa-search-plus fa-3x"></i>
+                                <h3>Lab 3</h3>
                             </div>
                         </div>
                         <img class="img-fluid" src="img/portfolio/transmitter.png" alt="">
@@ -106,9 +106,9 @@
                         <img class="img-fluid" src="img/portfolio/arduino.png" alt="">
                     </a>
                 </div>
-            </div> 
+            </div>
             <h2 class="text-center text-uppercase text-secondary mb-0">Milestones</h2>
-            <hr class="star-dark mb-5" >
+            <hr class="star-dark mb-5">
             <div class="row">
                 <div class="col-md-6 col-lg-3">
                     <a class="portfolio-item d-block mx-auto " href="#portfolio-modal-5">
@@ -381,49 +381,71 @@
                                 circuitry to detect both optical and audio signals.</p>
                             <h2><a id="Lab_Procedure_4"></a>Lab Procedure</h2>
                             <h3><a id="Setup_6"></a>Setup</h3>
-                            <p>The team was split into two groups, one to detect a 660 Hz audio tone that will signify the
-                                start of the competition, and one to detect a 6080 Hz infrared signal. Both groups utilized
+                            <p>The team was split into two groups, one to detect a 660 Hz audio tone that will signify
+                                the
+                                start of the competition, and one to detect a 6080 Hz infrared signal. Both groups
+                                utilized
                                 Open Music Labs Arduino FFT library to perform the required signal analysis. More
                                 information on Open Music Labs can be found on their website <a href="http://wiki.openmusiclabs.com/wiki/ArduinoFFT">here</a>.</p>
                             <h3><a id="Audio_10"></a>Audio</h3>
                             <p>We started out by designing the amplification and filtering circuit.<br>
-                                The fourier transform maps signals in the time domain into its constituent frequencies in
-                                the frequency domain. In a signal’s frequency representation, we can analyze the magnitude
-                                of various frequencies to see which frequencies are more present than others. Note that the
+                                The fourier transform maps signals in the time domain into its constituent frequencies
+                                in
+                                the frequency domain. In a signal’s frequency representation, we can analyze the
+                                magnitude
+                                of various frequencies to see which frequencies are more present than others. Note that
+                                the
                                 fourier transform can be applied to both continuous and discrete signals. A fourier
-                                transform applied to a discrete function is called the discrete fourier transform (DFT). In
-                                computer science, one algorithm to calculate the discrete fourier transform in an optimized
-                                way is the Fast Fourier Transform (FFT). The FFT samples a signal at varying time steps and
+                                transform applied to a discrete function is called the discrete fourier transform
+                                (DFT). In
+                                computer science, one algorithm to calculate the discrete fourier transform in an
+                                optimized
+                                way is the Fast Fourier Transform (FFT). The FFT samples a signal at varying time steps
+                                and
                                 then calculates its frequency components. In this lab we used the FFT to detect when a
                                 660Hz tone is played.</p>
                             <p>The following formula can be used to calculate the DFT of a signal:</p>
                             <p><img style="max-width:100%; max-height: 400px;" src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/img/portfolio/DFT.png"
                                     alt="logo"></p>
                             <p>where x_k is a N-point sequence of complex points and X_k is the DFT vector.</p>
-                            <p>We first brainstormed various amplifiers that would achieve a high enough gain to amplify
-                                the 660Hz signal. We decided to use an inverting Op Amp cascaded with a low pass filter.</p>
+                            <p>We first brainstormed various amplifiers that would achieve a high enough gain to
+                                amplify
+                                the 660Hz signal. We decided to use an inverting Op Amp cascaded with a low pass
+                                filter.</p>
                             <p>In the above schematic, the microphone input signal passes through DC signal blocking
-                                capacitor C1, which is then fed into the inverting input of the op amp. The non-inverting
+                                capacitor C1, which is then fed into the inverting input of the op amp. The
+                                non-inverting
                                 input of the op amp is held at a DC bias of Vdd/2 for maximum output voltage swing. The
-                                output signal from the op amp is then passed through a low pass filter with pole at 600kHz.
-                                We did account for the fact that the LPF acts as a load of the Op Amp when we experimented
-                                with capacitor and resistor values. A rough calculation shows that the interstage voltage
-                                divider is not too significant. The final values we used amplified the signal producing a
-                                gain of around 100x and a low pass filter with cutoff frequency 4kHz. The below image shows
-                                an oscilloscope reading when a 660Hz tone is played around 10 cm away from the microphone.</p>
+                                output signal from the op amp is then passed through a low pass filter with pole at
+                                600kHz.
+                                We did account for the fact that the LPF acts as a load of the Op Amp when we
+                                experimented
+                                with capacitor and resistor values. A rough calculation shows that the interstage
+                                voltage
+                                divider is not too significant. The final values we used amplified the signal producing
+                                a
+                                gain of around 100x and a low pass filter with cutoff frequency 4kHz. The below image
+                                shows
+                                an oscilloscope reading when a 660Hz tone is played around 10 cm away from the
+                                microphone.</p>
                             <p><img style="max-width:100%; max-height: 400px;" src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/img/portfolio/Optical_Amplifier.jpg"
                                     alt="Oscilloscope reading"></p>
-                            <p>The below image shows a frequency sweep of the operational amplifier. The cutoff frequency
+                            <p>The below image shows a frequency sweep of the operational amplifier. The cutoff
+                                frequency
                                 is around 4kHz as mentioned above. Note that this does not affect the gain of the 660Hz
                                 signal.</p>
                             <p><img style="max-width:100%; max-height: 400px;" src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/FilterFrequencySweep.png?raw=true"
                                     alt="Frequency sweep"></p>
-                            <p>On the software side, we initially captured the FFT output from the analog circuit using the
-                                example code provided by the FFT library from the Open Music Lab: fft_adc_serial.ino. This
-                                script captures analog data on Arduino pin A0 using the embedded ADC at a sampling rate of
+                            <p>On the software side, we initially captured the FFT output from the analog circuit using
+                                the
+                                example code provided by the FFT library from the Open Music Lab: fft_adc_serial.ino.
+                                This
+                                script captures analog data on Arduino pin A0 using the embedded ADC at a sampling rate
+                                of
                                 approximately 38kHz. There are 256 samples (bins) per FFT taken, giving a resolution of
                                 38,000/256 ≈ 150Hz. This indicates that we should see the 660Hz tone in bin
-                                ceiling(660/150) = 5, which is what we observed. We wrote the following MATLAB script to
+                                ceiling(660/150) = 5, which is what we observed. We wrote the following MATLAB script
+                                to
                                 capture the data output on to the serial port:</p>
                             <pre><code>
 <!--                         -->% Ensure that COM port is open
@@ -453,13 +475,17 @@
 <!--                         -->end
                             </code></pre>
                             <p>Using this code, we recorded the following data:</p>
-                            <p>We observed that the 660Hz tone appeared as a strong peak in bin 5 as expected. In addition,
+                            <p>We observed that the 660Hz tone appeared as a strong peak in bin 5 as expected. In
+                                addition,
                                 tones at 1320Hz and 1960Hz appear in bins 10 and 15 respectively, demonstrating the
                                 linearity of the FFT.<br>
-                                Since the peak for 660Hz appears in such a low-numbered bin, we discovered that we could
+                                Since the peak for 660Hz appears in such a low-numbered bin, we discovered that we
+                                could
                                 use a significantly slower sampling rate to conserve CPU time. The built-in Arduino
-                                function AnalogRead is capable of this. It samples at approximately 8930Hz. This gives us a
-                                resolution of 8930/256 ≈ 35Hz. Using this method, we expect to see the 660Hz tone in bin
+                                function AnalogRead is capable of this. It samples at approximately 8930Hz. This gives
+                                us a
+                                resolution of 8930/256 ≈ 35Hz. Using this method, we expect to see the 660Hz tone in
+                                bin
                                 ceiling(660/35) = 19. We modified the code as follows:</p>
                             <pre><code>
 <!--                         -->#define LOG_OUT 1 // use the log output function
@@ -490,47 +516,65 @@
 <!--                         -->}
                             </code></pre>
                             <p>Using the same MATLAB script, we captured the following data:</p>
-                            <p>We noticed that the actual bin numbers corresponding to the peaks for the 660Hz, 1320Hz, and
+                            <p>We noticed that the actual bin numbers corresponding to the peaks for the 660Hz, 1320Hz,
+                                and
                                 1960Hz test tones were 20, 39, and 57 respectively. Although these bins are not exactly
-                                what we expected, they are within a margin of error of a bin, which we found acceptable for
+                                what we expected, they are within a margin of error of a bin, which we found acceptable
+                                for
                                 an Arduino.</p>
-                            <p>In our next step of testing, we applied the 660 Hz signal with background noise. To see if
+                            <p>In our next step of testing, we applied the 660 Hz signal with background noise. To see
+                                if
                                 we could discern the signal from the noise, we looked at the FFT and checked if the bin
                                 with the 660Hz signal is within a certain intensity of the other signal. Please see the
                                 below video for a demonstration:</p>
                             <p>
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/u_h56zHHiHA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/u_h56zHHiHA"
+                                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                             </p>
                             <h3><a id="Optical_114"></a>Optical</h3>
                             <p>We first set up the photo-transistor circuit as depicted in the lab handout:</p>
                             <p><img style="max-width:100%; max-height: 400px;" src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/phototransistor.png?raw=true"
                                     alt="Photo-transistor circuit"></p>
-                            <p>We connected it to a 5V Power Source and then connected the IR Hat to 9 Volts. To increase
-                                the IR sensor’s range of detection, we added a simple inverting op-amp circuit with a gain
+                            <p>We connected it to a 5V Power Source and then connected the IR Hat to 9 Volts. To
+                                increase
+                                the IR sensor’s range of detection, we added a simple inverting op-amp circuit with a
+                                gain
                                 of about -100 utilizing resistor values of 100,000 and 1,000 Ohms respectively. See the
                                 following article for the circuit design we referenced and built: <a href="https://en.wikipedia.org/wiki/Operational_amplifier_applications#Inverting_amplifier">Inverting
-                                    Amplifier</a>. This circuit is shown below but we later found that its benefits were
-                                minimal for our practical purposes. And so we decided not to use it in our final design.</p>
+                                    Amplifier</a>. This circuit is shown below but we later found that its benefits
+                                were
+                                minimal for our practical purposes. And so we decided not to use it in our final
+                                design.</p>
                             <p><img style="max-width:100%; max-height: 400px;" src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/OpAmpCircuitOptical.png?raw=true"
                                     alt="Op-amp circuit"></p>
                             <p>The next thing that we tested was utilizing the FFT library in order to detect a 6080 Hz
-                                signal once the Arduino received the signal. We opened the example sketch: “fft_adc_serial”
-                                from the Open Music Labs Library and determined whether it was detecting frequencies from
-                                the IR Hat. What we noticed is that that the Arduino was printing values between 0 to 256
+                                signal once the Arduino received the signal. We opened the example sketch:
+                                “fft_adc_serial”
+                                from the Open Music Labs Library and determined whether it was detecting frequencies
+                                from
+                                the IR Hat. What we noticed is that that the Arduino was printing values between 0 to
+                                256
                                 onto the Serial Monitor to denote the value of each of the 256 buckets for the Fourier
                                 Transform it was computing.</p>
-                            <p>Once we made that observation, we changed the sampling rate, according to the calculations
+                            <p>Once we made that observation, we changed the sampling rate, according to the
+                                calculations
                                 done by the Team Alpha report, by setting the ADCSRA register to 0xe4 from the standard
-                                fft_adc_serial script. This makes the ADC sample rate to be about 76,800 Hz. This was done
-                                since we needed to sample above 36,000 Hz to detect decoys at 18,000 Hz according to the
-                                Nyquist condition and this was smallest sample rate above that constraint. We often printed
+                                fft_adc_serial script. This makes the ADC sample rate to be about 76,800 Hz. This was
+                                done
+                                since we needed to sample above 36,000 Hz to detect decoys at 18,000 Hz according to
+                                the
+                                Nyquist condition and this was smallest sample rate above that constraint. We often
+                                printed
                                 these Fourier transforms to the Serial monitor to see if we were detecting the correct
                                 bin/frequency.</p>
-                            <p>We then developed a function denoted as <code>isSignalThere</code> to calculate whether the
+                            <p>We then developed a function denoted as <code>isSignalThere</code> to calculate whether
+                                the
                                 FFT contained a peak at the frequency we desired. This function takes in the target
-                                frequency, the sampling rate, and the FFT array as parameters. The width of each bin is the
+                                frequency, the sampling rate, and the FFT array as parameters. The width of each bin is
+                                the
                                 sampling frequency divided by 256, and the function calculates which bin the target
-                                frequency is and then checks whether this bin or its adjacent bins contain a value above a
+                                frequency is and then checks whether this bin or its adjacent bins contain a value
+                                above a
                                 threshold, which was determined through empirical tests to be 60.</p>
                             <pre><code>
 <!--                         -->boolean isSignalThere(uint8_t fft[], int targetFrequency, long samplingRate) {
@@ -548,30 +592,41 @@
 <!--                         -->    return false;
 <!--                         -->}
                             </code></pre>
-                            <p>Utilizing this function along with the <code>fft_adc_serial</code> example sketch by calling
-                                it with the parameters targetFrequency = 6080 and sampling rate = 76,800, we were able to
-                                print to the serial monitor whether we were detecting a signal at 6080 Hz. The following
+                            <p>Utilizing this function along with the <code>fft_adc_serial</code> example sketch by
+                                calling
+                                it with the parameters targetFrequency = 6080 and sampling rate = 76,800, we were able
+                                to
+                                print to the serial monitor whether we were detecting a signal at 6080 Hz. The
+                                following
                                 video shows how we were able to detect cycling the IR Hat on and off using the Serial
                                 plotter from a foot away:</p>
                             <p>
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/_tRcdDt8q-A" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/_tRcdDt8q-A"
+                                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                             </p>
-                            <p>We then tested the detection with an IR Decoy that was initially set to 12,000 Hz, later set
+                            <p>We then tested the detection with an IR Decoy that was initially set to 12,000 Hz, later
+                                set
                                 to 18,000 Hz, and natural/flourescent light to make sure only the 6080 Hz tone was
                                 detected.</p>
-                            <p>The following video shows how we were able to detect the 6080 Hz signal, but not the decoy
+                            <p>The following video shows how we were able to detect the 6080 Hz signal, but not the
+                                decoy
                                 when it was placed in the way:</p>
                             <p>
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/_UgpGABSOR8?start=17" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/_UgpGABSOR8?start=17"
+                                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                             </p>
-                            <p>Finally, the IR Hat and decoy were displaced slightly so the IR sensor sensed both signals,
+                            <p>Finally, the IR Hat and decoy were displaced slightly so the IR sensor sensed both
+                                signals,
                                 but only detected the 6080Hz tone. The FFT of the two signals is below:</p>
                             <p><img style="max-width:100%; max-height: 400px;" src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/fftpicopticalteam%20(1).jpg?raw=true"
                                     alt="FFT"></p>
                             <h3><a id="Combined_System_162"></a>Combined System</h3>
-                            <p>Once each system had been implemented and tested they were combined into a single Arduino
-                                sketch, with the optical signal reading from A0, and the acoustic signal being read from
-                                A5. The loop for individual system was put into a function, and were then called from a top
+                            <p>Once each system had been implemented and tested they were combined into a single
+                                Arduino
+                                sketch, with the optical signal reading from A0, and the acoustic signal being read
+                                from
+                                A5. The loop for individual system was put into a function, and were then called from a
+                                top
                                 level loop, as seen below:</p>
                             <pre><code>
 <!--                         -->void loop() {
@@ -588,15 +643,18 @@
 <!--                         -->}
                             </code></pre>
                             <p>Simply pasting the two sets of code into functions do not work properly, as they use
-                                different sample rates and ADC settings. To combat this issue initialization of the ADC was
-                                moved form the <code>setup()</code> function to each of the individual FFT functions. After
+                                different sample rates and ADC settings. To combat this issue initialization of the ADC
+                                was
+                                moved form the <code>setup()</code> function to each of the individual FFT functions.
+                                After
                                 this change was made the entire system worked properly as shown in the video below:</p>
                             <p>
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/Ro4x0O4s6_g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/Ro4x0O4s6_g"
+                                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                             </p>
                         </div>
                         <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
-                                <i class="fa fa-close"></i> Close Project</a>
+                            <i class="fa fa-close"></i> Close Project</a>
                     </div>
                 </div>
             </div>
@@ -611,12 +669,321 @@
             <div class="container text-center">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <h2 class="text-secondary text-uppercase mb-0">Lab 3</h2>
+                        <h2 class="text-secondary text-center text-uppercase mb-0">Lab 3</h2>
                         <hr class="star-dark mb-5">
-                        <img class="img-fluid mb-5" src="img/portfolio/circus.png" alt="">
-                        <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque
-                            assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit
-                            asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                        <div class="text-left">
+
+                        <p><em>Objective</em>: The goal of this lab was to integrate all of the components of previous
+                            labs and milestones into a single working system, as well as develop new functionality to
+                            transmit maze data between the robot and a base station that will interface with a GUI,
+                            displaying the maze.</p>
+                        <h3><a id="Setup_4"></a>Setup</h3>
+                        <p>The team was split up into two groups, one to work on development of the radio communication
+                            and corresponding protocols, and the other to integrate the previous components together.</p>
+                        <h3><a id="Radio_8"></a>Radio</h3>
+                        <h5><a id="Getting_Started_with_the_Radios_10"></a>Getting Started with the Radios</h5>
+                        <p>We started out by connecting the radios to the special green board and then to the 3.3 Volt
+                            Power Supply.<br>
+                            We then downloaded the RF24 Library off of &quot;<a href="https://github.com/maniacbug/RF24">https://github.com/maniacbug/RF24</a>&quot;.
+                            Once we downloaded the ZIP file, we included the library by navigating to the Arduino
+                            application and then to “Sketch” -&gt; “Include Library” -&gt; “Add .Zip File”.</p>
+                        <p>We then downloaded the “Getting Started” sketch off of the ECE 3400 Github at<br>
+                            &quot;<a href="https://github.com/CEI-lab/ece3400-2018/blob/master/docs/Solutions/lab4/GettingStarted/GettingStarted.ino">https://github.com/CEI-lab/ece3400-2018/blob/master/docs/Solutions/lab4/GettingStarted/GettingStarted.ino</a>&quot;.
+                            What we immediately noticed is that it would not compile as a result of the “printf”
+                            statements. Thus, we replaced each of the “printf” statements with “Serial.println” and we
+                            were able to get the code to compile and upload.</p>
+                        <p>At first, we had difficulties with transmitting and receiving utilizing the “Getting
+                            Started” sketch. Utilizing a Voltmeter,<br>
+                            we recognized that there was a short within the radio that was causing issues and so we had
+                            to borrow another groups’ radio in order to continue.</p>
+                        <p>We then set our pipe values by utilizing the given formula: 2(3D + N) + X where D = 3 and N
+                            = 20 represented our lab date and group number. This yielded 58 and 59 which in hexadecimal
+                            are 3A And 3B. And so we changed the pipe values to 0x000000003ALL<br>
+                            and 0x000000003BLL respectively.</p>
+                        <p>This allowed us to get the “Getting Started” sketch to work with an accuracy of
+                            approximately 8 feet from each other.</p>
+                        <h4><a id="Transmitting_Robot_Information_26"></a>Transmitting Robot Information</h4>
+                        <p>At this point, we needed to develop a method of transmitting data about our surroundings and
+                            a way of encoding our surroundings. We decided on the following 2 byte system:</p>
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center">Bit</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align:center">15-13</td>
+                                    <td>X Coordinate</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">12-10</td>
+                                    <td>Y Coordinate</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">9</td>
+                                    <td>iamhere (robot is here)</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">8</td>
+                                    <td>west (whether there is a west wall)</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">7</td>
+                                    <td>north (whether there is a north wall)</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">6</td>
+                                    <td>east (whether there is a east wall)</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">5</td>
+                                    <td>south (whether there is a south wall)</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">4</td>
+                                    <td>robot (whether there is a robot)</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">3-1</td>
+                                    <td>treasure (which treasure we detected)</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">0</td>
+                                    <td>Unused</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>Thus, we created the global variables x_cord, y_cord, iamhere, west, north, east, south, and
+                            robot and depending on whether these values were true or not, we encoded an appropriate 2
+                            byte value (short) to send. We created the following method “get_msg” to convert these
+                            global variables to the encoded message. We also created an enum for treasures that
+                            contained “R_C, R_T, R_S, B_C, B_T, B_S, and NaN” that tsure would take on the values of.
+                            The method works as follows:</p>
+                        <pre><code>unsigned short get_msg(){
+  unsigned short t;
+  switch (tsure){
+    case R_C : t = 0b110; break;
+    case R_T : t = 0b101; break;
+    case R_S : t = 0b100; break;
+    case B_C : t = 0b011; break;
+    case B_T : t = 0b010; break;
+    case B_S : t = 0b001; break;
+    case NaN : t = 0b000; break; }
+    
+  unsigned short msg = (x_coord &lt;&lt; 13) + (y_coord &lt;&lt; 10) +
+              (iamhere  &lt;&lt; 9) +
+              (west     &lt;&lt; 8) +
+              (north    &lt;&lt; 7) +
+              (east     &lt;&lt; 6) +
+              (south    &lt;&lt; 5) +
+              (robot    &lt;&lt; 4) +
+              (t        &lt;&lt; 1);
+
+  return t;
+}
+
+</code></pre>
+                        <p>This allowed us to encode messages to write to our radios that would be able to transmit to
+                            each other radio.</p>
+                        <h4><a id="Receiving_Information_73"></a>Receiving Information:</h4>
+                        <p>Once a radio received a packet in the data scheme above, we decoded the information
+                            utilizing bit shifting.<br>
+                            For example, in order to obtain the x and y coordinates, we used the following masks and
+                            bit shifting to decode the values:</p>
+                        <pre><code>#define x_mask 0xe000
+#define x_shift 13
+#define y_mask 0x1c00
+#define y_shift 10
+#define get_x(a) (a&amp;x_mask) &gt;&gt; x_shift
+#define get_y(a) (a&amp;y_mask) &gt;&gt; y_shift
+</code></pre>
+                        <p>This allowed us to communicate information from one radio to another and decode it
+                            appropriately. The following images demonstrates the output when we sent encoded
+                            information from one radio to another:</p>
+
+                        <img src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/IMG_5380.jpg?raw=true"
+                            style="width:500px">
+                        <br>
+                        <img src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/IMG_5381.jpg?raw=true"
+                            style="width:500px; margin: 10px auto;">
+                        <br>
+                        <h4><a id="Updating_GUI_from_the_base_station_92"></a>Updating GUI from the base station</h4>
+                        <p>To update the GUI from the base station we first figured out which port the Arduino was
+                            connected to as well as the name of the tty shell the serial monitor writes to. We then
+                            hardcoded values representing a virtual maze and ran the program. We monitored the GUI to
+                            see updates. As expected, the GUI updated to reflect the explored maze.</p>
+                        <h4><a id="Interfacing_with_the_GUI_and_Wireless_Communication_97"></a>Interfacing with the GUI
+                            and Wireless Communication</h4>
+                        <p>Once we were able to send maze information from one Arduino to another, we needed to
+                            interface with the GUI. This<br>
+                            involved taking the parsed information and turning the information into a formatted string
+                            that the GUI would accept to the serial monitor. An example of a string is as follows:
+                            “2,3,west=false,north=true,south=false,robot=true.” We were able to generate this string by
+                            utilizing tertiary conditionals i.e. if the west bit is 1 then add “true” to the output
+                            string and if it is 0 then add “false”.</p>
+                        <p>And so once we generated this string from the parsed information, we were able to generate
+                            images on the GUI. In order to create a virtual simulation, we created an array of virtual
+                            information that the transmitter would iterate through, the receiver would parse and update
+                            the GUI with. We manually created this array. The simulation array we used was the
+                            following based on the transmission scheme decoded above:</p>
+                        <pre><code>{0b0000001110100000, 0b0000011010100000, 0b0000101011000110, 0b0010101001100000, 0b0010011010101010, 0b0010001110000000, 0b0100001100100000, 0b0100011010100000, 0b0100101010100000};
+</code></pre>
+                        <p>A wireless virtual transmission with an interface with the GUI is presented below. There is
+                            slight lagging mostly due to the browser’s refreshing rate.</p>
+                        <p>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/IlqivRq3zKw"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </p>
+                        <h4><a id="Efficient_data_scheme_to_store_all_maze_information_on_an_Arduino_112"></a>Efficient
+                            data scheme to store all maze information on an Arduino</h4>
+                        <p>We used an 8x8 array to store maze information. Each index corresponds to an intersection.
+                            To keep the data at a minimum, we stored a two byte short in each index of the array. Each
+                            packet sent wirelessly is decoded and stored in the array.Below is an outline of each bit:</p>
+                        <h3><a id="Robot_117"></a>Robot</h3>
+                        <h4><a id="Audio_FFT_119"></a>Audio FFT</h4>
+                        <p>To begin we incorporated the analog audio circuit from Lab 2 onto the primary breadboard,
+                            and connecting it to one of the analog input pins. For more information on how the audio
+                            circuit is implemented please see ** Lab 2 **.</p>
+                        <p>An additional state in our FSM was created as the initial state which waits, continuously
+                            checking the <code>audioFFT()</code>, also described in Lab 2, looking for the 660Hz start
+                            signal. Upon detecting the signal, the FSM transitions to moving forward and begins
+                            traversing the maze via the right hand rule.</p>
+                        <p>Once this state was implemented we noticed that the servos jittered in the initial state
+                            when <code>audioFFT()</code> was run. After some testing we discovered this was because the
+                            <code>audioFFT()</code> function disables the timers and interrupts used by the <code>Servo</code>
+                            class.<br>
+                            The following changes resolved this issue:</p>
+                        <pre><code>// cli(); // &lt;- commented out
+...
+// sei(); // &lt;- commented out
+</code></pre>
+                        <p>After this change was made the latency of the <code>audioFFT()</code> was drastically
+                            reduced so we had to increase our threshold for the number of sequential FFTs required to
+                            detect the start tone from 5 to 15. This ensure that common speech or music did not set off
+                            the robot.<br>
+                            Below is a video of the robot starting on a tone:</p>
+                        <p>Robot starting on a 660Hz tone</p>
+                        <p>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/J3oYayUAUiY"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </p>
+                        <p>In case the start tone detection fails, we also incorporated a manual override switch that
+                            can start the robot during the competition.<br>
+                            Below is a video of the robot starting via manual override:</p>
+                        <p>Robot starting from manual override switch:</p>
+                        <p>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/3r8BT0jyPSM"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </p>
+                        <h4><a id="Left_Wall_Sensor_147"></a>Left Wall Sensor</h4>
+                        <p>Previously, we used two sensors to detect walls: one for detecting walls ahead and one for
+                            detecting walls to the right. We left out a left-wall sensor because we did not have enough
+                            analog pins, and left wall detection only mattered in the case of a dead-end, in which case
+                            our robot would begin to turn, detect the wall on the left (near the end of the turn), and
+                            “undo” the turn by reversing out. In this lab, since mapping the walls is needed, we
+                            decided to add a left-wall sensor by muxing our wall sensor inputs. After building the
+                            necessary circuitry for the mux, we built a few methods for retrieving the various wall
+                            sensor values. A code snippet is included below.</p>
+                        <pre><code>int sensor_at_wall(int mux_control, int threshold) {
+  digitalWrite(MUX_PIN_0, mux_control &amp; 0b01);
+  digitalWrite(MUX_PIN_1, (mux_control &amp; 0b10) &gt;&gt; 1);
+  return analogRead(WALL_MUX_PIN_IN) &gt; threshold;
+}
+</code></pre>
+                        <p><code>MUX_PIN_0</code> is the LSB of the mux control signal and <code>MUX_PIN_1</code> is
+                            the MSB. Since we had already abstracted away the hardware implementation of the wall
+                            sensors in methods, we had to make minimal changes to our code to account for this change.</p>
+                        <p><em>Note:</em> The mux used was the <a href="http://www.ti.com/lit/ds/symlink/cd74hc4051.pdf">TI
+                                CD74HCT4051</a> with the S2 select grounded, making it effectively a 4:1 mux.</p>
+                        <h4><a id="Maze_Mapping_162"></a>Maze Mapping</h4>
+                        <p>The robot will eventually need to plan its path around the maze using a more substantial
+                            algorithm than right-hand wall following. To do this, it will need information about the
+                            maze as a whole stored locally on the Arduino. Since there are 64 total intersections, this
+                            information must be stored as efficiently as possible.<br>
+                            To this end, we designed a new encoding scheme to record information about the walls and
+                            treasures located at each intersection. All of this information can be stored in two bytes
+                            per intersection as follows:</p>
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center">Bit</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align:center">15-11</td>
+                                    <td>Unused</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">10-9</td>
+                                    <td>Treasure Shape</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">8</td>
+                                    <td>West Valid</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">7</td>
+                                    <td>West</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">6</td>
+                                    <td>North Valid</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">5</td>
+                                    <td>North</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">4</td>
+                                    <td>East Valid</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">3</td>
+                                    <td>East</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">2</td>
+                                    <td>South Valid</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">1</td>
+                                    <td>South</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center">0</td>
+                                    <td>Unused</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>The valid bits allow us to record information about walls at intersections that we have not
+                            explored yet. For example, assuming 0,0 is the northwest intersection, if we find a
+                            northern wall at intersection 2,3, we know that there is a southern wall at 2,2. In this
+                            case, we would set the south bit and the south valid bit of the 2,2 intersection, but the
+                            other walls would remain invalid. That way, the robot can reason with the maximum amount of
+                            data available. We do not believe that the redundancy is a significant problem, as this
+                            only adds a few extra bytes of information total. The data structure as a whole only
+                            occupies 128 bytes, so it should not significantly affect our memory usage. Updating this
+                            data structure only involves a single call to the array_update function per intersection,
+                            so it shouldn’t be a significant drain on processing power either.</p>
+                        <h4><a id="Testing_With_Other_Robots_183"></a>Testing With Other Robots</h4>
+                        <p>From milestone 2, we were able to test our IR hat and optical FFT implementation. In this
+                            lab, we mounted the IR hat at a 5.5 inch height but could not test with other teams’ robots
+                            due to time constraints.</p>
+                        <h3><a id="Complete_Integration_186"></a>Complete Integration</h3>
+                        <p>After all of the aforementioned changes had be integrated into the design we did a final
+                            test of the robot starting on a tone, navigating a maze, storing the maze locally, and
+                            transmitting the maze information wirelessly to the base station which interfaced with the
+                            GUI. Below is a video of this in action:</p>
+                        <p>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/a42s1vxHHX8"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </p>
+
+                        </div>
                         <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
                             <i class="fa fa-close"></i> Close Project</a>
                     </div>
@@ -624,7 +991,7 @@
             </div>
         </div>
     </div>
-     <!-- Portfolio Modal 4 -->
+    <!-- Portfolio Modal 4 -->
     <div class="portfolio-modal mfp-hide" id="portfolio-modal-4">
         <div class="portfolio-modal-dialog bg-white">
             <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
@@ -805,8 +1172,10 @@
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
                         <h2 class="text-secondary text-center text-uppercase mb-0">Milestone 2</h2>
-                        <h3 class="text-center"><a id="Maze_exploration_using_Right_Hand_Rule_2"></a>Maze exploration using Right Hand Rule</h3>
-                        <p>To add maze exploration functionality using the right hand rule, we incorporated the following logic:</p>
+                        <h3 class="text-center"><a id="Maze_exploration_using_Right_Hand_Rule_2"></a>Maze exploration
+                            using Right Hand Rule</h3>
+                        <p>To add maze exploration functionality using the right hand rule, we incorporated the
+                            following logic:</p>
                         <pre><code>
 <!--                 -->if no_right_wall:
 <!--                 -->      turn_right()
@@ -815,10 +1184,37 @@
 <!--                 -->  else:
 <!--                 -->      turn_left() // right wall and front wall is detected 
 <!--                 --></code></pre>
-                        <p>We try to turn right at every intersection, and if the right side is blocked, we try moving forward. We added two short distance sensors for wall detection on the right and front of the robot in addition to the IR sensor explored in Lab 2. We also added two indicator LEDs to show whether the robot detects a front or right wall. Front and right wall detection uses an experimentally determined threshold value from the distance sensors. We found 100 to be a good threshold for the front wall sensor and 200 to be a good threshold for the right sensor. In case the robot reaches a dead end, the robot will initially start turning left (evaluate the else statement) and detect that there is a wall in front of it. It will then reverse the turn and turn 180 degrees to continue to maze.</p>
-                        <p>Due to the extra amount of complexity that arose from wall detection and in order to make our line following system more robust, we incorporated a finite state machine design for navigation. We start our robot in a “move forward” state that iteratively checks our left and right line sensors. If any of those sensors detect that we are no longer line following, then we branch into their respective states to adjust accordingly. If any of the adjusting or “move forward” states also detect that we are at an intersection, by checking if both the left and right sensors are on white, and need to turn according to the right hand rule logic above, we branch into a state that moves the robot slightly past the intersection (forward_until_past_intersection) and sets the turn diction by setting a variable called turn_direction. If we do need to turn, we branch into a state that performs the turn based on the turn_direction (start_turn), determine that the turn is completed (wait_until_turn_completed) based on the line sensors, and then branches back into the “move forward” state and continue our maze detection.</p>
-                        <p>Excerpts from the code are as follows. The “only_left_on_white” and “only_right_on_white” function check if only one of the line sensors is on white based on empirical thresholds from the previous lab. We also created “left_on_white” and “right_on_white” to check if the respective sensor is on white. The “both_on_white” function checks if both the line sensors are on white. The “turn_status[turn_direction]” returns “left_on_white” for a left turn and “right_on_white” for a right turn as we start turning left when the left line sensor is no longer on white and turn right when the right line sensor is no longer on white.</p>
-<!--                 --><pre><code>int move_forward() {
+                        <p>We try to turn right at every intersection, and if the right side is blocked, we try moving
+                            forward. We added two short distance sensors for wall detection on the right and front of
+                            the robot in addition to the IR sensor explored in Lab 2. We also added two indicator LEDs
+                            to show whether the robot detects a front or right wall. Front and right wall detection
+                            uses an experimentally determined threshold value from the distance sensors. We found 100
+                            to be a good threshold for the front wall sensor and 200 to be a good threshold for the
+                            right sensor. In case the robot reaches a dead end, the robot will initially start turning
+                            left (evaluate the else statement) and detect that there is a wall in front of it. It will
+                            then reverse the turn and turn 180 degrees to continue to maze.</p>
+                        <p>Due to the extra amount of complexity that arose from wall detection and in order to make
+                            our line following system more robust, we incorporated a finite state machine design for
+                            navigation. We start our robot in a “move forward” state that iteratively checks our left
+                            and right line sensors. If any of those sensors detect that we are no longer line
+                            following, then we branch into their respective states to adjust accordingly. If any of the
+                            adjusting or “move forward” states also detect that we are at an intersection, by checking
+                            if both the left and right sensors are on white, and need to turn according to the right
+                            hand rule logic above, we branch into a state that moves the robot slightly past the
+                            intersection (forward_until_past_intersection) and sets the turn diction by setting a
+                            variable called turn_direction. If we do need to turn, we branch into a state that performs
+                            the turn based on the turn_direction (start_turn), determine that the turn is completed
+                            (wait_until_turn_completed) based on the line sensors, and then branches back into the
+                            “move forward” state and continue our maze detection.</p>
+                        <p>Excerpts from the code are as follows. The “only_left_on_white” and “only_right_on_white”
+                            function check if only one of the line sensors is on white based on empirical thresholds
+                            from the previous lab. We also created “left_on_white” and “right_on_white” to check if the
+                            respective sensor is on white. The “both_on_white” function checks if both the line sensors
+                            are on white. The “turn_status[turn_direction]” returns “left_on_white” for a left turn and
+                            “right_on_white” for a right turn as we start turning left when the left line sensor is no
+                            longer on white and turn right when the right line sensor is no longer on white.</p>
+                        <!--                 -->
+                        <pre><code>int move_forward() {
 <!--                 -->  Serial.println(&quot;move forward&quot;);
 <!--                 -->  front_led_off(); // initialize the leds to not detect a wall
 <!--                 -->  right_led_off();
@@ -880,12 +1276,23 @@
 <!--                 -->
 <!--                 -->
 <!--                 --></code></pre>
-<!--                 --><p>Once we developed these states and branching conditions, wall-detection worked. The following video demonstrates how our robot is able to detect walls and line follows. Note the flashing LEDs.</p>
-                        <h1><iframe width="560" height="315" src="https://www.youtube.com/embed/sdR-A3kpq3s" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></h1>
+                        <!--                 -->
+                        <p>Once we developed these states and branching conditions, wall-detection worked. The
+                            following video demonstrates how our robot is able to detect walls and line follows. Note
+                            the flashing LEDs.</p>
+                        <h1><iframe width="560" height="315" src="https://www.youtube.com/embed/sdR-A3kpq3s"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></h1>
                         <h3><a id="Avoiding_other_Robots_88"></a>Avoiding other Robots</h3>
-                        <p>In order to avoid other robots, we attached an IR Sensor to the front of the robot. The robot performs an FFT utilizing the “optical_FFT” function written in Lab 2. If we do detect a decoy robot, then we treat it as a wall in our wall detection algorithm above. This is why we added an OR statement with “optical_FFT()” above in the “move_forward” state as well as added similar conditions in the “adjust_left” and “adjust_right” states. We initially had issues with integrating the FFT but we adjusted our value of ADCSRA and we found it to work.</p>
+                        <p>In order to avoid other robots, we attached an IR Sensor to the front of the robot. The
+                            robot performs an FFT utilizing the “optical_FFT” function written in Lab 2. If we do
+                            detect a decoy robot, then we treat it as a wall in our wall detection algorithm above.
+                            This is why we added an OR statement with “optical_FFT()” above in the “move_forward” state
+                            as well as added similar conditions in the “adjust_left” and “adjust_right” states. We
+                            initially had issues with integrating the FFT but we adjusted our value of ADCSRA and we
+                            found it to work.</p>
                         <p>A video of our robot avoiding other robots, walls, and line following is as follows:</p>
-                        <h1><iframe width="560" height="315" src="https://www.youtube.com/embed/XYCFWvGQjow" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></h1>
+                        <h1><iframe width="560" height="315" src="https://www.youtube.com/embed/XYCFWvGQjow"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></h1>
                     </div>
                 </div>
             </div>
