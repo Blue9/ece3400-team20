@@ -13,7 +13,20 @@ The team was split up into two groups, one to work on development of the radio c
 
 ### Robot ###
 
+#### Audio Incorporation ####
 To begin we incorportated the analog audio circuit from Lab 2 onto the primary breadboard, and connecting it to one of the analog input pins. For more information on how the audio circuit is implemented please see ***<Lab 2 Hyperlink>***.
 
 An additional state in our FSM was created as the initial state which waits, continuously checking the `audioFFT()`, also described in Lab 2, looking for the 660Hz start signal. Upon detecting the signal, the FSM transitions to moving forward and begins traversing the maze via the right hand rule.
 
+Once this state was implemented we noticed that the servos jittered in the initial state when `audioFFT()` was run. After some testing we discovered this was because the `audioFFT()` function disables the timers and interrupts used by the `Servo` class. 
+The following changes resolved this issue:
+
+```
+\\ cli(); \\ <- commented out
+...
+\\\ sei(); \\ <- commented out
+```
+
+#### Left Wall Sensor ####
+
+#### Maze Mapping ####
