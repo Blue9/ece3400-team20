@@ -1,10 +1,12 @@
-#include "states.h"
-#include "robot_state.h"
-#include "turn_states.h"
-#include "radio.h"
-#include "constants.h"
-#include "util.h"
 #include <USBAPI.h>
+
+#include "array_update.h"
+#include "constants.h"
+#include "radio.h"
+#include "robot_state.h"
+#include "states.h"
+#include "turn_states.h"
+#include "util.h"
 
 function_t states[] = {
   wait_for_tone,
@@ -86,6 +88,7 @@ int handle_intersection() {
   update_walls();
   update_robot_position();
   transmit_msg();
+  array_update(x_robot, y_robot, west, north, east, south, 0, 0);
   if (!right_wall()) turn_direction = 1;
   else if (front_wall() && !left_wall()) turn_direction = 0;
   if (right_wall() && !front_wall()) return MOVE_FORWARD;
