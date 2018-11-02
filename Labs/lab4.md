@@ -22,7 +22,7 @@ Once the resolution was known we could continue to find all of registers to init
 The values for the above table were found in the [OV7670 Datasheet](https://www.voti.nl/docs/OV7670.pdf).
 
 #### PLL
-Before spliting up in teams we generate a PLL module to create multiple clocked signals for use both internal and external to the FPGA. The PLL module was generate using Quartus's interal IP generation. We followed the [Lab 4 handout](https://cei-lab.github.io/ece3400-2018/lab4.html) PLL section initially, however, we added a fourth clock signal at 8MHz for use with the serial communication between the FPGA and Arduino. The use of this will be described more in the **Team Arduino** section.
+Before spliting up in teams we generate a PLL module to create multiple clocked signals for use both internal and external to the FPGA. The PLL module was generate using Quartus's interal IP generation. We followed the [Lab 4 handout](https://github.com/CEI-lab/ece3400-2018/blob/master/docs/lab4.md#pll) PLL section initially, however, we added a fourth clock signal at 8MHz for use with the serial communication between the FPGA and Arduino. The use of this will be described more in the **Team Arduino** section.
 
 ### Team Arduino
 
