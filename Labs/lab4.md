@@ -3,7 +3,9 @@
 *Objective:* The goal of this lab was to develop software and hardware to interface with the OV7670 Camera and the DE0-NANO FPGA. To accomplish this the team split up into two groups, one to focus on the communication between the camera and FPGA with the Arduino, and the other to focus on streaming the video between the camera and FPGA.
 
 #### Prelab
-Before splitting up into teams, we worked together to finish prelab, finding the key registers on the OV7670 to configure its settings. The following table shows the required registers and their corresponding values to initialize the camera:
+Before splitting up into teams, we worked together to finish prelab, finding the key registers on the OV7670 to configure its settings. To know what values to write, we first looked at the user manual for the [DE0-NANO FPGA](http://www.ti.com/lit/ug/tidu737/tidu737.pdf). The buffer needs to hold an entire frame of 8b pixels so at 594kb there can be a total of ~76,000 total pixels per frame. This led us to picking the format of the camera to be QVGA leading to a resolution of 320x240, equaling ~76,000 pixels per frame.
+
+Once the resolution was known we could continue to find all of registers to initialize the camera. The following table shows the required registers and their corresponding values:
 
 | Description           | Register  | Value |
 | -----------           | :------:  | :---: |
