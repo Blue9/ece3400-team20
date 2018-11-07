@@ -78,9 +78,58 @@ This was particularly relevant for certain registers were we needed to set multi
 
 After all registers were written, the bits that were intended to be set were checked to ensure proper setup. This was done by reading the value of a register, ANDing it wih the bit in question, and comparing the value to the expected: 
 ```C
-correct = (read_register_value(0x12) & 0x80) == 0x80
+correct = ((read_register_value(0x12) & 0x80) == 0x80);
 ```
 The setup is only deemed correct if all registers have the correct value.
 
 #### Communicating with the FPGA
+To begin a protocol needed to be designed to communicate with between the FPGA and Arduino. Due to the contrainst of digital pins on the Ardunio, we decided to create a serial communication protocol. 
+
+##### FPGA
+To ensure no bits are ever missed the 8MHz signal generated in the PLL module was output to a digital pin for the clock signal for serial communication:
+```Verilog
+assign GPIO_0_D[1] = CLK_8;
+```
+This is half the frequency of the Arduino so there signal will always be detected unless there is outside interference.
+
+The protocol transmits a single byte with bits (2:0) representing the treasures as follows:
+| Treasure      | Value |
+| :------------ | :---: |
+| None          | 0x0   |
+| Red Circle    | 0x1   |
+| Red Triangle  | 0x2   |
+| Red Square    | 0x3   |
+| Blue Circle   | 0x4   |
+| Blue Triangle | 0x5   |
+| Blue Square   | 0x6   |
+
+Only three bits are needed to represent the treasure leaving 5 bits for a preamble for the Arduino to accurately find the value. After much consideration the preamble `0b00111` was chosen as it is always detectable and will never be acciedentally transmitted because of the treasure value.
+
+The preamble is concatenated with the treasure data and transmited one bit at a time over a digital GPIO pin: 
+```Verilog
+assign GPIO_0_D[3] = cnt[2] ? 
+                      (cnt[1] ? 
+                        (cnt[0] ? arduino_output[7] : arduino_output[6])  : 
+                        (cnt[0] ? arduino_output[5] : arduino_output[4])) : 
+                      (cnt[1] ? 
+                        (cnt[0] ? arduino_output[3] : arduino_output[2])  : 
+                        (cnt[0] ? arduino_output[1] : arduino_output[0]));
+```
+In the above snippet `cnt` is a counter which counts from `0 -> 7` with wrap around, clocked on the 8MHz signal.
+
+##### Arduino
+On the Arduino we utilized the builtin `shiftIn()` function which is documented [here](https://www.arduino.cc/reference/en/language/functions/advanced-io/shiftin/). In essence, it read a value from a digital pin based on a rising clock edge read from a second digital pin. The data pin for `shiftIn()` was connected to the GPIO output for data on the FPGA, and the clock pin was connected to the GPIO tied to the 8MHz signal.
+
+To avoid using another digital pin on the Arduino we opted to avoid a *start* signal which signifies the start of a byte, and instead opted to detect the preamble and align in software. To do this, two bytes of data are needed from `shiftIn()` and the preamble is found. Once the location of the preamble is detected the treasure is found by the looking at the three bits next lowest, with wrap around.
+
+For exmaple:
+**BIT**
+
+|  15  |  14  |  13  |  12  |  11  |  10  |  09  |  08  |  07   |  06   |  05   |  04  |  03  |  02  |  01  |  00  |
+| :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :---: | :---: | :---: | :--: | :--: | :--: | :--: | :--: |
+|  X   |  X   |  X   |  *0* |  *0* |  *1* |  *1* |  *1* | **0** | **0** | **0** |  X   |  X   |  X   |  X   |  X   |
+
+The Arduino's `shiftIn()` and the FPGA's `cnt` are not alligned, so the first bit read by the Arduino is not the start of a byte, however, when reading the two bytes the preamble is detected in bits [12:8] so the treasure info must be stored in [7:5].
+
+
 ### Team FPGA
