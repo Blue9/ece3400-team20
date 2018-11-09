@@ -83,9 +83,9 @@ correct = ((read_register_value(0x12) & 0x80) == 0x80);
 The setup is only deemed correct if all registers have the correct value.
 
 #### Communicating with the FPGA
-To begin a protocol needed to be designed to communicate with between the FPGA and Arduino. Due to the contrainst of digital pins on the Ardunio, we decided to create a serial communication protocol. 
+To begin a protocol needed to be designed to communicate with between the FPGA and Arduino. Due to the contrainst of digital pins on the Ardunio, we attempted to create a serial communication protocol. 
 
-##### FPGA
+##### FPGA - Serial
 To ensure no bits are ever missed the 8MHz signal generated in the PLL module was output to a digital pin for the clock signal for serial communication:
 ```Verilog
 assign GPIO_0_D[1] = CLK_8;
@@ -93,6 +93,7 @@ assign GPIO_0_D[1] = CLK_8;
 This is half the frequency of the Arduino so there signal will always be detected unless there is outside interference.
 
 The protocol transmits a single byte with bits (2:0) representing the treasures as follows:
+
 | Treasure      | Value |
 | :------------ | :---: |
 | None          | 0x0   |
@@ -117,7 +118,7 @@ assign GPIO_0_D[3] = cnt[2] ?
 ```
 In the above snippet `cnt` is a counter which counts from `0 -> 7` with wrap around, clocked on the 8MHz signal.
 
-##### Arduino
+##### Arduino - Serial
 On the Arduino we utilized the builtin `shiftIn()` function which is documented [here](https://www.arduino.cc/reference/en/language/functions/advanced-io/shiftin/). In essence, it read a value from a digital pin based on a rising clock edge read from a second digital pin. The data pin for `shiftIn()` was connected to the GPIO output for data on the FPGA, and the clock pin was connected to the GPIO tied to the 8MHz signal.
 
 To avoid using another digital pin on the Arduino we opted to avoid a *start* signal which signifies the start of a byte, and instead opted to detect the preamble and align in software. To do this, two bytes of data are needed from `shiftIn()` and the preamble is found. Once the location of the preamble is detected the treasure is found by the looking at the three bits next lowest, with wrap around.
@@ -131,5 +132,57 @@ For exmaple:
 
 The Arduino's `shiftIn()` and the FPGA's `cnt` are not alligned, so the first bit read by the Arduino is not the start of a byte, however, when reading the two bytes the preamble is detected in bits [12:8] so the treasure info must be stored in [7:5].
 
+
+#### Testing - Serial
+To ensure the serial communication was working properly we first looked at the output from the FPGA on an oscilliscope. In the followign image, the blue signal is clock and the yellow is the signal.
+
+![FPGA_SERIAL](https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/FPGA_SERIAL_OUTPUT.jpg)
+
+The preamble is can be seen and the data is `0b010` so the entire byte is `0b00111010` as seen in the above image.
+
+This showed us the FPGA portion of the system was working properly. However, when we attempted to read in the values from the Arduino with `shiftIn()` allignement and incorrect reads were too significant to overcome. 
+
+After hours of attempting to recitify these error, changing the clock frequency, using different read functions, and using amplifier 3V to 5V circuits, with no success we opted to attempt a parallel solution instead.
+
+#### FPGA - Parallel
+The parallel implementation was much simpler than the serial, outputting each of the three treasure bits to a different pin.
+```Verilog
+assign GPIO_0_D[1] = treasure[0];
+assign GPIO_0_D[3] = treasure[1];
+assign GPIO_0_D[5] = treasure[2];
+```
+The representation for treasures was the same as for serial:
+
+| Treasure      | Value |
+| :------------ | :---: |
+| None          | 0x0   |
+| Red Circle    | 0x1   |
+| Red Triangle  | 0x2   |
+| Red Square    | 0x3   |
+| Blue Circle   | 0x4   |
+| Blue Triangle | 0x5   |
+| Blue Square   | 0x6   |
+
+### Arduino - Parallel
+The Arduino parallel implementation again was much easier than its serial counterpart.
+
+The value of the three digital pins the FPGA was connected to were read, representing `treasure[i]`. From there, the three bits read in were converted to decimal:
+```C
+4*digitalRead(5) + 2*digitalRead(6) + digitalRead(7);
+```
+Then the table from the **FPGA - Parallel** section was used to translate the decimal to treasures. The final component was requiring the treasure value to stay static to avoid any interference and potential incorrect signals on the line.
+```C
+if(trs == prev_trs)
+  count++;
+else
+  count = 0;
+if(count == trs_threshold)
+  /* display/report treasure value */
+```
+
+#### Testing - Parallel
+The following shows the FPGA communicating with Arduino with arbitrary treasure values:
+
+<YOUTUBE OF COMMS>
 
 ### Team FPGA
