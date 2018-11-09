@@ -123,7 +123,8 @@ On the Arduino we utilized the builtin `shiftIn()` function which is documented 
 
 To avoid using another digital pin on the Arduino we opted to avoid a *start* signal which signifies the start of a byte, and instead opted to detect the preamble and align in software. To do this, two bytes of data are needed from `shiftIn()` and the preamble is found. Once the location of the preamble is detected the treasure is found by the looking at the three bits next lowest, with wrap around.
 
-For exmaple:
+For example:
+
 **BIT**
 
 |  15  |  14  |  13  |  12  |  11  |  10  |  09  |  08  |  07   |  06   |  05   |  04  |  03  |  02  |  01  |  00  |
