@@ -163,7 +163,7 @@ The representation for treasures was the same as for serial:
 | Blue Triangle | 0x5   |
 | Blue Square   | 0x6   |
 
-### Arduino - Parallel
+#### Arduino - Parallel
 The Arduino parallel implementation again was much easier than its serial counterpart.
 
 The value of the three digital pins the FPGA was connected to were read, representing `treasure[i]`. From there, the three bits read in were converted to decimal:
