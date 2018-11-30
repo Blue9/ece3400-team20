@@ -30,7 +30,7 @@ When PCL goes high: // trigger when PCL goes high
         Set Write_Enable to 1 # Write to Memory
  ```
  
-To clarify the pseudo-code, we introduced the toggle variable because color transmission occurs by sending two bytes. Depending on the color scheme utilized, we may obtain the green color data from one byte and the red/blue color data from another byte. We first utilized an RGB565 scheme and so obtained the R/G data upon the first byte and the G/B data upon the second byte. And so we set pixel_data[7], pixel_data[6], pixel_data[5], pixel_data[4], pixel_data[3], pixel_data[2] to first_input_byte[7], first_input_byte[6], first_input_byte[5], first_input_byte[2], first_input_byte[1], first_input_byte[0] respectively in the Reference Point 1 section. And we set pixel_data[1], pixel_data[0] to second_input_byte[4], second_input_byte[3] respectively in the Reference Point 2 section. 
+To clarify the pseudo-code, we introduce the toggle variable because color transmission occurs by sending two bytes. Depending on the color scheme utilized, we may obtain the green color data from one byte and the red/blue color data from another byte. We first utilized an RGB565 scheme and so obtained the R/G data upon the first byte and the G/B data upon the second byte. And so we set pixel_data[7], pixel_data[6], pixel_data[5], pixel_data[4], pixel_data[3], pixel_data[2] to first_input_byte[7], first_input_byte[6], first_input_byte[5], first_input_byte[2], first_input_byte[1], first_input_byte[0] respectively in the Reference Point 1 section. And we set pixel_data[1], pixel_data[0] to second_input_byte[4], second_input_byte[3] respectively in the Reference Point 2 section. 
 
 The reason for this ordering can be found on page 9 in the OV7670 manual. We take the three most significant bits from the red transmission, the three most significant bits from the green transmission, and the two most significant bits from the blue transmission. 
 
@@ -45,8 +45,7 @@ OV7670_write_register(0x42, 0x08)
 
 We obtained the following result:
 
-
-# ADD COLOR BAR IMAGE
+<img src=https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/ColorBar.PNG width=250>
 
 # Team FPGA: Color Detection
 
