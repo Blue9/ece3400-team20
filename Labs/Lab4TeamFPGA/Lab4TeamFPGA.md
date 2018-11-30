@@ -103,7 +103,7 @@ Note that in order to determine rising and falling edges, we kept track of the p
 
 # Color Detection, Demonstration:
 
-Utilizing the register settings and the image processor in the previous two sections, we were able to obtain color detection as demonstrated in the following videos:
+Utilizing the register settings and the image processor in the previous two sections, we were able to obtain that we were able to read pixel values as demonstrated in the following videos:
 
 https://www.youtube.com/watch?v=X9Ipn2ejz8U
 
