@@ -2,17 +2,16 @@
 
 After opening up the Verilog project code from the ECE 3400 website and setting up the clocks as instructed, we declared red, green, and blue as localparameters as 8'b11100000, 8'b00011100, and 8'b00000111 respectively. We also attached the VGA adapter to GPIO_0_5 -> GPIO_0_23 using page 18 of the DEO_NANO user manual. We display the diagram for future reference:
 
-<img src=https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/FPGADiagram.png width=250>
+<img src=https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/FPGADiagram.png width=700>
 
-We set the pixel that we are writing values to by modifing X_ADDR and Y_ADDR. In order to write a test image to memory, on every clock cycle, we increment either X_ADDR or Y_ADDR and write a corresponding color. We attempted a different color bar to write to memory as our test image:
+We set the pixel that we are writing values to by modifing X_ADDR and Y_ADDR. In order to write a test image to memory, on every clock cycle, we increment either X_ADDR or Y_ADDR and write a corresponding color based on the value of X_ADDR and Y_ADDR. We attempted a different color bar to write to memory as our test image:
 
-
-<img src=https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/Screen%20Shot%202018-11-30%20at%202.52.07%20PM.png width=250>
+<img src=https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/Screen%20Shot%202018-11-30%20at%202.52.07%20PM.png width=700>
 
 
 # Team FPGA Downsampling:
 
-We started by writing a downsampler based upon the timing diagram in the OV7670 datasheet: pages (7-10) in 
+We wrote our downsampler based upon the timing diagram in the OV7670 datasheet: pages (7-10) in 
 
 http://web.mit.edu/6.111/www/f2016/tools/OV7670_2006.pdf .
 
@@ -48,7 +47,7 @@ The reason for this ordering can be found on page 9 in the OV7670 manual. We tak
 
 # Team FPGA Color Bar Test:
 
-In order to test whether this downsampling was accurate, we needed to enable the Color Bar Test on the Arduino. We added the following registers to do so in the OV7670 sketch:
+In order to test whether this downsampling was accurate, we needed to enable the Color Bar Test on the Arduino. We added the following registers to do so in the OV7670 sketch from Team Arduino:
 
 ```
 OV7670_write_register(0x12, 0x0E); // enable color bar testes
@@ -57,7 +56,7 @@ OV7670_write_register(0x42, 0x08)
 
 We obtained the following result:
 
-<img src=https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/ColorBar.PNG width=250>
+<img src=https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/ColorBar.PNG width=700>
 
 # Team FPGA Color Detection Settings:
 
