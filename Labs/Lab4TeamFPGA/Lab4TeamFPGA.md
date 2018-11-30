@@ -1,4 +1,16 @@
-# Team FPGA: Downsampling
+# Team FPGA Setup:
+
+After opening up the Verilog project code from the ECE 3400 website and setting up the clocks as instructed, we declared red, green, and blue as localparameters as 8'b11100000, 8'b00011100, and 8'b00000111 respectively. We also attached the VGA adapter to GPIO_0_5 -> GPIO_0_23 using page 18 of the DEO_NANO user manual. We display the diagram for future reference:
+
+<img src=https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/FPGADiagram.png width=250>
+
+We set the pixel that we are writing values to by modifing X_ADDR and Y_ADDR. In order to write a test image to memory, on every clock cycle, we increment either X_ADDR or Y_ADDR and write a corresponding color. We attempted a different color bar to write to memory as our test image:
+
+
+<img src=https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/Screen%20Shot%202018-11-30%20at%202.52.07%20PM.png width=250>
+
+
+# Team FPGA Downsampling:
 
 We started by writing a downsampler based upon the timing diagram in the OV7670 datasheet: pages (7-10) in 
 
@@ -34,7 +46,7 @@ To clarify the pseudo-code, we introduce the toggle variable because color trans
 
 The reason for this ordering can be found on page 9 in the OV7670 manual. We take the three most significant bits from the red transmission, the three most significant bits from the green transmission, and the two most significant bits from the blue transmission. 
 
-# Team FPGA: Color Bar Test
+# Team FPGA Color Bar Test:
 
 In order to test whether this downsampling was accurate, we needed to enable the Color Bar Test on the Arduino. We added the following registers to do so in the OV7670 sketch:
 
@@ -47,7 +59,7 @@ We obtained the following result:
 
 <img src=https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/ColorBar.PNG width=250>
 
-# Team FPGA: Color Detection
+# Team FPGA Color Detection Settings:
 
 After obtaining a color bar test, we attempted to work on obtaining image quality such that we would be able to detect shape colors. Initial image quality of the camera was very poor and so we replaced all of our wires. After that did not work well, we attempted to play around with the register settings and utilized RGB 444 instead of RGB 565 for our tranmission setting. We found the following register settings to work well:
 
@@ -63,10 +75,43 @@ OV7670_write_register(0x1E, (read_register_value(0x1E) | 0x30));  // Mirror Flip
 OV7670_write_register(0x14, (read_register_value(0x14) | 0x01)); // Gain setting
 ```
 
-Since we decided to change to RGB 444, we needed to also change how we would down sample in Reference Point 1 and Reference Point 2. And so we 
+Since we decided to change to RGB 444, we also needed to change how we would down-sample in Reference Point 1 and Reference Point 2. And so we changed the ordering of pixel_data to {input_data_1[3], input_data_1[2], input_data_1[1], input_data_2[7], input_data_2[6], input_data_2[5], input_data_2[3], input_data_2[2]}. 
 
+With this setting, we obtained better image quality but still had issues with differentiating blue and red colors. And so we decided to fully saturate red, remove green, and threshold blue by utilizing the following scheme on the most significant bits: pixel_data = {input_data_1[3], input_data_1[3], input_data_1[3], 0, 0, 0, input_data_2[3] | input_data_2[2], input_data_2[3] | input_data_2[2]}. And so if the most significant bit of the red data was high, then we fully saturate red. And if either of the two most significant bits of blue were high, then we fully saturate blue. We found this scheme to work well for color detection.
+
+# Team FPGA Color Detection, Image Processor:
+
+In order to differentiate between red and blue treasures, we kept counts on the number of blue and red pixels and thresholded whether the frame was blue or red. The code looked as the following pseudo-code:
+
+```
+blueCount = 0
+redCount = 0 
+On every rising clock edge:
+    if HREF is high:
+        if incoming pixel has blue values all high (00000011): 
+            increment blue count
+        if incoming pixel has red values all high (11100000)
+            increment red count
+    if VSYNC is on rising edge:
+        compare blueCount and redCount against threshold
+        set the LEDs according whichever is higher than threshold
+    if VSYNC is on falling edge:
+        reset blueCount
+        reset redCount
+```
  
- 
+Note that in order to determine rising and falling edges, we kept track of the previous values and compared against the current value. We empirically tested for the threshold and found 70 to be a good threshold. 
+
+# Color Detection, Demonstration:
+
+Utilizing the register settings and the image processor in the previous two sections, we were able to obtain color detection as demonstrated in the following videos:
+
+https://www.youtube.com/watch?v=X9Ipn2ejz8U
+
+
+
+
+
  
    
     
