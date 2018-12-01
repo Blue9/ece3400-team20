@@ -57,9 +57,9 @@ The above pseudocode is a summary of our implementation.
 ### Demonstration 
 
 Below is a short maze traversal.  This shows that backtracking works as well as general DFS:
-
+https://www.youtube.com/watch?v=QDcZ0XjWdXo
 Below is a long maze traversal.  This demonstrates both backtracking, escaping infinite loops and some edge cases:
-
+https://www.youtube.com/watch?v=M_wKZIesAfc
 ### Testing
 We initially ran into problems due to incorrect bearings.  After fixing this problem, we ran into problems with storing data in arrays.  We then fixed this problem pretty easily.
 The main problem we are still having is the fact that the sensor thresholds change with ambient light.  Furthermore, if the robot goes to a square and detects a wall when there isn't any, it will not add that adjacent square to the DFS stack.  This is sometimes corrected if the robot travels to an adjacent square of that.  We decreased this occurance by changing thresholds appropriately.
