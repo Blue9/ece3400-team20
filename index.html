@@ -25,6 +25,11 @@
 
 <body id="page-top">
     <!-- Navigation -->
+    <style>
+        img {
+            max-width: 100%;
+        }
+    </style>
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="#page-top">ECE 3400</a>
@@ -97,7 +102,7 @@
                     </a>
                 </div>
                 <div class="col-md-6 col-lg-3">
-                    <a class="portfolio-item d-block mx-auto btn disabled" href="#portfolio-modal-4">
+                    <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-4">
                         <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
                             <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
                                 <h3>Lab 4</h3>
@@ -131,7 +136,7 @@
                     </a>
                 </div>
                 <div class="col-md-6 col-lg-3">
-                    <a class="portfolio-item d-block mx-auto btn disabled" href="#portfolio-modal-7">
+                    <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-7">
                         <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
                             <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
                                 <h3>Milestone 3</h3>
@@ -141,7 +146,7 @@
                     </a>
                 </div>
                 <div class="col-md-6 col-lg-3">
-                    <a class="portfolio-item d-block mx-auto btn disabled" href="#portfolio-modal-8">
+                    <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-8">
                         <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
                             <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
                                 <h3>Milestone 4</h3>
@@ -762,29 +767,28 @@
                             contained “R_C, R_T, R_S, B_C, B_T, B_S, and NaN” that tsure would take on the values of.
                             The method works as follows:</p>
                         <pre><code>unsigned short get_msg(){
-  unsigned short t;
-  switch (tsure){
-    case R_C : t = 0b110; break;
-    case R_T : t = 0b101; break;
-    case R_S : t = 0b100; break;
-    case B_C : t = 0b011; break;
-    case B_T : t = 0b010; break;
-    case B_S : t = 0b001; break;
-    case NaN : t = 0b000; break; }
-    
-  unsigned short msg = (x_coord &lt;&lt; 13) + (y_coord &lt;&lt; 10) +
-              (iamhere  &lt;&lt; 9) +
-              (west     &lt;&lt; 8) +
-              (north    &lt;&lt; 7) +
-              (east     &lt;&lt; 6) +
-              (south    &lt;&lt; 5) +
-              (robot    &lt;&lt; 4) +
-              (t        &lt;&lt; 1);
-
-  return t;
-}
-
-</code></pre>
+<!--                         -->    unsigned short t;
+<!--                         -->    switch (tsure){
+<!--                         -->        case R_C : t = 0b110; break;
+<!--                         -->        case R_T : t = 0b101; break;
+<!--                         -->        case R_S : t = 0b100; break;
+<!--                         -->        case B_C : t = 0b011; break;
+<!--                         -->        case B_T : t = 0b010; break;
+<!--                         -->        case B_S : t = 0b001; break;
+<!--                         -->        default : t = 0b000; break;
+<!--                         -->    }
+<!--                         -->        
+<!--                         -->    unsigned short msg = (x_coord &lt;&lt; 13) + (y_coord &lt;&lt; 10) +
+<!--                         -->                (iamhere  &lt;&lt; 9) +
+<!--                         -->                (west     &lt;&lt; 8) +
+<!--                         -->                (north    &lt;&lt; 7) +
+<!--                         -->                (east     &lt;&lt; 6) +
+<!--                         -->                (south    &lt;&lt; 5) +
+<!--                         -->                (robot    &lt;&lt; 4) +
+<!--                         -->                (t        &lt;&lt; 1);
+<!--                         -->
+<!--                         -->    return t;
+<!--                         -->}</code></pre>
                         <p>This allowed us to encode messages to write to our radios that would be able to transmit to
                             each other radio.</p>
                         <h4><a id="Receiving_Information_73"></a>Receiving Information:</h4>
@@ -1016,12 +1020,383 @@
                     <div class="col-lg-8 mx-auto">
                         <h2 class="text-secondary text-uppercase mb-0">Lab 4</h2>
                         <hr class="star-dark mb-5">
-                        <img class="img-fluid mb-5" src="img/portfolio/game.png" alt="">
-                        <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque
-                            assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit
-                            asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                        <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
-                            <i class="fa fa-close"></i> Close Project</a>
+                        <div class="text-left">
+                                <h1><a id="Lab_4_0"></a>Lab 4</h1>
+                                <h2><a id="FPGA__Shape_Detection_1"></a>FPGA &amp; Shape Detection</h2>
+                                <p><em>Objective:</em> The goal of this lab was to develop software and hardware to interface with the OV7670 Camera and the DE0-NANO FPGA. To accomplish this the team split up into two groups, one to focus on the communication between the camera and FPGA with the Arduino, and the other to focus on streaming the video between the camera and FPGA.</p>
+                                <h4><a id="Prelab_4"></a>Prelab</h4>
+                                <p>Before splitting up into teams, we worked together to finish prelab, finding the key registers on the OV7670 to configure its settings. To know what values to write, we first looked at the user manual for the <a href="http://www.ti.com/lit/ug/tidu737/tidu737.pdf">DE0-NANO FPGA</a>. The buffer needs to hold an entire frame of 8b pixels so at 594kb there can be a total of ~76,000 total pixels per frame. This led us to picking the format of the camera to be QVGA leading to a resolution of 320x240, equaling ~76,000 pixels per frame.</p>
+                                <p>Once the resolution was known we could continue to find all of registers to initialize the camera. The following table shows the required registers and their corresponding values:</p>
+                                <table class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                <th>Description</th>
+                                <th style="text-align:center">Register</th>
+                                <th style="text-align:center">Value</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                <td>Reset Regs</td>
+                                <td style="text-align:center">0x12</td>
+                                <td style="text-align:center">0x80</td>
+                                </tr>
+                                <tr>
+                                <td>Enable Scaling</td>
+                                <td style="text-align:center">0x0C</td>
+                                <td style="text-align:center">0x04</td>
+                                </tr>
+                                <tr>
+                                <td>Use External CLK</td>
+                                <td style="text-align:center">0x11</td>
+                                <td style="text-align:center">0x40</td>
+                                </tr>
+                                <tr>
+                                <td>Set Resolution</td>
+                                <td style="text-align:center">0x12</td>
+                                <td style="text-align:center">0x14</td>
+                                </tr>
+                                <tr>
+                                <td>Enable Color Bar Test</td>
+                                <td style="text-align:center">0x12</td>
+                                <td style="text-align:center">0x02</td>
+                                </tr>
+                                <tr>
+                                <td>Vertical Flip</td>
+                                <td style="text-align:center">0x1E</td>
+                                <td style="text-align:center">0x10</td>
+                                </tr>
+                                <tr>
+                                <td>Mirror Flip</td>
+                                <td style="text-align:center">0x1E</td>
+                                <td style="text-align:center">0x20</td>
+                                </tr>
+                                </tbody>
+                                </table>
+                                <p><em>Note: Some use the same register so the required value cannot simply overwrite the old, but more consideration is required. Implementation is described in the <strong>Team Arduino</strong> section.</em></p>
+                                <p>The values for the above table were found in the <a href="https://www.voti.nl/docs/OV7670.pdf">OV7670 Datasheet</a>.</p>
+                                <h4><a id="PLL_23"></a>PLL</h4>
+                                <p>Before spliting up in teams we generate a PLL module to create multiple clocked signals for use both internal and external to the FPGA. The PLL module was generate using Quartus’s interal IP generation. We followed the <a href="https://github.com/CEI-lab/ece3400-2018/blob/master/docs/lab4.md#pll">Lab 4 handout</a> PLL section initially, however, we added a fourth clock signal at 8MHz for use with the serial communication between the FPGA and Arduino. The use of this will be described more in the <strong>Team Arduino</strong> section.</p>
+                                <h3><a id="Team_Arduino_26"></a>Team Arduino</h3>
+                                <p>The goal of team Adruino was to wire the camera, initialize all of its registers, and interface with the FPGA to read treasure data. To begin we downloaded the <a href="https://cei-lab.github.io/ece3400-2018/Lab4_Arduino_Template.zip">OV7670 setup sketch</a> as a baseline for implementation.</p>
+                                <h4><a id="Internal_PullUp_Disable_28"></a>Internal Pull-Up Disable</h4>
+                                <p>The first step in initializing the camera is wiring the Arduino to the OV7670, however, the Arduino operates on 5V and the camera operates on 3.3V, so the internal pull-ups to the Arduino’s <code>SDA</code> and <code>SCL</code> pins needed to be disable to avoid burning out the camera.</p>
+                                <p><em>Note: This must be done <strong>EVERY</strong> time <strong>BEFORE</strong> code is uploaded.</em></p>
+                                <p>To disable the settings on a Windows PC:</p>
+                                <ol>
+                                <li>Go to <code>C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src\utility</code></li>
+                                <li>Right click on <em>twi.c</em> and select <em>Properties&gt;Securities&gt;Edit</em></li>
+                                </ol>
+                                <ul>
+                                <li>Click <em>Users</em></li>
+                                <li>Click <em>Full Control</em></li>
+                                <li>Click <em>OK</em> and <em>Close</em></li>
+                                </ul>
+                                <ol start="3">
+                                <li>Open <em>twi.c</em></li>
+                                <li>Comment out the following lines:</li>
+                                </ol>
+<!--                         --><pre><code class="language-C"><span class="hljs-comment">//activate internal pullups for twi</span>
+<!--                         -->digitalWrite(SDA,<span class="hljs-number">1</span>);
+<!--                         -->digitalWrite(SCL,<span class="hljs-number">1</span>);
+                                </code></pre>
+                                <ol start="5">
+                                <li>Save and close</li>
+                                </ol>
+                                <p>We found that even after changing the file permissions, sometimes users were not able to modify <em>twi.c</em>. To work around this we copied the contents of the <em>twi.c</em> to a new file in a different directory and named the new file <em>twi.c</em>. Then, the new <em>twi.c</em> was copied into <code>C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src\utility</code>, replacing the old <em>twi.c</em> with the new modified version.</p>
+                                <h4><a id="Physical_Setup_52"></a>Physical Setup</h4>
+                                <p>After internal pull-ups were disabled the OV7670 and Arduino were wired based on the labs suggestion:</p>
+                                <p><img src="https://cei-lab.github.io/ece3400-2018/images/Lab3CameraWiringDiagram.png" alt="OV7670_Wiring"></p>
+                                <p>The wire names in the above picture do <em>NOT</em> directly map to the pinout on the OV7670. The conversions are as follows:</p>
+                                <table class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                <th style="text-align:center">OV7670 Pin Name</th>
+                                <th style="text-align:center">Signal Name</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                <td style="text-align:center">SIOC</td>
+                                <td style="text-align:center">SCL</td>
+                                </tr>
+                                <tr>
+                                <td style="text-align:center">SIOD</td>
+                                <td style="text-align:center">SCA</td>
+                                </tr>
+                                <tr>
+                                <td style="text-align:center">MCLK</td>
+                                <td style="text-align:center">XCLK</td>
+                                </tr>
+                                </tbody>
+                                </table>
+                                <p>To generate the 24MHz signal from the FPGA, the output of the PLL module described above was mapped to a GPIO output pin:</p>
+                                <pre><code class="language-Verilog"><span class="hljs-keyword">assign</span> GIPO_0_D[<span class="hljs-number">0</span>] <span class="hljs-keyword">=</span> CLK_24;
+                                </code></pre>
+                                <h4><a id="Communicating_with_the_Camera_69"></a>Communicating with the Camera</h4>
+                                <p>To setup an I2C connection the first step is finding the address of the slave, in this case the OV7670. In the datasheet it states for writing the addres is <code>0x42</code> and <code>0x43</code> for reading, leading to a base address of <code>0x21</code> and an appended <code>0</code> for write and <code>1</code> for read.</p>
+                                <p>To initialize the camera, the results from the prelab were used, writing the required values to the identified registers. To write the data the provided function <code>OV7670_write_register(reg_address, data)</code> was used, however, just setting the bits we need would overwrite the values of all other bits in the registers with <code>0</code>. Instead, we OR’d the current value of the register written to with the desired value preserving the other bits. For example:</p>
+                                <pre><code class="language-C">OV7670_write_register(<span class="hljs-number">0x01</span>, (read_register_value(<span class="hljs-number">0x02</span>) | <span class="hljs-number">0x03</span>));
+                                </code></pre>
+                                <p>This was particularly relevant for certain registers were we needed to set multiple bits for initialization.</p>
+                                <p>After all registers were written, the bits that were intended to be set were checked to ensure proper setup. This was done by reading the value of a register, ANDing it wih the bit in question, and comparing the value to the expected:</p>
+                                <pre><code class="language-C">correct = ((read_register_value(<span class="hljs-number">0x12</span>) &amp; <span class="hljs-number">0x80</span>) == <span class="hljs-number">0x80</span>);
+                                </code></pre>
+                                <p>The setup is only deemed correct if all registers have the correct value.</p>
+                                <h4><a id="Communicating_with_the_FPGA_84"></a>Communicating with the FPGA</h4>
+                                <p>To begin a protocol needed to be designed to communicate with between the FPGA and Arduino. Due to the contrainst of digital pins on the Ardunio, we attempted to create a serial communication protocol.</p>
+                                <h5><a id="FPGA__Serial_87"></a>FPGA - Serial</h5>
+                                <p>To ensure no bits are ever missed the 8MHz signal generated in the PLL module was output to a digital pin for the clock signal for serial communication:</p>
+                                <pre><code class="language-Verilog"><span class="hljs-keyword">assign</span> GPIO_0_D[<span class="hljs-number">1</span>] <span class="hljs-keyword">=</span> CLK_8;
+                                </code></pre>
+                                <p>This is half the frequency of the Arduino so there signal will always be detected unless there is outside interference.</p>
+                                <p>The protocol transmits a single byte with bits (2:0) representing the treasures as follows:</p>
+                                <table class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                <th style="text-align:left">Treasure</th>
+                                <th style="text-align:center">Value</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                <td style="text-align:left">None</td>
+                                <td style="text-align:center">0x0</td>
+                                </tr>
+                                <tr>
+                                <td style="text-align:left">Red Circle</td>
+                                <td style="text-align:center">0x1</td>
+                                </tr>
+                                <tr>
+                                <td style="text-align:left">Red Triangle</td>
+                                <td style="text-align:center">0x2</td>
+                                </tr>
+                                <tr>
+                                <td style="text-align:left">Red Square</td>
+                                <td style="text-align:center">0x3</td>
+                                </tr>
+                                <tr>
+                                <td style="text-align:left">Blue Circle</td>
+                                <td style="text-align:center">0x4</td>
+                                </tr>
+                                <tr>
+                                <td style="text-align:left">Blue Triangle</td>
+                                <td style="text-align:center">0x5</td>
+                                </tr>
+                                <tr>
+                                <td style="text-align:left">Blue Square</td>
+                                <td style="text-align:center">0x6</td>
+                                </tr>
+                                </tbody>
+                                </table>
+                                <p>Only three bits are needed to represent the treasure leaving 5 bits for a preamble for the Arduino to accurately find the value. After much consideration the preamble <code>0b00111</code> was chosen as it is always detectable and will never be acciedentally transmitted because of the treasure value.</p>
+                                <p>The preamble is concatenated with the treasure data and transmited one bit at a time over a digital GPIO pin:</p>
+                                <pre><code class="language-Verilog"><span class="hljs-keyword">assign</span> GPIO_0_D[<span class="hljs-number">3</span>] <span class="hljs-keyword">=</span> cnt[<span class="hljs-number">2</span>] ? 
+                                                      (cnt[<span class="hljs-number">1</span>] ? 
+                                                        (cnt[<span class="hljs-number">0</span>] ? arduino_output[<span class="hljs-number">7</span>] <span class="hljs-keyword">:</span> arduino_output[<span class="hljs-number">6</span>])  <span class="hljs-keyword">:</span> 
+                                                        (cnt[<span class="hljs-number">0</span>] ? arduino_output[<span class="hljs-number">5</span>] <span class="hljs-keyword">:</span> arduino_output[<span class="hljs-number">4</span>])) <span class="hljs-keyword">:</span> 
+                                                      (cnt[<span class="hljs-number">1</span>] ? 
+                                                        (cnt[<span class="hljs-number">0</span>] ? arduino_output[<span class="hljs-number">3</span>] <span class="hljs-keyword">:</span> arduino_output[<span class="hljs-number">2</span>])  <span class="hljs-keyword">:</span> 
+                                                        (cnt[<span class="hljs-number">0</span>] ? arduino_output[<span class="hljs-number">1</span>] <span class="hljs-keyword">:</span> arduino_output[<span class="hljs-number">0</span>]));
+                                </code></pre>
+                                <p>In the above snippet <code>cnt</code> is a counter which counts from <code>0 -&gt; 7</code> with wrap around, clocked on the 8MHz signal.</p>
+                                <h5><a id="Arduino__Serial_120"></a>Arduino - Serial</h5>
+                                <p>On the Arduino we utilized the builtin <code>shiftIn()</code> function which is documented <a href="https://www.arduino.cc/reference/en/language/functions/advanced-io/shiftin/">here</a>. In essence, it read a value from a digital pin based on a rising clock edge read from a second digital pin. The data pin for <code>shiftIn()</code> was connected to the GPIO output for data on the FPGA, and the clock pin was connected to the GPIO tied to the 8MHz signal.</p>
+                                <p>To avoid using another digital pin on the Arduino we opted to avoid a <em>start</em> signal which signifies the start of a byte, and instead opted to detect the preamble and align in software. To do this, two bytes of data are needed from <code>shiftIn()</code> and the preamble is found. Once the location of the preamble is detected the treasure is found by the looking at the three bits next lowest, with wrap around.</p>
+                                <p>For example:</p>
+                                <p><strong>BIT</strong></p>
+                                <table class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                <th style="text-align:center">15</th>
+                                <th style="text-align:center">14</th>
+                                <th style="text-align:center">13</th>
+                                <th style="text-align:center">12</th>
+                                <th style="text-align:center">11</th>
+                                <th style="text-align:center">10</th>
+                                <th style="text-align:center">09</th>
+                                <th style="text-align:center">08</th>
+                                <th style="text-align:center">07</th>
+                                <th style="text-align:center">06</th>
+                                <th style="text-align:center">05</th>
+                                <th style="text-align:center">04</th>
+                                <th style="text-align:center">03</th>
+                                <th style="text-align:center">02</th>
+                                <th style="text-align:center">01</th>
+                                <th style="text-align:center">00</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                <td style="text-align:center">X</td>
+                                <td style="text-align:center">X</td>
+                                <td style="text-align:center">X</td>
+                                <td style="text-align:center"><em>0</em></td>
+                                <td style="text-align:center"><em>0</em></td>
+                                <td style="text-align:center"><em>1</em></td>
+                                <td style="text-align:center"><em>1</em></td>
+                                <td style="text-align:center"><em>1</em></td>
+                                <td style="text-align:center"><strong>0</strong></td>
+                                <td style="text-align:center"><strong>0</strong></td>
+                                <td style="text-align:center"><strong>0</strong></td>
+                                <td style="text-align:center">X</td>
+                                <td style="text-align:center">X</td>
+                                <td style="text-align:center">X</td>
+                                <td style="text-align:center">X</td>
+                                <td style="text-align:center">X</td>
+                                </tr>
+                                </tbody>
+                                </table>
+                                <p>The Arduino’s <code>shiftIn()</code> and the FPGA’s <code>cnt</code> are not alligned, so the first bit read by the Arduino is not the start of a byte, however, when reading the two bytes the preamble is detected in bits [12:8] so the treasure info must be stored in [7:5].</p>
+                                <h4><a id="Testing__Serial_136"></a>Testing - Serial</h4>
+                                <p>To ensure the serial communication was working properly we first looked at the output from the FPGA on an oscilliscope. In the followign image, the blue signal is clock and the yellow is the signal.</p>
+                                <p><img src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/img/portfolio/FPGA_SERIAL_OUTPUT.jpg" alt="FPGA_SERIAL"></p>
+                                <p>The preamble is can be seen and the data is <code>0b010</code> so the entire byte is <code>0b00111010</code> as seen in the above image.</p>
+                                <p>This showed us the FPGA portion of the system was working properly. However, when we attempted to read in the values from the Arduino with <code>shiftIn()</code> allignement and incorrect reads were too significant to overcome.</p>
+                                <p>After hours of attempting to recitify these error, changing the clock frequency, using different read functions, and using amplifier 3V to 5V circuits, with no success we opted to attempt a parallel solution instead.</p>
+                                <h4><a id="FPGA__Parallel_147"></a>FPGA - Parallel</h4>
+                                <p>The parallel implementation was much simpler than the serial, outputting each of the three treasure bits to a different pin.</p>
+                                <pre><code class="language-Verilog"><span class="hljs-keyword">assign</span> GPIO_0_D[<span class="hljs-number">1</span>] <span class="hljs-keyword">=</span> treasure[<span class="hljs-number">0</span>];
+                                <span class="hljs-keyword">assign</span> GPIO_0_D[<span class="hljs-number">3</span>] <span class="hljs-keyword">=</span> treasure[<span class="hljs-number">1</span>];
+                                <span class="hljs-keyword">assign</span> GPIO_0_D[<span class="hljs-number">5</span>] <span class="hljs-keyword">=</span> treasure[<span class="hljs-number">2</span>];
+                                </code></pre>
+                                <p>The representation for treasures was the same as for serial:</p>
+                                <table class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                <th style="text-align:left">Treasure</th>
+                                <th style="text-align:center">Value</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                <td style="text-align:left">None</td>
+                                <td style="text-align:center">0x0</td>
+                                </tr>
+                                <tr>
+                                <td style="text-align:left">Red Circle</td>
+                                <td style="text-align:center">0x1</td>
+                                </tr>
+                                <tr>
+                                <td style="text-align:left">Red Triangle</td>
+                                <td style="text-align:center">0x2</td>
+                                </tr>
+                                <tr>
+                                <td style="text-align:left">Red Square</td>
+                                <td style="text-align:center">0x3</td>
+                                </tr>
+                                <tr>
+                                <td style="text-align:left">Blue Circle</td>
+                                <td style="text-align:center">0x4</td>
+                                </tr>
+                                <tr>
+                                <td style="text-align:left">Blue Triangle</td>
+                                <td style="text-align:center">0x5</td>
+                                </tr>
+                                <tr>
+                                <td style="text-align:left">Blue Square</td>
+                                <td style="text-align:center">0x6</td>
+                                </tr>
+                                </tbody>
+                                </table>
+                                <h4><a id="Arduino__Parallel_166"></a>Arduino - Parallel</h4>
+                                <p>The Arduino parallel implementation again was much easier than its serial counterpart.</p>
+                                <p>The value of the three digital pins the FPGA was connected to were read, representing <code>treasure[i]</code>. From there, the three bits read in were converted to decimal:</p>
+                                <pre><code class="language-C"><span class="hljs-number">4</span>*digitalRead(<span class="hljs-number">5</span>) + <span class="hljs-number">2</span>*digitalRead(<span class="hljs-number">6</span>) + digitalRead(<span class="hljs-number">7</span>);
+                                </code></pre>
+                                <p>Then the table from the <strong>FPGA - Parallel</strong> section was used to translate the decimal to treasures. The final component was requiring the treasure value to stay static to avoid any interference and potential incorrect signals on the line.</p>
+                                <pre><code class="language-C"><span class="hljs-keyword">if</span>(trs == prev_trs)
+                                  count++;
+                                <span class="hljs-keyword">else</span>
+                                  count = <span class="hljs-number">0</span>;
+                                <span class="hljs-keyword">if</span>(count == trs_threshold)
+                                  <span class="hljs-comment">/* display/report treasure value */</span>
+                                </code></pre>
+                                <h4><a id="Testing__Parallel_183"></a>Testing - Parallel</h4>
+                                <p>The following shows the FPGA communicating with Arduino with arbitrary treasure values:</p>
+                                <p>
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/t0z3kFzrsgU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </p>
+                                <h1><a id="Team_FPGA_Setup_188"></a>Team FPGA Setup:</h1>
+                                <p>After opening up the Verilog project code from the ECE 3400 website and setting up the clocks as instructed, we declared red, green, and blue as localparameters as 8’b11100000, 8’b00011100, and 8’b00000111 respectively. We also attached the VGA adapter to GPIO_0_5 -&gt; GPIO_0_23 using page 18 of the DEO_NANO user manual. We display the diagram for future reference:</p>
+                                <p><img src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/FPGADiagram.png?raw=true" alt="fpga diagram"></p>
+                                <p>We set the pixel that we are writing values to by modifing X_ADDR and Y_ADDR. In order to write a test image to memory, on every clock cycle, we increment either X_ADDR or Y_ADDR and write a corresponding color based on the value of X_ADDR and Y_ADDR. We attempted a different color bar to write to memory as our test image:</p>
+                                <p><img src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/Screen%20Shot%202018-11-30%20at%202.52.07%20PM.png?raw=true" alt="Color bar"></p>
+                                <h1><a id="Team_FPGA_Downsampling_199"></a>Team FPGA Downsampling:</h1>
+                                <p>We wrote our downsampler based upon the timing diagram in the OV7670 datasheet: pages (7-10) in</p>
+                                <p><a href="http://web.mit.edu/6.111/www/f2016/tools/OV7670_2006.pdf">http://web.mit.edu/6.111/www/f2016/tools/OV7670_2006.pdf</a></p>
+                                <p>After reading the timing diagrams we developed the following pseduo-coded downsampler solution:</p>
+                                <pre><code>When PCL goes high: // trigger when PCL goes high
+                                
+                                    if(VSYNC is high):
+                                        // new frame comes in
+                                        Reset X_Address and Y_Address
+                                        Reset pixel_data
+                                        Set Write_Enable to 0
+                                        Set Toggle to 0
+                                    else if (HREF is on falling edge):
+                                        // new row data comes in
+                                        Reset X_Address
+                                        Increment Y_Address
+                                        Reset pixel_data
+                                        Set Write_Enable to 0
+                                        Set Toggle to 0
+                                   else if (HREF is high and toggle is 0): # Reference Point 1
+                                        Set pixel data based on first_input_byte
+                                        Set Write_Enable to 0
+                                   else if (HREF is high and toggle is 1): # Reference Point 2
+                                        Set pixel data based on second_input_byte
+                                        Set Write_Enable to 1 # Write to Memory
+                                </code></pre>
+                                <p>To clarify the pseudo-code, we introduce the toggle variable because color transmission occurs by sending two bytes. Depending on the color scheme utilized, we may obtain the green color data from one byte and the red/blue color data from another byte. We first utilized an RGB565 scheme and so obtained the R/G data upon the first byte and the G/B data upon the second byte. And so we set <code>pixel_data[7], pixel_data[6], pixel_data[5], pixel_data[4], pixel_data[3], pixel_data[2]</code> to <code>first_input_byte[7], first_input_byte[6], first_input_byte[5], first_input_byte[2], first_input_byte[1], first_input_byte[0]</code> respectively in the Reference Point 1 section. And we set <code>pixel_data[1], pixel_data[0]</code> to <code>second_input_byte[4], second_input_byte[3]</code> respectively in the Reference Point 2 section.</p>
+                                <p>The reason for this ordering can be found on page 9 in the OV7670 manual. We take the three most significant bits from the red transmission, the three most significant bits from the green transmission, and the two most significant bits from the blue transmission.</p>
+                                <h1><a id="Team_FPGA_Color_Bar_Test_235"></a>Team FPGA Color Bar Test:</h1>
+                                <p>In order to test whether this downsampling was accurate, we needed to enable the Color Bar Test on the Arduino. We added the following registers to do so in the OV7670 sketch from Team Arduino:</p>
+                                <pre><code>OV7670_write_register(0x12, 0x0E); // enable color bar testes
+                                OV7670_write_register(0x42, 0x08)
+                                </code></pre>
+                                <p>We obtained the following result:</p>
+                                <p><img src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/ColorBar.PNG?raw=true" alt="color bar test"></p>
+                                <h1><a id="Team_FPGA_Color_Detection_Settings_248"></a>Team FPGA Color Detection Settings:</h1>
+                                <p>After obtaining a color bar test, we attempted to work on obtaining image quality such that we would be able to detect shape colors. Initial image quality of the camera was very poor and so we replaced all of our wires. After that did not work well, we attempted to play around with the register settings and utilized RGB 444 instead of RGB 565 for our tranmission setting. We found the following register settings to work well:</p>
+                                <pre><code>
+                                OV7670_write_register(0x12, (read_register_value(0x12) | 0x80)); // Reset All Registers
+                                OV7670_write_register(0x0C, (read_register_value(0x0C) | 0x08)); // Enable Scaling
+                                OV7670_write_register(0x11, (read_register_value(0x11) | 0x40)); // Enable External Clock
+                                OV7670_write_register(0x12, (read_register_value(0x12) | 0x0C)); // Camera Resolution
+                                OV7670_write_register(0x8C,  (read_register_value(0x8C) | 0x2); // Enable RGB444
+                                OV7670_write_register(0x40, (read_register_value(0x40) | 0xD0); // Set the bit for RGB and Enable a Bit for 444
+                                OV7670_write_register(0x1E, (read_register_value(0x1E) | 0x30));  // Mirror Flip
+                                OV7670_write_register(0x14, (read_register_value(0x14) | 0x01)); // Gain setting
+                                </code></pre>
+                                <p>Since we decided to change to RGB 444, we also needed to change how we would down-sample in Reference Point 1 and Reference Point 2. And so we changed the ordering of pixel_data to <code>{input_data_1[3], input_data_1[2], input_data_1[1], input_data_2[7], input_data_2[6], input_data_2[5], input_data_2[3], input_data_2[2]}</code>.</p>
+                                <p>With this setting, we obtained better image quality but still had issues with differentiating blue and red colors. And so we decided to fully saturate red, remove green, and threshold blue by utilizing the following scheme on the most significant bits: <code>pixel_data = {input_data_1[3], input_data_1[3], input_data_1[3], 0, 0, 0, input_data_2[3] | input_data_2[2], input_data_2[3] | input_data_2[2]}</code>. And so if the most significant bit of the red data was high, then we fully saturate red. And if either of the two most significant bits of blue were high, then we fully saturate blue. We found this scheme to work well for color detection.</p>
+                                <h1><a id="Team_FPGA_Color_Detection_Image_Processor_268"></a>Team FPGA Color Detection, Image Processor:</h1>
+                                <p>In order to differentiate between red and blue treasures, we kept counts on the number of blue and red pixels and thresholded whether the frame was blue or red. The code looked as the following pseudo-code:</p>
+                                <pre><code>blueCount = 0
+<!--                         -->redCount = 0 
+<!--                         -->On every rising clock edge:
+<!--                         -->    if HREF is high:
+<!--                         -->        if incoming pixel has blue values all high (00000011): 
+<!--                         -->            increment blue count
+<!--                         -->        if incoming pixel has red values all high (11100000)
+<!--                         -->            increment red count
+<!--                         -->    if VSYNC is on rising edge:
+<!--                         -->        compare blueCount and redCount against threshold
+<!--                         -->        set the LEDs according whichever is higher than threshold
+<!--                         -->    if VSYNC is on falling edge:
+<!--                         -->        reset blueCount
+<!--                         -->        reset redCount
+                                </code></pre>
+                                <p>Note that in order to determine rising and falling edges, we kept track of the previous values and compared against the current value. We empirically tested for the threshold and found 70 to be a good threshold.</p>
+                                <h1><a id="Color_Detection_Demonstration_291"></a>Color Detection, Demonstration:</h1>
+                                <p>Utilizing the register settings and the image processor in the previous two sections, we were able to obtain that we were able to read pixel values as demonstrated in the following videos:</p>
+                                <p>
+                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/X9Ipn2ejz8U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </p>
+                        </div>
+                        <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss mt-4" href="#">
+                                <i class="fa fa-close"></i> Close Project</a>
                     </div>
                 </div>
             </div>
@@ -1182,9 +1557,9 @@
             <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
                 <i class="fa fa-3x fa-times"></i>
             </a>
-            <div class="container text-left">
+            <div class="container text-center">
                 <div class="row">
-                    <div class="col-lg-8 mx-auto">
+                    <div class="col-lg-8 text-left mx-auto">
                         <h2 class="text-secondary text-center text-uppercase mb-0">Milestone 2</h2>
                         <h3 class="text-center"><a id="Maze_exploration_using_Right_Hand_Rule_2"></a>Maze exploration
                             using Right Hand Rule</h3>
@@ -1307,9 +1682,125 @@
                         <p>A video of our robot avoiding other robots, walls, and line following is as follows:</p>
                         <h1><iframe width="560" height="315" src="https://www.youtube.com/embed/XYCFWvGQjow"
                                 frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></h1>
-                    </div>
+
+                        </div>
                 </div>
+                <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss mt-4" href="#">
+                        <i class="fa fa-close"></i> Close Project</a>
             </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 7 -->
+    <div class="portfolio-modal mfp-hide" id="portfolio-modal-7">
+            <div class="portfolio-modal-dialog bg-white">
+                    <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
+                        <i class="fa fa-3x fa-times"></i>
+                    </a>
+                    <div class="container text-center">
+                        <div class="row">
+                            <div class="col-lg-8 text-left mx-auto">
+                                <h2 class="text-secondary text-center text-uppercase mb-0">Milestone 3</h2>
+                                <h3><a id="Maze_Exploration_using_Depth_First_Search_2"></a>Maze Exploration using Depth First Search</h3>
+                                <p>To be able to map the entire maze, a right hand wall traversal is not sufficient, as it will not be able to reach isolated elements in the body of the maze. Instead, our robot will implement a depth first search (DFS) to map the entire maze.</p>
+                                <h3><a id="Depth_First_Search_Algorithm_6"></a>Depth First Search Algorithm</h3>
+                                <p>To begin we have an empty stack to signify the nodes which on our “frontier”. The frontier is all of the intersections in which we have been adjacent to and could have moved too, but have not yet visited. At each intersection we add all of adjacent nodes that do not have a wall inbetween to the fronteir stack with the condition that we have not yet visited said node. This can be checked by looking at the 2D array we have to map the maze from <strong>Lab 3</strong>.</p>
+                                <p>The image below shows how the DFS tree is created and the corresponding frontier stack:</p>
+                                <p style="width:100%" class="text-center"><img src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/img/portfolio/DFS_tree.PNG" alt="DFS Tree" title="DFS Tree"><br>
+                                <img src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/img/portfolio/DFS_frontier.PNG" alt="DFS Frontier" title="DFS Frontier"></p>
+                                <p>To choose which node to navigate to the top element of the frontier stack is popped giving the coordinates of the closest unexplored node in the DFS tree. For the majority of exploration this node will be adjacent to the current so we can simply turn or continue straight. If the node is not adjacent, we must backtrack untill it is adjacent, requiring another data structure: a stack of previous moves. This stack will add the past move to the stack so we can retrace our path to find the next node in the frontier set. The robot will continue to retrace until the next node is adjacent when it will move to the node and then repeat the process. We also ensure that when backtracking the moves are not added to the previous moves stack to avoid oscillations in movement.</p>
+                                <p>When elements are pushed to the frontier stack, if available, the node which is directly in front of the robot will be placed on the top of the stack to prioritize forward movement over turning. This is becuase turning at an intersection takes significantly more time than moving straight and thus should be avoided as given the option.</p>
+                                <p>The order nodes are pushed to the stack is LEFT, RIGHT, FRONT, so the following would be the mapping of a 4x5 maze with a single wall:</p>
+                                <p style="width:100%" class="text-center"><img src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/img/portfolio/DFS_search.PNG" alt="DFS Map" title="DFS Map"></p>
+                                <p><em>NOTE: The above algorithm and graphics were taken from ECE 3400 LEC16 - 2018</em></p>
+                                <h3><a id="Algorithm_Integration_25"></a>Algorithm Integration</h3>
+                                <p>To incorporate DFS, two additional data structures were needed as described above: <code>StackArray &lt;Coord&gt; dfs_frontier</code> and <code>StackArray &lt;Coord&gt; dfs_prev_moves</code> utilizing the <code>StackArray</code> library. They are of type <code>Coord</code> which represent coordinates in the maze, defined as follows:</p>
+                                <pre><code class="language-C"><span class="hljs-keyword">class</span> Coord{
+                                  <span class="hljs-keyword">public</span>:
+                                    byte x, y;
+                                    Coord(byte x_coord, byte y_coord){ 
+                                      x = x_coord; y = y_coord;
+                                    } 
+                                };
+                                </code></pre>
+                                <p>At each intersection, the robot first updates its position, adding the current node to <code>dfs_prev_moves</code>, and adds all of the adjacent nodes to <code>dfs_frontier</code> if their is not a wall between them. Next, the we peek at <code>dfs_frontier</code> and check if it is adjacent to the current node and there is no wall in between. If it is adjacent, the element is popped, the global direction (N, S, E, W) is found by comparing the two <code>Coord</code> x and y values, which is then translated to a turn direction (<code>left</code>, <code>right</code>, <code>straight</code>, <code>turn around</code>) to give the robot direction. If it is not adjacent, the top of <code>dfs_prev_moves</code> is popped to begin backtracking towards the next element in the frontier set. The turn direction is calculated in the exact same way as if the node was adjacent.</p>
+                                <pre><code>handle_intersection():
+                                  update_static_array // update internally wall locations at current point
+                                  if( ! check_neighbors(current_location, dfs_next.nextMove() ):
+                                    move_temp = dfs_next.pop()
+                                    next_direction = get_direction(move_temp, current_location, current_bearing) // obtain NSEW direction
+                                  else:
+                                    dfs_prev_moves.push(current_location)
+                                    move_temp = dfs_next.pop()
+                                    next_direction = get_direction(move_temp, current_location, current_bearing) // obtain NSEW direction
+                                  next_move = get_next_move(current_location, next_direction)
+                                  return next_move
+                                </code></pre>
+                                <p>The above pseudocode is a summary of our implementation.</p>
+                                <h3><a id="Demonstration_56"></a>Demonstration</h3>
+                                <p>Below is a short maze traversal.  This shows that backtracking works as well as general DFS:<br>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/QDcZ0XjWdXo"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                Below is a long maze traversal.  This demonstrates both backtracking, escaping infinite loops and some edge cases:<br>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/M_wKZIesAfc"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <h3><a id="Testing_62"></a>Testing</h3>
+                                <p>We initially ran into problems due to incorrect bearings.  After fixing this problem, we ran into problems with storing data in arrays.  We then fixed this problem pretty easily.<br>
+                                The main problem we are still having is the fact that the sensor thresholds change with ambient light.  Furthermore, if the robot goes to a square and detects a wall when there isn’t any, it will not add that adjacent square to the DFS stack.  This is sometimes corrected if the robot travels to an adjacent square of that.  We decreased this occurance by changing thresholds appropriately.</p>
+                                <p>We then enabled GUI communication.  We could not get a signal however and ran out of time.</p>
+                                 
+                                 
+                                 
+                                 
+                            </div>
+                        </div>
+                    </div>
+                        <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss mt-4" href="#">
+                                <i class="fa fa-close"></i> Close Project</a>
+            </div>
+    </div>
+
+    <!-- Portfolio Modal 8 -->
+    <div class="portfolio-modal mfp-hide" id="portfolio-modal-8">
+            <div class="portfolio-modal-dialog bg-white">
+                    <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
+                        <i class="fa fa-3x fa-times"></i>
+                    </a>
+                    <div class="container text-center">
+                        <div class="row">
+                            <div class="col-lg-8 text-left mx-auto">
+                                <h2 class="text-secondary text-center text-uppercase mb-0">Milestone 4</h2>
+                                <h3><a id="Distinguishing_between_Red_and_Blue_Treasures_0"></a>Distinguishing between Red and Blue Treasures</h3>
+                                <p>In order to be able to distinguish between red and blue treasures, we had made our camera output to be RGB444 and saturated the down-sampling for red and thresholded the blue values coming in. When designing our downsampler and image processor for Lab 4, we had the goal of distinguishing red and blue treasures in mind. This design is what allowed us to observe this outcome in the following video in which we place red and blue treasures in front of our camera and successfully distinguish between them:</p>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/X9Ipn2ejz8U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <h1><a id="Shape_Detection_6"></a>Shape Detection</h1>
+                                <p>Once we were able to distinguish between a red and a blue treasure, the next step was to determine what shape a treasure is. Our strategy was to sample three equally distanced pixel rows from the image. We noticed the following:</p>
+                                <p><img src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/Screen%20Shot%202018-11-30%20at%207.21.46%20PM.png?raw=true" alt="shape_detection_algo"></p>
+                                <p>As demonstrated by the figure, if we compare the intensity of red between the three samples, we would be able to determine which shape it is. We could even average these samples for greater accuracy. The rules would be as follows:</p>
+                                <pre><code>Take Color Samples at Rows 58, 72, and 94.
+
+                                If color intensity is same across all samples:
+                                shape = rectanlge
+                                
+                                If color intensity is highest at middle row and edge rows are smaller:
+                                shape = diamond
+
+                                If color intensity is monotonically increasing/decreasing:
+                                shape = triangle
+                                </code></pre>
+                                <p>With the amount of noise that we were experiencing with the camera and after hours of changing registers and wires, we were unable to achieve a steady feed that could implement the strategy above. However, the following video demonstrates what should happen but was not what we able to get:</p>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/hRiXi_E4cNg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <p>After a lot of experimentation, we hypothesized that our VSYNC line was not working properly. We believed this because our image would constantly reset to (0, 0) before writing a full image. The only way both coordinates can be reset is if VSYNC is pulled high, so the VSYNC line was likely experiencing some noise and getting pulled up when it shouldn’t have.</p>
+                                <p>To fix this issue, we first got rid of VSYNC resets altogether and instead reset coordinates when Y_ADDR went off the screen. This worked to an extent, but oftentimes our screen would be offset and wrap around vertically. To fix this, we decided to use VSYNC but only every 44 million cycles. This prevented the screen from becoming offset and also prevented the unusual coordinate resets we were experiencing.</p>
+                                <p>After doing this, we saturated all pixels to only have full red, blue, or green intensity. This finally gave us a stable image and we were able to conduct shape detection, shown in the video below. If the 3 left bits are high, then we detect a triangle. If the middle 3 bits are high, we’ve detected a square. If the rightmost 2 bits are high, we’ve detected a diamond. Otherwise, we do not detect a treasure and all bits are high.</p>
+                                <p><iframe width="560" height="315" src="https://www.youtube.com/embed/FeldkNRAHkY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+                                <p>As seen in the video, our output is very stable, and we are not completely sure why this is the case, considering the video feed is quite noisy. This is likely due to our thresholds being calibrated far apart enough to differentiate the shapes well enough. However, we found that running this test multiple times and with different shape orientations we were unable to detect the shape. Because of that, we feel it is best to omit this from our robot.</p>
+
+                            </div>
+                        </div>
+                        <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss mt-4" href="#">
+                                <i class="fa fa-close"></i> Close Project</a>
+                    </div>
         </div>
     </div>
     <!-- Bootstrap core JavaScript -->
