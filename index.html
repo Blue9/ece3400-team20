@@ -28,6 +28,10 @@
     <style>
         img {
             max-width: 100%;
+            text-align: center;
+        }
+        .mfp-content {
+            max-width: 1200px;
         }
     </style>
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
@@ -246,7 +250,7 @@
             </a>
             <div class="container text-center">
                 <div class="row">
-                    <div class="col-lg-8 mx-auto">
+                    <div class="col-lg-10 mx-auto">
                         <h2 class="text-secondary text-uppercase mb-0">Lab 1</h2>
                         <hr class="star-dark mb-5">
                         <div class="text-left">
@@ -259,14 +263,14 @@
                                 Tools/Board/ and selected Arduino/Genuino UNO. We also verified that the IDE is
                                 connected to the right port by looking under Tools/Port. It should be as in the
                                 following images:</p>
-                            <p><img style="max-width:100%; max-height: 400px;" src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/Labs/Blink.png?token=ALqGCLBrFr-mOmTYEvBasTaXfWTdYf-xks5blqK1wA%3D%3D"
+                            <p class="text-center" style="max-width:100%; max-height: 400px;" src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/Labs/Blink.png?token=ALqGCLBrFr-mOmTYEvBasTaXfWTdYf-xks5blqK1wA%3D%3D"
                                     alt="ArduinoBlinkSketch"></p>
-                            <p><img style="max-width:100%; max-height: 400px;" src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/Labs/Tools.png?token=ALqGCBe1R2TgNZlNnu1_rmeRQ2tHJ5pvks5blqNVwA%3D%3D"
+                            <p class="text-center"><img style="max-width:100%; max-height: 400px;" src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/Labs/Tools.png?token=ALqGCBe1R2TgNZlNnu1_rmeRQ2tHJ5pvks5blqNVwA%3D%3D"
                                     alt="ArduinoToolsImage"></p>
                             <p>We clicked the check mark to compile the sketch and uploaded it to the Arduino UNO. We
                                 obtained the following result:</p>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/GjLLtRx1XvA"
-                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/GjLLtRx1XvA"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
                             <h4 class="heading">Modifying the Blink Sketch</h4>
                             <p>We modified the Blink sketch to communicate with an external LED powered by Pin 0 in
                                 series with a 300 Ohm resistor on the breadboard. We also made sure to connect the
@@ -276,8 +280,8 @@
                                 <li>Added <code>#define LED_PIN 0</code> at the top of the sketch</li>
                                 <li>Replaced <code>LED_BUILTIN</code> with <code>LED_PIN</code></li>
                             </ul>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/NNcXywDYe_s"
-                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/NNcXywDYe_s"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
                             <h4 class="heading">The Serial Monitor and the Analog Pins</h4>
                             <p>The first goal was to be able to see the output of the potentiometer on the Serial
                                 monitor on the Arduino UNO. The potentiometer has three pins and so we connected one
@@ -296,8 +300,8 @@
 <!--                         -->}
                             </code></pre>
                             <p>Our result for this part is as follows:</p>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/0JiTJ-EnS_w"
-                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/0JiTJ-EnS_w"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
                             <h4 class="heading">Analog Output</h4>
                             <p>The next goal was to be able to take the potentiometer value and map it to a PWM output
                                 that goes to the LED. For reference on PWM, we found the following article helpful: <a
@@ -326,8 +330,8 @@
                                 but <code>analogWrite()</code> only accepts values from <code>0</code> to <code>255</code>
                                 so the input was scaled down by a factor of four.</p>
                             <p>What we observed was as follows:</p>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/IoDwbJaUMtU"
-                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/IoDwbJaUMtU"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
                             <h4 class="heading">Parallax Servos</h4>
                             <p>Instead of the output being written to an LED, we now wrote the output to a Parallax
                                 Servos. The involved connecting the red wire to the 5 Volt Arduino output, the black
@@ -353,15 +357,15 @@
 <!--                         -->}
                             </code></pre>
                             <p>What we observed is as follows:</p>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/YBj1wgy29BY"
-                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/YBj1wgy29BY"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
                             <h4 class="heading">Assembling the Robot</h4>
                             <p>We assembled the robot and wrote code involving writing to the Servos in order to make
                                 an S shape. The following video
                                 <br> demonstrates our fully autonomous moving robot:
                             </p>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/D5O05hFTHSU"
-                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/D5O05hFTHSU"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
                         </div>
                         <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss mt-4" href="#">
                             <i class="fa fa-close"></i> Close Project</a>
@@ -378,7 +382,7 @@
             </a>
             <div class="container text-center">
                 <div class="row">
-                    <div class="col-lg-8 mx-auto">
+                    <div class="col-lg-10 mx-auto">
                         <h2 class="text-secondary text-uppercase mb-0">Lab 2</h2>
                         <hr class="star-dark mb-5">
                         <div class="text-left">
@@ -410,7 +414,7 @@
                                 then calculates its frequency components. In this lab we used the FFT to detect when a
                                 660Hz tone is played.</p>
                             <p>The following formula can be used to calculate the DFT of a signal:</p>
-                            <p><img style="max-width:100%; max-height: 400px;" src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/img/portfolio/DFT.png"
+                            <p class="text-center"><img style="max-width:100%; max-height: 400px;" src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/img/portfolio/DFT.png"
                                     alt="logo"></p>
                             <p>where x_k is a N-point sequence of complex points and X_k is the DFT vector.</p>
                             <p>We first brainstormed various amplifiers that would achieve a high enough gain to
@@ -433,13 +437,13 @@
                                 shows
                                 an oscilloscope reading when a 660Hz tone is played around 10 cm away from the
                                 microphone.</p>
-                            <p><img style="max-width:100%; max-height: 400px;" src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/img/portfolio/Optical_Amplifier.jpg"
+                            <p class="text-center"><img style="max-width:100%; max-height: 400px;" src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/img/portfolio/Optical_Amplifier.jpg"
                                     alt="Oscilloscope reading"></p>
                             <p>The below image shows a frequency sweep of the operational amplifier. The cutoff
                                 frequency
                                 is around 4kHz as mentioned above. Note that this does not affect the gain of the 660Hz
                                 signal.</p>
-                            <p><img style="max-width:100%; max-height: 400px;" src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/FilterFrequencySweep.png?raw=true"
+                            <p class="text-center"><img style="max-width:100%; max-height: 400px;" src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/FilterFrequencySweep.png?raw=true"
                                     alt="Frequency sweep"></p>
                             <p>On the software side, we initially captured the FFT output from the analog circuit using
                                 the
@@ -533,12 +537,12 @@
                                 with the 660Hz signal is within a certain intensity of the other signal. Please see the
                                 below video for a demonstration:</p>
                             <p>
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/u_h56zHHiHA"
-                                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/u_h56zHHiHA"
+                                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
                             </p>
                             <h3><a id="Optical_114"></a>Optical</h3>
                             <p>We first set up the photo-transistor circuit as depicted in the lab handout:</p>
-                            <p><img style="max-width:100%; max-height: 400px;" src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/phototransistor.png?raw=true"
+                            <p class="text-center"><img style="max-width:100%; max-height: 400px;" src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/phototransistor.png?raw=true"
                                     alt="Photo-transistor circuit"></p>
                             <p>We connected it to a 5V Power Source and then connected the IR Hat to 9 Volts. To
                                 increase
@@ -550,7 +554,7 @@
                                 were
                                 minimal for our practical purposes. And so we decided not to use it in our final
                                 design.</p>
-                            <p><img style="max-width:100%; max-height: 400px;" src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/OpAmpCircuitOptical.png?raw=true"
+                            <p class="text-center"><img style="max-width:100%; max-height: 400px;" src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/OpAmpCircuitOptical.png?raw=true"
                                     alt="Op-amp circuit"></p>
                             <p>The next thing that we tested was utilizing the FFT library in order to detect a 6080 Hz
                                 signal once the Arduino received the signal. We opened the example sketch:
@@ -606,8 +610,8 @@
                                 video shows how we were able to detect cycling the IR Hat on and off using the Serial
                                 plotter from a foot away:</p>
                             <p>
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/_tRcdDt8q-A"
-                                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/_tRcdDt8q-A"
+                                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
                             </p>
                             <p>We then tested the detection with an IR Decoy that was initially set to 12,000 Hz, later
                                 set
@@ -617,13 +621,13 @@
                                 decoy
                                 when it was placed in the way:</p>
                             <p>
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/_UgpGABSOR8?start=17"
-                                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/_UgpGABSOR8?start=17"
+                                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
                             </p>
                             <p>Finally, the IR Hat and decoy were displaced slightly so the IR sensor sensed both
                                 signals,
                                 but only detected the 6080Hz tone. The FFT of the two signals is below:</p>
-                            <p><img style="max-width:100%; max-height: 400px;" src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/fftpicopticalteam%20(1).jpg?raw=true"
+                            <p class="text-center"><img style="max-width:100%; max-height: 400px;" src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/fftpicopticalteam%20(1).jpg?raw=true"
                                     alt="FFT"></p>
                             <h3><a id="Combined_System_162"></a>Combined System</h3>
                             <p>Once each system had been implemented and tested they were combined into a single
@@ -654,8 +658,8 @@
                                 After
                                 this change was made the entire system worked properly as shown in the video below:</p>
                             <p>
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/Ro4x0O4s6_g"
-                                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/Ro4x0O4s6_g"
+                                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
                             </p>
                         </div>
                         <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
@@ -673,7 +677,7 @@
             </a>
             <div class="container text-center">
                 <div class="row">
-                    <div class="col-lg-8 mx-auto">
+                    <div class="col-lg-10 mx-auto">
                         <h2 class="text-secondary text-center text-uppercase mb-0">Lab 3</h2>
                         <hr class="star-dark mb-5">
                         <div class="text-left">
@@ -837,8 +841,8 @@
                         <p>A wireless virtual transmission with an interface with the GUI is presented below. There is
                             slight lagging mostly due to the browser’s refreshing rate.</p>
                         <p>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/IlqivRq3zKw"
-                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/IlqivRq3zKw"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
                         </p>
                         <h4><a id="Efficient_data_scheme_to_store_all_maze_information_on_an_Arduino_112"></a>Efficient
                             data scheme to store all maze information on an Arduino</h4>
@@ -870,16 +874,16 @@
                             Below is a video of the robot starting on a tone:</p>
                         <p>Robot starting on a 660Hz tone</p>
                         <p>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/J3oYayUAUiY"
-                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/J3oYayUAUiY"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
                         </p>
                         <p>In case the start tone detection fails, we also incorporated a manual override switch that
                             can start the robot during the competition.<br>
                             Below is a video of the robot starting via manual override:</p>
                         <p>Robot starting from manual override switch:</p>
                         <p>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/3r8BT0jyPSM"
-                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/3r8BT0jyPSM"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
                         </p>
                         <h4><a id="Left_Wall_Sensor_147"></a>Left Wall Sensor</h4>
                         <p>Previously, we used two sensors to detect walls: one for detecting walls ahead and one for
@@ -982,8 +986,8 @@
                             is shown below.
                             
                             <p>
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/9wIbhgJp84U"
-                                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/9wIbhgJp84U"
+                                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
                             </p>
                             
                             <p>Regarding decoys, we do not actively seek out decoys and ignore them. This is because our
@@ -997,8 +1001,8 @@
                             transmitting the maze information wirelessly to the base station which interfaced with the
                             GUI. Below is a video of this in action:</p>
                         <p>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/a42s1vxHHX8"
-                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/a42s1vxHHX8"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
                         </p>
 
                         </div>
@@ -1017,7 +1021,7 @@
             </a>
             <div class="container text-center">
                 <div class="row">
-                    <div class="col-lg-8 mx-auto">
+                    <div class="col-lg-10 mx-auto">
                         <h2 class="text-secondary text-uppercase mb-0">Lab 4</h2>
                         <hr class="star-dark mb-5">
                         <div class="text-left">
@@ -1106,7 +1110,7 @@
                                 <p>We found that even after changing the file permissions, sometimes users were not able to modify <em>twi.c</em>. To work around this we copied the contents of the <em>twi.c</em> to a new file in a different directory and named the new file <em>twi.c</em>. Then, the new <em>twi.c</em> was copied into <code>C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src\utility</code>, replacing the old <em>twi.c</em> with the new modified version.</p>
                                 <h4><a id="Physical_Setup_52"></a>Physical Setup</h4>
                                 <p>After internal pull-ups were disabled the OV7670 and Arduino were wired based on the labs suggestion:</p>
-                                <p><img src="https://cei-lab.github.io/ece3400-2018/images/Lab3CameraWiringDiagram.png" alt="OV7670_Wiring"></p>
+                                <p class="text-center"><img src="https://cei-lab.github.io/ece3400-2018/images/Lab3CameraWiringDiagram.png" alt="OV7670_Wiring"></p>
                                 <p>The wire names in the above picture do <em>NOT</em> directly map to the pinout on the OV7670. The conversions are as follows:</p>
                                 <table class="table table-striped table-bordered">
                                 <thead>
@@ -1250,7 +1254,7 @@
                                 <p>The Arduino’s <code>shiftIn()</code> and the FPGA’s <code>cnt</code> are not alligned, so the first bit read by the Arduino is not the start of a byte, however, when reading the two bytes the preamble is detected in bits [12:8] so the treasure info must be stored in [7:5].</p>
                                 <h4><a id="Testing__Serial_136"></a>Testing - Serial</h4>
                                 <p>To ensure the serial communication was working properly we first looked at the output from the FPGA on an oscilliscope. In the followign image, the blue signal is clock and the yellow is the signal.</p>
-                                <p><img src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/img/portfolio/FPGA_SERIAL_OUTPUT.jpg" alt="FPGA_SERIAL"></p>
+                                <p class="text-center"><img src="https://raw.githubusercontent.com/Blue9/ece3400-team20/gh-pages/img/portfolio/FPGA_SERIAL_OUTPUT.jpg" alt="FPGA_SERIAL"></p>
                                 <p>The preamble is can be seen and the data is <code>0b010</code> so the entire byte is <code>0b00111010</code> as seen in the above image.</p>
                                 <p>This showed us the FPGA portion of the system was working properly. However, when we attempted to read in the values from the Arduino with <code>shiftIn()</code> allignement and incorrect reads were too significant to overcome.</p>
                                 <p>After hours of attempting to recitify these error, changing the clock frequency, using different read functions, and using amplifier 3V to 5V circuits, with no success we opted to attempt a parallel solution instead.</p>
@@ -1315,13 +1319,13 @@
                                 <h4><a id="Testing__Parallel_183"></a>Testing - Parallel</h4>
                                 <p>The following shows the FPGA communicating with Arduino with arbitrary treasure values:</p>
                                 <p>
-                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/t0z3kFzrsgU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/t0z3kFzrsgU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
                                 </p>
                                 <h1><a id="Team_FPGA_Setup_188"></a>Team FPGA Setup:</h1>
                                 <p>After opening up the Verilog project code from the ECE 3400 website and setting up the clocks as instructed, we declared red, green, and blue as localparameters as 8’b11100000, 8’b00011100, and 8’b00000111 respectively. We also attached the VGA adapter to GPIO_0_5 -&gt; GPIO_0_23 using page 18 of the DEO_NANO user manual. We display the diagram for future reference:</p>
-                                <p><img src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/FPGADiagram.png?raw=true" alt="fpga diagram"></p>
+                                <p class="text-center"><img src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/FPGADiagram.png?raw=true" alt="fpga diagram"></p>
                                 <p>We set the pixel that we are writing values to by modifing X_ADDR and Y_ADDR. In order to write a test image to memory, on every clock cycle, we increment either X_ADDR or Y_ADDR and write a corresponding color based on the value of X_ADDR and Y_ADDR. We attempted a different color bar to write to memory as our test image:</p>
-                                <p><img src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/Screen%20Shot%202018-11-30%20at%202.52.07%20PM.png?raw=true" alt="Color bar"></p>
+                                <p class="text-center"><img src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/Screen%20Shot%202018-11-30%20at%202.52.07%20PM.png?raw=true" alt="Color bar"></p>
                                 <h1><a id="Team_FPGA_Downsampling_199"></a>Team FPGA Downsampling:</h1>
                                 <p>We wrote our downsampler based upon the timing diagram in the OV7670 datasheet: pages (7-10) in</p>
                                 <p><a href="http://web.mit.edu/6.111/www/f2016/tools/OV7670_2006.pdf">http://web.mit.edu/6.111/www/f2016/tools/OV7670_2006.pdf</a></p>
@@ -1356,7 +1360,7 @@
                                 OV7670_write_register(0x42, 0x08)
                                 </code></pre>
                                 <p>We obtained the following result:</p>
-                                <p><img src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/ColorBar.PNG?raw=true" alt="color bar test"></p>
+                                <p class="text-center"><img src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/ColorBar.PNG?raw=true" alt="color bar test"></p>
                                 <h1><a id="Team_FPGA_Color_Detection_Settings_248"></a>Team FPGA Color Detection Settings:</h1>
                                 <p>After obtaining a color bar test, we attempted to work on obtaining image quality such that we would be able to detect shape colors. Initial image quality of the camera was very poor and so we replaced all of our wires. After that did not work well, we attempted to play around with the register settings and utilized RGB 444 instead of RGB 565 for our tranmission setting. We found the following register settings to work well:</p>
                                 <pre><code>
@@ -1392,7 +1396,7 @@
                                 <h1><a id="Color_Detection_Demonstration_291"></a>Color Detection, Demonstration:</h1>
                                 <p>Utilizing the register settings and the image processor in the previous two sections, we were able to obtain that we were able to read pixel values as demonstrated in the following videos:</p>
                                 <p>
-                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/X9Ipn2ejz8U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/X9Ipn2ejz8U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
                                 </p>
                         </div>
                         <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss mt-4" href="#">
@@ -1410,12 +1414,12 @@
             </a>
             <div class="container text-center">
                 <div class="row">
-                    <div class="col-lg-8 mx-auto">
+                    <div class="col-lg-10 mx-auto">
                         <h2 class="text-secondary text-uppercase mb-0">Milestone 1</h2>
                         <hr class="star-dark mb-5">
                         <div class="text-left">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/Rsmbcb27Gc8"
-                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/Rsmbcb27Gc8"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
                             <p><strong><em>Lab Procedure:</em></strong></p>
                             <p><em>Objective:</em> The objective of this milestone is to be able to add sensors to the
                                 robot as well as program the robot such that the robot will be able to line follow and
@@ -1559,7 +1563,7 @@
             </a>
             <div class="container text-center">
                 <div class="row">
-                    <div class="col-lg-8 text-left mx-auto">
+                    <div class="col-lg-10 text-left mx-auto">
                         <h2 class="text-secondary text-center text-uppercase mb-0">Milestone 2</h2>
                         <h3 class="text-center"><a id="Maze_exploration_using_Right_Hand_Rule_2"></a>Maze exploration
                             using Right Hand Rule</h3>
@@ -1669,8 +1673,8 @@
                         <p>Once we developed these states and branching conditions, wall-detection worked. The
                             following video demonstrates how our robot is able to detect walls and line follows. Note
                             the flashing LEDs.</p>
-                        <h1><iframe width="560" height="315" src="https://www.youtube.com/embed/sdR-A3kpq3s"
-                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></h1>
+                        <h1><p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/sdR-A3kpq3s"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p></h1>
                         <h3><a id="Avoiding_other_Robots_88"></a>Avoiding other Robots</h3>
                         <p>In order to avoid other robots, we attached an IR Sensor to the front of the robot. The
                             robot performs an FFT utilizing the “optical_FFT” function written in Lab 2. If we do
@@ -1680,8 +1684,8 @@
                             initially had issues with integrating the FFT but we adjusted our value of ADCSRA and we
                             found it to work.</p>
                         <p>A video of our robot avoiding other robots, walls, and line following is as follows:</p>
-                        <h1><iframe width="560" height="315" src="https://www.youtube.com/embed/XYCFWvGQjow"
-                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></h1>
+                        <h1><p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/XYCFWvGQjow"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p></h1>
 
                         </div>
                 </div>
@@ -1699,7 +1703,7 @@
                     </a>
                     <div class="container text-center">
                         <div class="row">
-                            <div class="col-lg-8 text-left mx-auto">
+                            <div class="col-lg-10 text-left mx-auto">
                                 <h2 class="text-secondary text-center text-uppercase mb-0">Milestone 3</h2>
                                 <h3><a id="Maze_Exploration_using_Depth_First_Search_2"></a>Maze Exploration using Depth First Search</h3>
                                 <p>To be able to map the entire maze, a right hand wall traversal is not sufficient, as it will not be able to reach isolated elements in the body of the maze. Instead, our robot will implement a depth first search (DFS) to map the entire maze.</p>
@@ -1739,10 +1743,10 @@
                                 <p>The above pseudocode is a summary of our implementation.</p>
                                 <h3><a id="Demonstration_56"></a>Demonstration</h3>
                                 <p>Below is a short maze traversal.  This shows that backtracking works as well as general DFS:<br>
-                                <p><iframe width="560" height="315" src="https://www.youtube.com/embed/QDcZ0XjWdXo"
+                                <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/QDcZ0XjWdXo"
                                 frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
                                 Below is a long maze traversal.  This demonstrates both backtracking, escaping infinite loops and some edge cases:<br>
-                                <p><iframe width="560" height="315" src="https://www.youtube.com/embed/M_wKZIesAfc"
+                                <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/M_wKZIesAfc"
                                 frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
                                 <h3><a id="Testing_62"></a>Testing</h3>
                                 <p>We initially ran into problems due to incorrect bearings.  After fixing this problem, we ran into problems with storing data in arrays.  We then fixed this problem pretty easily.<br>
@@ -1769,14 +1773,14 @@
                     </a>
                     <div class="container text-center">
                         <div class="row">
-                            <div class="col-lg-8 text-left mx-auto">
+                            <div class="col-lg-10 text-left mx-auto">
                                 <h2 class="text-secondary text-center text-uppercase mb-0">Milestone 4</h2>
                                 <h3><a id="Distinguishing_between_Red_and_Blue_Treasures_0"></a>Distinguishing between Red and Blue Treasures</h3>
                                 <p>In order to be able to distinguish between red and blue treasures, we had made our camera output to be RGB444 and saturated the down-sampling for red and thresholded the blue values coming in. When designing our downsampler and image processor for Lab 4, we had the goal of distinguishing red and blue treasures in mind. This design is what allowed us to observe this outcome in the following video in which we place red and blue treasures in front of our camera and successfully distinguish between them:</p>
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/X9Ipn2ejz8U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/X9Ipn2ejz8U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
                                 <h1><a id="Shape_Detection_6"></a>Shape Detection</h1>
                                 <p>Once we were able to distinguish between a red and a blue treasure, the next step was to determine what shape a treasure is. Our strategy was to sample three equally distanced pixel rows from the image. We noticed the following:</p>
-                                <p><img src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/Screen%20Shot%202018-11-30%20at%207.21.46%20PM.png?raw=true" alt="shape_detection_algo"></p>
+                                <p class="text-center"><img src="https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/Screen%20Shot%202018-11-30%20at%207.21.46%20PM.png?raw=true" alt="shape_detection_algo"></p>
                                 <p>As demonstrated by the figure, if we compare the intensity of red between the three samples, we would be able to determine which shape it is. We could even average these samples for greater accuracy. The rules would be as follows:</p>
                                 <pre><code>Take Color Samples at Rows 58, 72, and 94.
 
@@ -1790,11 +1794,11 @@
                                 shape = triangle
                                 </code></pre>
                                 <p>With the amount of noise that we were experiencing with the camera and after hours of changing registers and wires, we were unable to achieve a steady feed that could implement the strategy above. However, the following video demonstrates what should happen but was not what we able to get:</p>
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/hRiXi_E4cNg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/hRiXi_E4cNg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
                                 <p>After a lot of experimentation, we hypothesized that our VSYNC line was not working properly. We believed this because our image would constantly reset to (0, 0) before writing a full image. The only way both coordinates can be reset is if VSYNC is pulled high, so the VSYNC line was likely experiencing some noise and getting pulled up when it shouldn’t have.</p>
                                 <p>To fix this issue, we first got rid of VSYNC resets altogether and instead reset coordinates when Y_ADDR went off the screen. This worked to an extent, but oftentimes our screen would be offset and wrap around vertically. To fix this, we decided to use VSYNC but only every 44 million cycles. This prevented the screen from becoming offset and also prevented the unusual coordinate resets we were experiencing.</p>
                                 <p>After doing this, we saturated all pixels to only have full red, blue, or green intensity. This finally gave us a stable image and we were able to conduct shape detection, shown in the video below. If the 3 left bits are high, then we detect a triangle. If the middle 3 bits are high, we’ve detected a square. If the rightmost 2 bits are high, we’ve detected a diamond. Otherwise, we do not detect a treasure and all bits are high.</p>
-                                <p><iframe width="560" height="315" src="https://www.youtube.com/embed/FeldkNRAHkY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+                                <p class="text-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/FeldkNRAHkY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
                                 <p>As seen in the video, our output is very stable, and we are not completely sure why this is the case, considering the video feed is quite noisy. This is likely due to our thresholds being calibrated far apart enough to differentiate the shapes well enough. However, we found that running this test multiple times and with different shape orientations we were unable to detect the shape. Because of that, we feel it is best to omit this from our robot.</p>
 
                             </div>
@@ -1814,7 +1818,7 @@
     <script src="js/jqBootstrapValidation.js"></script>
     <script src="js/contact_me.js"></script>
     <!-- Custom scripts for this template -->
-    <script src="js/freelancer.min.js"></script>
+    <script src="js/freelancer.js"></script>
 </body>
 
 </html>

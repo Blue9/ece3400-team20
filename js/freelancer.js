@@ -53,13 +53,20 @@
   $('.portfolio-item').magnificPopup({
     type: 'inline',
     preloader: false,
-    focus: '#username',
-    modal: true
+    showCloseBtn: true,
+    closeOnBgClick: true,
+    enableEscapeKey: true
   });
   $(document).on('click', '.portfolio-modal-dismiss', function(e) {
     e.preventDefault();
     $.magnificPopup.close();
   });
+
+  // $(document).keyup(function(e) {
+  //   if (e.keyCode === 27) { // escape key maps to keycode `27`
+  //   e.preventDefault();
+  //   $.magnificPopup.close();
+  //  }
 
   // Floating label headings for the contact form
   $(function() {
