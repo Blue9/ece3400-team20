@@ -37,5 +37,31 @@ class Coord{
 
 At each intersection, the robot first updates its position, adding the current node to `dfs_prev_moves`, and adds all of the adjacent nodes to `dfs_frontier` if their is not a wall between them. Next, the we peek at `dfs_frontier` and check if it is adjacent to the current node and there is no wall in between. If it is adjacent, the element is popped, the global direction (N, S, E, W) is found by comparing the two `Coord` x and y values, which is then translated to a turn direction (`left`, `right`, `straight`, `turn around`) to give the robot direction. If it is not adjacent, the top of `dfs_prev_moves` is popped to begin backtracking towards the next element in the frontier set. The turn direction is calculated in the exact same way as if the node was adjacent.
 
+```
+handle_intersection():
+  update_static_array // update internally wall locations at current point
+  if( ! check_neighbors(current_location, dfs_next.nextMove() ):
+    move_temp = dfs_next.pop()
+    next_direction = get_direction(move_temp, current_location, current_bearing) // obtain NSEW direction
+  else:
+    dfs_prev_moves.push(current_location)
+    move_temp = dfs_next.pop()
+    next_direction = get_direction(move_temp, current_location, current_bearing) // obtain NSEW direction
+  next_move = get_next_move(current_location, next_direction)
+  return next_move
+```
+
+The above pseudocode is a summary of our implementation.
+
+
+### Demonstration 
+
+Below is a short maze traversal.  This shows that backtracking works as well as general DFS:
+
+Below is a long maze traversal.  This demonstrates both backtracking, escaping infinite loops and some edge cases:
 
 ### Testing
+We initially ran into problems due to incorrect bearings.  After fixing this problem, we ran into problems with storing data in arrays.  We then fixed this problem pretty easily.
+The main problem we are still having is the fact that the sensor thresholds change with ambient light.  Furthermore, if the robot goes to a square and detects a wall when there isn't any, it will not add that adjacent square to the DFS stack.  This is sometimes corrected if the robot travels to an adjacent square of that.  We decreased this occurance by changing thresholds appropriately.
+
+We then enabled GUI communication.  We could not get a signal however and ran out of time.
