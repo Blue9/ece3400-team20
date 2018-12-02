@@ -130,20 +130,36 @@ int neither_on_white() {
 int sensor_at_wall(int mux_out, int threshold) {
   digitalWrite(WALL_MUX_PIN_OUT1, mux_out & 0b01);
   digitalWrite(WALL_MUX_PIN_OUT2, (mux_out & 0b10) >> 1);
-  //delay(10); // Give time for the mux to update
+  delay(10); // Give time for the mux to update
   return analogRead(WALL_MUX_PIN_IN) > threshold;
 }
 
 int right_wall() {
-  return sensor_at_wall(RIGHT_DISTANCE_MUX, RIGHT_DISTANCE_THRESHOLD);  // see constants.h
+  bool first = sensor_at_wall(RIGHT_DISTANCE_MUX, RIGHT_DISTANCE_THRESHOLD);
+  bool second = sensor_at_wall(RIGHT_DISTANCE_MUX, RIGHT_DISTANCE_THRESHOLD);
+  if (first == second) {
+    return first;
+  } else
+    return sensor_at_wall(RIGHT_DISTANCE_MUX, RIGHT_DISTANCE_THRESHOLD);
+//  return sensor_at_wall(RIGHT_DISTANCE_MUX, RIGHT_DISTANCE_THRESHOLD);  // see constants.h
 }
 
 int front_wall() {
-  return sensor_at_wall(FRONT_DISTANCE_MUX, FRONT_DISTANCE_THRESHOLD);  // see constants.h
+  bool first = sensor_at_wall(FRONT_DISTANCE_MUX, FRONT_DISTANCE_THRESHOLD);
+  bool second = sensor_at_wall(FRONT_DISTANCE_MUX, FRONT_DISTANCE_THRESHOLD);
+  if (first == second)
+    return first;
+  else
+    return sensor_at_wall(FRONT_DISTANCE_MUX, FRONT_DISTANCE_THRESHOLD);  // see constants.h
 }
 
 int left_wall() {
-  return sensor_at_wall(LEFT_DISTANCE_MUX, LEFT_DISTANCE_THRESHOLD); // see constants.h
+  bool first = sensor_at_wall(LEFT_DISTANCE_MUX, LEFT_DISTANCE_THRESHOLD);
+  bool second = sensor_at_wall(LEFT_DISTANCE_MUX, LEFT_DISTANCE_THRESHOLD);
+  if (first == second)
+    return first;
+  else
+    return sensor_at_wall(LEFT_DISTANCE_MUX, LEFT_DISTANCE_THRESHOLD); // see constants.h
 }
 
 bool override_pressed() {

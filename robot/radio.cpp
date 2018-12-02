@@ -43,24 +43,23 @@ unsigned short get_msg(){
     case B_S : t = 0b011; break;
     case NaN : t = 0b000; break; }
     
-  unsigned short msg = (x_robot << 13) + (y_robot << 10) +
-              (iamhere  << 9) +
-              (west     << 8) +
-              (north    << 7) +
-              (east     << 6) +
-              (south    << 5) +
-              (robot    << 4) +
-              (t        << 1);
+  unsigned short msg = (x_robot << 12) + (y_robot << 8) +
+              (iamhere  << 7) +
+              (west     << 6) +
+              (north    << 5) +
+              (east     << 4) +
+              (south    << 3) +
+              (robot    << 2);
 
-  Serial.println(x_robot << 13);
-  Serial.println(y_robot << 10);
-  Serial.println(iamhere  << 9);
-  Serial.println(west     << 8);
-  Serial.println(north    << 7);
-  Serial.println(east     << 6);
-  Serial.println(south    << 5);
-  Serial.println(robot    << 4);
-  Serial.println(t        << 1);
+//  // Serial.println(x_robot << 13);
+//  // Serial.println(y_robot << 10);
+//  // Serial.println(iamhere  << 9);
+//  // Serial.println(west     << 8);
+//  // Serial.println(north    << 7);
+//  // Serial.println(east     << 6);
+//  // Serial.println(south    << 5);
+//  // Serial.println(robot    << 4);
+//  // Serial.println(t        << 1);
 
   return msg;
 }
@@ -105,16 +104,16 @@ void transmit_msg() {
 
     // Take the time, and send it.  This will block until complete
     unsigned long msg = get_msg();
-    Serial.print("Now sending ");
+    // Serial.print("Now sending ");
 
-    Serial.print(msg);
-    Serial.println("...");
+    // Serial.print(msg);
+    // Serial.println("...");
     bool ok = radio.write( &msg, sizeof(unsigned short) );
 
-    if (ok)
-      Serial.println("ok...");
-    else
-      Serial.println("failed.\n\r");
+    //if (ok)
+      // Serial.println("ok...");
+    //else
+      // Serial.println("failed.\n\r");
 
     // Now, continue listening
     radio.startListening();
@@ -129,7 +128,7 @@ void transmit_msg() {
     // Describe the results
     if (timeout)
     {
-      Serial.println("Failed, response timed out.\n\r");
+      // Serial.println("Failed, response timed out.\n\r");
     }
     else
     {
@@ -138,8 +137,8 @@ void transmit_msg() {
       radio.read(&got_msg, sizeof(unsigned long));
 
       // Spew it
-      Serial.println("Got response ");
-      Serial.println(got_msg);
+      // Serial.println("Got response ");
+      // Serial.println(got_msg);
     }
     radio.stopListening();
 }

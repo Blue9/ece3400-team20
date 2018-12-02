@@ -15,12 +15,14 @@
 #define LATE_180 11
 
 typedef int (*function_t)(void);
+typedef uint8_t byte;
 
 extern function_t states[];
 
 extern int next_state;
+extern char next_direction_dfs;
 
-extern int turn_direction;
+extern byte turn_direction;
 extern function_t on_white[];
 extern function_t on_black[];
 

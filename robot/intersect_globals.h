@@ -37,11 +37,12 @@
 #define blue 0b1
 
 #define no_treasure 0x0
-#define square 0x1
+//#define square 0x1
 #define triangle 0x2
 #define circle 0x3
+#define square_square 0x1
 
-#define x_max 7
-#define y_max 7
+#define x_max 10
+#define y_max 10
 
 #endif

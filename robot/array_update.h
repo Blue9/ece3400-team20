@@ -2,8 +2,9 @@
 #define array_update_h
 
 #include "intersect_globals.h"
+#include "robot_state.h"
 
-extern short intersect_array[x_max + 1][y_max + 1];
+extern short intersect_array[x_max + 1][y_max + 1]; //short
 
 /**
  * Update the maze information array

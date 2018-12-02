@@ -4,8 +4,8 @@
 
 typedef uint8_t byte;
 
-extern int x_robot;
-extern int y_robot;
+extern byte x_robot;
+extern byte y_robot;
 extern bool north, south, east, west;
 
 extern byte current_direction;

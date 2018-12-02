@@ -6,7 +6,7 @@
 #define LEFT_COLOR_PIN A3
 #define RIGHT_SERVO_PIN 3
 #define LEFT_SERVO_PIN 5
-#define SENSOR_THRESHOLD 930  // Determined experimentally.
+#define SENSOR_THRESHOLD 830  // Determined experimentally.
 #define SENSOR_THRESHOLD_MARGIN 30
 
 #define LEFT_VELOCITY_MIN 0
@@ -25,9 +25,9 @@
 #define FRONT_LED_PIN 0
 #define RIGHT_LED_PIN 2
 #define LEFT_LED_PIN 8
-#define FRONT_DISTANCE_THRESHOLD 80 // Determined experimentally.
-#define RIGHT_DISTANCE_THRESHOLD 150 // Determined experimentally.
-#define LEFT_DISTANCE_THRESHOLD 120 // Determined experimentally.
+#define FRONT_DISTANCE_THRESHOLD 170 // Determined experimentally.
+#define RIGHT_DISTANCE_THRESHOLD 190 // Determined experimentally.
+#define LEFT_DISTANCE_THRESHOLD 130 // Determined experimentally.
 
 #define AUDIO_PIN A1
 #define OVERRIDE_SWITCH_PIN 4
