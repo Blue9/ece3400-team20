@@ -41,7 +41,7 @@ int handle_next_state() {
 
 int wait_for_tone() {
 //  // Serial.println("wait for tone");
-  if (!audioFFT() && !override_pressed()) return WAIT_FOR_TONE;
+  if (!audioFFT() && override_pressed()) return WAIT_FOR_TONE;
 //  // Serial.println(override_pressed());
 //  if (override_pressed()) return WAIT_FOR_TONE;
   return MOVE_FORWARD;
@@ -51,12 +51,22 @@ int move_forward() {
 //  // // Serial.println("move forward");
   set_left(1);
   set_right(1);
-  if (only_left_on_white()) return ADJUST_LEFT;
-  if (only_right_on_white()) return ADJUST_RIGHT;
-  if (both_on_white()) {
-    // At intersection, update current position data
-    return FORWARD_UNTIL_PAST_INTERSECTION;
-  }
+//  if (only_left_on_white()) return ADJUST_LEFT;
+//  if (only_right_on_white()) return ADJUST_RIGHT;
+//  if (both_on_white()) {
+//    // At intersection, update current position data
+//    return FORWARD_UNTIL_PAST_INTERSECTION;
+//  }
+
+  Serial.println(opticalFFT());
+  
+  if (opticalFFT()) {
+    if(current_direction == 0b00)      current_direction = 0b10;
+    else if(current_direction == 0b01) current_direction = 0b11;
+    else if(current_direction == 0b10) current_direction = 0b00;
+    else if(current_direction == 0b11) current_direction = 0b01;
+    return START_180;
+  } 
   return MOVE_FORWARD;
 }
 

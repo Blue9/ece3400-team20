@@ -5,7 +5,7 @@
 */
 
 #define LOG_OUT 1 // use the log output function
-#define FFT_N 256 // set to 256 point fft
+#define FFT_N 128 // set to 256 point fft
 
 #include <avr/interrupt.h>
 #include <pins_arduino.h>
@@ -15,18 +15,18 @@
 
 typedef uint8_t byte;
 
-const int audio_threshold = 15;
+const int audio_threshold = 9;
 short audio_cnt;
 uint8_t empty_arr[FFT_N/2];
 
 void resetFFT(){
-  for(int i = 0; i < 256; i++){
+  for(int i = 0; i < 128; i++){
     fft_log_out[i] = 0;
   }  
 }
 
 bool isSignalThere(uint8_t fft[], int targetFrequency, long samplingRate) {
-  int bucketLength = samplingRate / 256;
+  int bucketLength = samplingRate / 128;
   // Serial.print("Bucket Length:\t");
   // Serial.println(bucketLength);
   byte maxValue = 0;
@@ -37,7 +37,7 @@ bool isSignalThere(uint8_t fft[], int targetFrequency, long samplingRate) {
     }
   }
 
-  byte threshold = 60; //maxValue * (3/4);
+  byte threshold = 55; //maxValue * (3/4);
   // Serial.print("Threshold:\t");
   // Serial.println(threshold);
 
@@ -63,7 +63,7 @@ bool opticalFFT(){
     ADMUX = 0x40; // use adc0
     DIDR0 = 0x01; // turn off the digital input for adc0
     // cli();
-    for (int i = 0 ; i < 512 ; i += 2) { // save 256 samples
+    for (int i = 0 ; i < 256 ; i += 2) { // save 256 samples
       while(!(ADCSRA & 0x10)); // wait for adc to be ready
       ADCSRA = 0xf4; // restart adc
       byte m = ADCL; // fetch adc data
@@ -81,9 +81,9 @@ bool opticalFFT(){
     fft_mag_log(); // take the output of the fft
     ADCSRA = init_adcsra; // This is needed so the function actually returns
     // sei();
-    //for (byte i = 0 ; i < FFT_N/2 ; i++) { 
-    //  Serial.println(fft_log_out[i]); // send out the data
-    //}
+    for (byte i = 0 ; i < FFT_N/2 ; i++) { 
+     Serial.println(fft_log_out[i]); // send out the data
+    }
     return isSignalThere(fft_log_out, 6080, 76800);
 }
 
@@ -94,7 +94,7 @@ bool audioFFT(){
     ADMUX = 0x50; // use adc0
     DIDR0 = 0x00; // turn off the digital input for adc0
     // cli();
-    for (int i = 0; i < 512 ; i +=2) {
+    for (int i = 0; i < 256 ; i +=2) {
       fft_input[i] = analogRead(AUDIO_PIN);
       fft_input[i+1] = 0;
     }
@@ -104,10 +104,10 @@ bool audioFFT(){
     fft_mag_log(); // take the output of the fft
     // sei();
     ADCSRA = init_adcsra;
-    //Serial.println("start");
-    /*for (byte i = 0 ; i < FFT_N/2 ; i++) {
+    Serial.println("start");
+    for (byte i = 0 ; i < FFT_N/2 ; i++) {
         Serial.println(fft_log_out[i]); // send out the data
-    } */
+    } 
     bool found = isSignalThere(fft_log_out, 660, 8930);
     if(found){
       audio_cnt++;
@@ -123,6 +123,8 @@ bool audioFFT(){
     if(audio_cnt >= audio_threshold){
       Serial.println("660Hz Found"); 
       return true;
+    } else {
+        Serial.println("Not found");
     }
     return false; 
 }
