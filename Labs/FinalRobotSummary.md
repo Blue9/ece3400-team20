@@ -24,7 +24,15 @@ Similarly we added an IR Hat near the top and an IR sensor on the front in order
 
 *Milestone 3:* Our robot performed DFS traversal within the maze at the final competition. 
 
-With all the sensors on the robot (wall, line, IR, Audio) and the radios, we found ourselves running out of pins. And so our final robot contained a mux.  
+With all the sensors on the robot (wall, line, IR, Audio) and the radios, we found ourselves running out of pins. And so our final robot also contained a *mux*. In addition, we added a *push button* in the event that our audio FFT was no longer working that could start the maze traversal when pressed.
+
+We found creating a finite state machine to be immensely useful for debugging and performance. Please go to our github and examine the states.cpp file to get an overview of all the different states and how they interconnect.
+
+Our final robot is shown below:
+
+*insert picture*
+
+
 
 
 
