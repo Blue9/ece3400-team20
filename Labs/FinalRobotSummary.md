@@ -10,11 +10,11 @@ here: http://www.parallax.com/downloads/continuous-rotation-servo-documentation
 line following algorithms that implied the nature of the orientation of the robot. For example, if the 
 left line sensor is indicating that it is on white and the right line sensor is indicating that it is on black, then our robot must be turning too far to the right and must adjust accordingly via the servos.
 
-*Lab 2:* We learned the basics of FFT analysis and how to determine the frequency of an incoming signal. We developed an audio circuit as follows and had audio FFT analysis within the code. Our circuit on the robot is as follows:
+*Lab 2:* We learned the basics of FFT analysis and how to determine the frequency of an incoming signal. We developed an audio circuit as follows and had audio FFT analysis for 660 Hz within the code. Our circuit on the robot is as follows:
 
 <img src=https://github.com/Blue9/ece3400-team20/blob/gh-pages/img/portfolio/MicrophoneCircuit.png width=500>
 
-Similarly we added an IR Hat near the top and an IR sensor on the front in order to perform FFT analysis to detect other robots for obstacle avoidance. 
+Similarly we added an IR Hat near the top and an IR sensor on the front in order to perform FFT analysis to detect other robots at 6080 Hz for obstacle avoidance. 
 
 *Lab 3:* Our robot had an nRF24L01 transceiver on it in order to transmit information about its orientation and what is going on around it, i.e. walls, other robots, and if there are treasures located around it. We developed a data scheme in order to transmit this information once we obtained it and then updated a GUI that showed what the maze looked like based on the  tranmission. 
 
