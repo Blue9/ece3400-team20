@@ -22,7 +22,7 @@ Similarly we added an IR Hat near the top and an IR sensor on the front in order
 
 *Lab 4 / Milestone 4:* We learned the basics of image processing for shapes and color by working with the OV7670 camera and an FPGA. We decided that the tradeoff between lost points for false detection was too much and decided not to place it on the robot. We made this decision utilizing the frameworks provided by the conflict resolution lectures.
 
-*Milestone 3:* Our robot performed DFS traversal within the maze at the final competition. 
+*Milestone 3:* Taking into account sensor values for close obstacles, our robot performed DFS traversal within the maze at the final competition. 
 
 With all the sensors on the robot (wall, line, IR, Audio) and the radios, we found ourselves running out of pins. And so our final robot also contained a *mux*. In addition, we added a *push button* in the event that our audio FFT was no longer working that could start the maze traversal when pressed.
 
