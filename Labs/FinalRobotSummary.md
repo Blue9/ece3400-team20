@@ -16,7 +16,7 @@ left line sensor is indicating that it is on white and the right line sensor is 
 
 Similarly we added an IR Hat near the top and an IR sensor on the front in order to perform FFT analysis to detect other robots at 6080 Hz for obstacle avoidance. 
 
-*Lab 3:* Our robot had an nRF24L01 transceiver on it in order to transmit information about its orientation and what is going on around it, i.e. walls, other robots, and if there are treasures located around it. We developed a data scheme in order to transmit this information once we obtained it and then updated a GUI that showed what the maze looked like based on the  tranmission. 
+*Lab 3:* Our robot had an nRF24L01 transceiver on it in order to transmit information about its orientation and what is going on around it, i.e. walls, other robots, and if there are treasures located around it. We developed a data scheme in order to transmit this information once we obtained it and then updated a GUI at a base station that showed what the maze looked like based on the  transmission. 
 
 *Milestone 2:* We had three short distance wall sensors in the front, right, and left sides of our robot. 
 
