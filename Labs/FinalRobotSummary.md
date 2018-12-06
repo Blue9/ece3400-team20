@@ -1,4 +1,4 @@
-# Final Robot Design:
+# Final Robot Design Review:
 
 Our final robot was a culmination of all of the previous labs and milestones on this site. The purpose of building this robot was to compete in a maze mapping competition in which we earn points for following white lines in the maze, detecting and avoiding walls in it, performing image processing in order to identify objects around it (i.e treasures), and then transmitting information about what the maze looks like to a base-station located several feet away. We summarize how our previous work led to our final robot system as follows:
 
@@ -36,7 +36,7 @@ We found creating a finite state machine to be immensely useful for both debuggi
 1 Arduino Uno - $16
 Total: $69
 
-*Challenges Encountered Through The Semester:*
+# Challenges Encountered Through The Semester:
 
 Our main challenges revolved around the reliability of the hardware components. At the beginning of this class, we spent several hours perfecting our line following method from Lab 1.  We initially incorporated delays into our turning methods, but then realized that this was not robust enough and what we really needed to have was a finite state machine, so that at every moment the robot would make an appropriate decision. The combination of this and short time delays approximately equal to the propagation delay helped perfect our line following. We were also able to implement and account for situations where the robot moves off track and needs to return back to a white line.
 
@@ -54,7 +54,7 @@ With regards to the FPGA image processing and camera interaction, we found it in
 
 The breadboard we used often caused wires to come loose.  A few days before the final competition, we decided to port the schematic to a solder board and solder wires to ensure that they don’t fall off. This was a huge time investment which unfortunately resulted in an impossible to find short in our circuit.  We spent a while trying to find out where the short was coming from, but eventually found that it was not a short and rather a bigger problem which we did not have the time to solve. The day before the competition we redid the circuitry putting it back onto a breadboard.  If we had more time we would have tried the solder board again or a printed circuit board
 
-*Them vs The Robot They Tell You Not To Worry About*
+# Final Design: Them vs The Robot They Tell You Not To Worry About
 It is simple.  Some robots are designed better than others. We now present several arguments on why our robot is better than the competitors:
 
 Line following:  
