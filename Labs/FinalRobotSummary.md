@@ -57,24 +57,24 @@ The breadboard we used often caused wires to come loose.  A few days before the 
 # Them vs The Robot They Tell You Not To Worry About:
 
 Line following:  
-Them:  Delays, hardcoded turns, unreliable line following, falling off track
-Us:  A robust finite state machine with perfect line following even off track
+- Them:  Delays, hardcoded turns, unreliable line following, falling off track
+- Us:  A robust finite state machine with perfect line following even off track
 
 Chassis:
-Them:  Unstable piece of plastic
-Us:  Carefully laser cut wood to dampen noise and reduce mechanical perturbations.  	
+- Them:  Unstable piece of plastic
+- Us:  Carefully laser cut wood to dampen noise and reduce mechanical perturbations.  	
 
 Audio FFT:
-	Them:  Basic Op Amp which amplifies signals rather than filter a desired signal
-	Us:  A lowpass filter with cutoff frequency within 10% of desired frequency with boost.
+- Them:  Basic Op Amp which amplifies signals rather than filter a desired signal
+- Us:  A lowpass filter with cutoff frequency within 10% of desired frequency with boost.
 
 Short Distance Sensors:
-	They:  One, unreliable read.
-	Us:  High speed redundancy to ensure correctness. 
+- Them:  One, unreliable read.
+- Us:  High speed redundancy to ensure correctness. 
 
 Algorithm:
-	Them:  Textbook DFS
-	Us:  DFS with secret optimizations.
+- Them:  Textbook DFS
+- Us:  DFS with secret optimizations.
 	
 # Final Competition Video:
 
