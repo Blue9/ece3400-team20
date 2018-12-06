@@ -78,5 +78,8 @@
       $(this).removeClass("floating-label-form-group-with-focus");
     });
   });
-
+  $('.shine-override').each(function () {
+    setTimeout(() => {$(this).addClass('shine-override-active');}, 1000);
+    setTimeout(() => {$(this).removeClass('shine-override-active');}, 2000);
+  });
 })(jQuery); // End of use strict
