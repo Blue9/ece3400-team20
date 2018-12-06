@@ -55,7 +55,6 @@ With regards to the FPGA image processing and camera interaction, we found it in
 The breadboard we used often caused wires to come loose.  A few days before the final competition, we decided to port the schematic to a solder board and solder wires to ensure that they don’t fall off. This was a huge time investment which unfortunately resulted in an impossible to find short in our circuit.  We spent a while trying to find out where the short was coming from, but eventually found that it was not a short and rather a bigger problem which we did not have the time to solve. The day before the competition we redid the circuitry putting it back onto a breadboard.  If we had more time we would have tried the solder board again or a printed circuit board
 
 # Them vs The Robot They Tell You Not To Worry About:
-It is simple.  Some robots are designed better than others. We now present several arguments on why our robot is better than the competitors:
 
 Line following:  
 Them:  Delays, hardcoded turns, unreliable line following, falling off track
