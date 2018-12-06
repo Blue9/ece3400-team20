@@ -1,4 +1,4 @@
-# Final Robot Design Review:
+# Final Robot Design Lab Review:
 
 Our final robot was a culmination of all of the previous labs and milestones on this site. The purpose of building this robot was to compete in a maze mapping competition in which we earn points for following white lines in the maze, detecting and avoiding walls in it, performing image processing in order to identify objects around it (i.e treasures), and then transmitting information about what the maze looks like to a base-station located several feet away. We summarize how our previous work led to our final robot system as follows:
 
@@ -54,7 +54,7 @@ With regards to the FPGA image processing and camera interaction, we found it in
 
 The breadboard we used often caused wires to come loose.  A few days before the final competition, we decided to port the schematic to a solder board and solder wires to ensure that they don’t fall off. This was a huge time investment which unfortunately resulted in an impossible to find short in our circuit.  We spent a while trying to find out where the short was coming from, but eventually found that it was not a short and rather a bigger problem which we did not have the time to solve. The day before the competition we redid the circuitry putting it back onto a breadboard.  If we had more time we would have tried the solder board again or a printed circuit board
 
-# Final Design: Them vs The Robot They Tell You Not To Worry About
+# Them vs The Robot They Tell You Not To Worry About
 It is simple.  Some robots are designed better than others. We now present several arguments on why our robot is better than the competitors:
 
 Line following:  
