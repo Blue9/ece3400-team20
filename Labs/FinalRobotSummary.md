@@ -75,3 +75,5 @@ Short Distance Sensors:
 Algorithm:
 	Them:  Textbook DFS
 	Us:  DFS with secret optimizations.
+	
+# Final Competition Video:
